@@ -1,0 +1,85 @@
+kind,name,x,y,width,height,local_id,image
+line,line 1,644,225,166,15,,rectangle_java2.jpg
+sub-line,line 1 part 1,644,225,56,15,,rectangle_java2.jpg
+sub-line,line 1 part 2,711,225,79,15,,rectangle_java2.jpg
+sub-line,line 1 part 3,804,225,7,15,,rectangle_java2.jpg
+line,line 2,688,289,401,20,,rectangle_java2.jpg
+sub-line,line 2 part 1,689,289,34,20,,rectangle_java2.jpg
+sub-line,line 2 part 2,753,289,72,20,,rectangle_java2.jpg
+sub-line,line 2 part 3,838,289,7,20,,rectangle_java2.jpg
+sub-line,line 2 part 4,857,289,45,20,,rectangle_java2.jpg
+sub-line,line 2 part 5,914,289,7,20,,rectangle_java2.jpg
+sub-line,line 2 part 6,934,289,13,20,,rectangle_java2.jpg
+sub-line,line 2 part 7,959,289,7,20,,rectangle_java2.jpg
+sub-line,line 2 part 8,982,289,9,20,,rectangle_java2.jpg
+sub-line,line 2 part 9,1004,289,7,20,,rectangle_java2.jpg
+sub-line,line 2 part 10,1027,289,21,20,,rectangle_java2.jpg
+sub-line,line 2 part 11,1060,289,6,20,,rectangle_java2.jpg
+sub-line,line 2 part 12,1084,289,6,20,,rectangle_java2.jpg
+line,line 3,734,332,190,17,,rectangle_java2.jpg
+sub-line,line 3 part 1,734,332,146,17,,rectangle_java2.jpg
+sub-line,line 3 part 2,890,332,12,17,,rectangle_java2.jpg
+sub-line,line 3 part 3,912,332,13,17,,rectangle_java2.jpg
+line,line 4,734,375,156,17,,rectangle_java2.jpg
+sub-line,line 4 part 1,734,375,112,17,,rectangle_java2.jpg
+sub-line,line 4 part 2,856,375,13,17,,rectangle_java2.jpg
+sub-line,line 4 part 3,881,375,10,17,,rectangle_java2.jpg
+line,line 5,734,417,201,17,,rectangle_java2.jpg
+sub-line,line 5 part 1,734,417,146,17,,rectangle_java2.jpg
+sub-line,line 5 part 2,890,417,12,17,,rectangle_java2.jpg
+sub-line,line 5 part 3,915,417,21,17,,rectangle_java2.jpg
+line,line 6,734,458,234,18,,rectangle_java2.jpg
+sub-line,line 6 part 1,734,458,191,18,,rectangle_java2.jpg
+sub-line,line 6 part 2,935,458,12,18,,rectangle_java2.jpg
+sub-line,line 6 part 3,958,458,11,18,,rectangle_java2.jpg
+line,line 7,688,521,346,18,,rectangle_java2.jpg
+sub-line,line 7 part 1,689,521,34,18,,rectangle_java2.jpg
+sub-line,line 7 part 2,734,521,112,18,,rectangle_java2.jpg
+sub-line,line 7 part 3,861,521,6,18,,rectangle_java2.jpg
+sub-line,line 7 part 4,880,521,45,18,,rectangle_java2.jpg
+sub-line,line 7 part 5,937,521,6,18,,rectangle_java2.jpg
+sub-line,line 7 part 6,958,521,34,18,,rectangle_java2.jpg
+sub-line,line 7 part 7,1004,521,6,18,,rectangle_java2.jpg
+sub-line,line 7 part 8,1028,521,7,18,,rectangle_java2.jpg
+line,line 8,734,564,534,20,,rectangle_java2.jpg
+sub-line,line 8 part 1,735,564,22,20,,rectangle_java2.jpg
+sub-line,line 8 part 2,771,564,6,20,,rectangle_java2.jpg
+sub-line,line 8 part 3,790,564,191,20,,rectangle_java2.jpg
+sub-line,line 8 part 4,995,564,8,20,,rectangle_java2.jpg
+sub-line,line 8 part 5,1014,564,34,20,,rectangle_java2.jpg
+sub-line,line 8 part 6,1060,564,6,20,,rectangle_java2.jpg
+sub-line,line 8 part 7,1081,564,12,20,,rectangle_java2.jpg
+sub-line,line 8 part 8,1104,564,147,20,,rectangle_java2.jpg
+sub-line,line 8 part 9,1263,564,6,20,,rectangle_java2.jpg
+line,line 9,779,607,371,17,,rectangle_java2.jpg
+sub-line,line 9 part 1,779,607,191,17,,rectangle_java2.jpg
+sub-line,line 9 part 2,980,607,12,17,,rectangle_java2.jpg
+sub-line,line 9 part 3,1003,607,146,17,,rectangle_java2.jpg
+line,line 10,733,649,64,13,,rectangle_java2.jpg
+sub-line,line 10 part 1,733,649,46,13,,rectangle_java2.jpg
+sub-line,line 10 part 2,793,649,5,13,,rectangle_java2.jpg
+line,line 11,779,692,481,17,,rectangle_java2.jpg
+sub-line,line 11 part 1,779,692,192,17,,rectangle_java2.jpg
+sub-line,line 11 part 2,980,692,12,17,,rectangle_java2.jpg
+sub-line,line 11 part 3,1003,692,192,17,,rectangle_java2.jpg
+sub-line,line 11 part 4,1208,692,8,17,,rectangle_java2.jpg
+sub-line,line 11 part 5,1227,692,34,17,,rectangle_java2.jpg
+line,line 12,733,734,270,17,,rectangle_java2.jpg
+sub-line,line 12 part 1,734,734,68,17,,rectangle_java2.jpg
+sub-line,line 12 part 2,813,734,191,17,,rectangle_java2.jpg
+line,line 13,643,794,388,21,,rectangle_java2.jpg
+sub-line,line 13 part 1,645,794,12,21,,rectangle_java2.jpg
+sub-line,line 13 part 2,666,794,12,21,,rectangle_java2.jpg
+sub-line,line 13 part 3,689,794,79,21,,rectangle_java2.jpg
+sub-line,line 13 part 4,782,794,7,21,,rectangle_java2.jpg
+sub-line,line 13 part 5,802,794,65,21,,rectangle_java2.jpg
+sub-line,line 13 part 6,881,794,6,21,,rectangle_java2.jpg
+sub-line,line 13 part 7,903,794,43,21,,rectangle_java2.jpg
+sub-line,line 13 part 8,959,794,7,21,,rectangle_java2.jpg
+sub-line,line 13 part 9,980,794,33,21,,rectangle_java2.jpg
+sub-line,line 13 part 10,1026,794,6,21,,rectangle_java2.jpg
+line,line 14,643,840,212,16,,rectangle_java2.jpg
+sub-line,line 14 part 1,645,840,134,16,,rectangle_java2.jpg
+sub-line,line 14 part 2,794,840,6,16,,rectangle_java2.jpg
+sub-line,line 14 part 3,813,840,21,16,,rectangle_java2.jpg
+sub-line,line 14 part 4,847,840,6,16,,rectangle_java2.jpg
