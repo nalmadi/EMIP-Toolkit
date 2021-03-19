@@ -10,3 +10,6 @@ Following is a description of each file and directory:
 3.	The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
 
 *contact information will be added upon acceptance for publication.
+
+# Please Cite:
+Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic. 2021. EMIP Toolkit: A Python Library for CustomizedPost-processing of the Eye Movements in Programming Dataset.Proc. ACM ETRA.0, 0, Article 0 (May 2021), 10 pages.https://doi.org/10.1145/3448018.3457425
