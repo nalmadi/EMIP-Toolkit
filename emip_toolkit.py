@@ -1,9 +1,8 @@
 """
-This version of the code is provided without a docstring to maintain author anonymity in the 
-peer-review process.  Author and contact information will be added upon approval for publication.
-
 The EMIP Toolkit can be used under the CC 4.0 license
 (https://creativecommons.org/licenses/by/4.0/)
+
+Author: Naser Al Madi (nsalmadi@colby.edu)
 """
 
 import math
