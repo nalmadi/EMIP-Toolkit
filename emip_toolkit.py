@@ -121,6 +121,11 @@ class Trial():
     def print_trial_data(self):
         ''' prints trial data '''
         return self.trial_data
+
+
+    def get_subject_ID(self):
+        ''' returns subject ID '''
+        return self.trial_participant
     
 
     def get_offset(self):
@@ -409,8 +414,12 @@ class Experiment():
                 
                 if active:
                     # parse trial, participant, data, image
-                    self.trial.append(Trial( len(self.trial), 
-                                            tfile.split('/')[-1][:3], 
+
+                    trial_ID = len(self.trial)
+                    participant_ID = tfile.split('/')[-1].split('_')[0]
+
+                    self.trial.append(Trial( trial_ID, 
+                                            participant_ID, 
                                             trial_data[:-1], 
                                             trial_image[-2][-1])  )
                     
@@ -428,6 +437,7 @@ class Experiment():
     def get_number_of_trials(self):
         '''returns the number of trials in the experiment'''
         return len(self.trial)
+
 
 
 import pandas as pd
@@ -714,3 +724,44 @@ def hit_test(trial, aois_tokens, radius = 25 ):
                 result = result.append(df, ignore_index=True)
             
     return result
+
+
+def EMIP_dataset(path, sample_size = 216):
+    ''' 
+
+    path : String
+    path to EMIP dataset rawdata directory, example '../../emip_dataset/rawdata/'
+    
+    sample_size : Int (optional)
+    The number of subjects to be processed, the default is 216
+
+    return : Dictionary
+    dictionary of experiments where the key is the subject ID
+
+    '''
+
+    import os
+
+    subject = {}
+    count = 0
+
+    # go over .tsv files in the rawdata dicrectory add files and count them
+    # r=root, d=directories, f = files
+    for r, d, f in os.walk(path):
+        for file in f:
+            if '.tsv' in file:
+                
+                participant_ID = file.split('/')[-1].split('_')[0]
+                
+                if subject.get(participant_ID, -1) == -1:
+                    subject[participant_ID] = Experiment(os.path.join(r, file))
+                else:
+                    print("Error, experiment already in dictionary")
+                
+                count += 1
+                
+                # breaks after sample_size
+                if count == sample_size:
+                    break
+
+    return subject
