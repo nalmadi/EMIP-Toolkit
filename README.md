@@ -12,4 +12,4 @@ Following is a description of each file and directory:
 *contact information will be added upon acceptance for publication.
 
 # Please Cite:
-Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic. 2021. EMIP Toolkit: A Python Library for CustomizedPost-processing of the Eye Movements in Programming Dataset.Proc. ACM ETRA.0, 0, Article 0 (May 2021), 10 pages.https://doi.org/10.1145/3448018.3457425
+Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EMIP Toolkit: A Python Library for Customized Post-processing ofthe Eye Movements in Programming Dataset. InETRA ’21: 2021 Symposiumon Eye Tracking Research and Applications (ETRA ’21 Short Papers), May25–27, 2021, Virtual Event, Germany.ACM, New York, NY, USA, 6 pages.https://doi.org/10.1145/3448018.3457425
