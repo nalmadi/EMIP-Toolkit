@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import imshow
 import numpy as np
+from numpy.lib.ufunclike import fix
 import pandas
 
 
@@ -62,6 +63,116 @@ class Fixation():
         		self.y_cord,
         		self.token]
 
+class SMIRed250_Fixation(Fixation):
+    def __init__(self, trial, participant, timestamp, duration, x_cord, y_cord, token):
+        super().__init__(trial, participant, timestamp, duration, x_cord, y_cord, token)
+
+class EyeLink1000_Fixation(Fixation):
+    def __init__(self, trial, participant, timestamp, duration, x_cord, y_cord, token, pupil):
+        super().__init__(trial, participant, timestamp, duration, x_cord, y_cord, token)
+        self.pupil = pupil
+
+    def get_fixation(self):
+        ''' returns fixation attributes as a list '''
+
+        return super().get_fixation() + [self.pupil]
+
+class Saccade():
+    def __init__(self, trial, participant, timestamp, duration, x_cord, y_cord, x1_cord, y1_cord, amplitude, peak_velocity):
+        ''' initalizes the basic data for each fixation:
+
+			trial : int
+			trial ID that the fixation belongs to.
+
+			participant : int
+			participant id that the fixation belongs to.
+
+			timestamp : int
+			fixation time stamp.
+
+			duration : int
+			fixation duration in milliseconds.
+
+			x_cord : int
+			fixation x coordinate.
+
+			y_cord : int
+			fixation Y coordinate.
+
+            x1_cord : int
+			fixation x1 coordinate.
+
+			y1_cord : int
+			fixation Y1 coordinate.
+
+			amplitude : int
+            amplitude.
+
+            peak_velocity : int
+            peak velocity.
+        '''
+
+        self.trial_ID = trial
+        self.participant = participant
+        self.timestamp = timestamp
+        self.duration = duration
+        self.x_cord = x_cord
+        self.y_cord = y_cord
+        self.x1_cord = x1_cord
+        self.y1_cord = y1_cord
+        self.amplitude = amplitude
+        self.peak_velocity = peak_velocity
+
+    def get_saccade(self):
+        ''' returns saccade attributes as a list '''
+
+        return [self.trial_ID,
+                self.participant,
+                self.timestamp,
+                self.duration,
+                self.x_cord,
+                self.y_cord,
+                self.x1_cord,
+                self.y1_cord,
+                self.amplitude,
+                self.peak_velocity]
+
+class EyeLink1000_Saccade(Saccade):
+    def __init__(self, trial, participant, timestamp, duration, x_cord, y_cord, x1_cord, y1_cord, amplitude, peak_velocity):
+        super().__init__(trial, participant, timestamp, duration, x_cord, y_cord, x1_cord, y1_cord, amplitude, peak_velocity)
+
+class Blink():
+    def __init__(self, trial, participant, timestamp, duration):
+        ''' initalizes the basic data for each blink:
+
+			trial : int
+			trial ID that the fixation belongs to.
+
+			participant : int
+			participant id that the fixation belongs to.
+
+			timestamp : int
+			fixation time stamp.
+
+			duration : int
+			fixation duration in milliseconds.
+        '''
+        self.trial_ID = trial
+        self.participant = participant
+        self.timestamp = timestamp
+        self.duration = duration
+
+    def get_blink(self):
+        ''' returns blink attributes as a list '''
+
+        return [self.trial_ID,
+                self.participant,
+                self.timestamp,
+                self.duration]
+
+class EyeLink1000_Blink(Blink):
+    def __init__(self, trial, participant, timestamp, duration):
+        super().__init__(trial, participant, timestamp, duration)
 
 class Trial():
     ''' Each trial consists of many samples that need to be converted to fixations.
@@ -72,7 +183,7 @@ class Trial():
     A trial is part of an experiment. Or each experiment consists of multiple trials.
     '''
 
-    def __init__(self, trial, participant, data, image):
+    def __init__(self, trial, participant, image):
         ''' initialize attributes for storing trial data, filtered fixations, and
         stores image name.
 
@@ -82,6 +193,7 @@ class Trial():
         participant : String
         participant ID
 
+        # EMIP Only
         data : String
 		samples (SMPs) that belong to the trial
 
@@ -91,42 +203,28 @@ class Trial():
 
         self.trial_ID = trial
         self.trial_participant = participant
-        self.trial_data = [] + data
+
         self.offset_history = []
+
         self.trial_image = image
 
         self.fixations = []
-
 
     def get_trial_image(self):
         ''' returns the image file name associated with the trial '''
         return self.trial_image
 
-
-    def get_sample_number(self):
-        ''' returns the number of samples in the trial '''
-        return len(self.trial_data)
-
-
     def get_fixation_number(self):
         ''' returns the number of filtered fixations in the trial '''
         return len(self.fixations)
-
 
     def get_fixations(self):
         ''' returns the filtered fixations in the trial '''
         return self.fixations
 
-
-    def print_trial_data(self):
-        ''' prints trial data '''
-        return self.trial_data
-
-
     def get_subject_ID(self):
         ''' returns subject ID '''
         return self.trial_participant
-
 
     def get_offset(self):
         ''' returns total offset applied by adding all offsets
@@ -141,7 +239,6 @@ class Trial():
             y_total += (y_offset)
 
         return (x_total, y_total)
-
 
     def reset_offset(self):
         ''' resets and changes previosuly done using offset
@@ -159,7 +256,6 @@ class Trial():
         self.offset_history.clear()
 
         self.sample_offset(x_total, y_total)
-
 
     def sample_offset(self, x_offset, y_offset):
         ''' moves smaples +X and +Y pixels accorss the viewing window
@@ -190,6 +286,22 @@ class Trial():
 
             sample[23] = str(x_cord + x_offset)
             sample[24] = str(y_cord + y_offset)
+
+
+class SMIRed250_Trial(Trial):
+    def __init__(self, trial, participant, data, image):
+        super().__init__(trial, participant, image)
+        self.trial_data = [] + data
+
+
+    def get_sample_number(self):
+        ''' returns the number of samples in the trial '''
+        return len(self.trial_data)
+
+
+    def print_trial_data(self):
+        ''' prints trial data '''
+        return self.trial_data
 
 
     def filter_fixations(self, minimum_duration=50, sample_duration=4, maxmimum_dispersion=25):
@@ -279,7 +391,6 @@ class Trial():
             # the wondow dispersion is above threshold
 
 
-
     def draw_trial(self, images_path, draw_raw_data, draw_filtered_fixations, path, save_image):
         '''draws the trial image and raw-data/fixations over the image
         circle size indicates fixation duration
@@ -365,18 +476,121 @@ class Trial():
             print(image_name, "saved!")
 
 
+class EyeLink1000_Trial(Trial):
+    def __init__(self, trial, participant, image, fixations, saccades, blinks):
+        super().__init__(trial, participant, image)
+
+        self.fixations = fixations
+        # Eyelink1000
+        self.saccades = saccades
+        self.blinks = blinks
+
+
+    def get_sample_number(self):
+        ''' returns the number of samples in the trial '''
+        return len(self.fixations.values()) + len(self.saccades.values()) + len(self.blinks.values())
+
+    def get_fixations(self):
+        ''' returns the filtered fixations in the trial '''
+        return self.fixations.values()
+
+    # [UPDATE] Add saccade and blink getter for EyeLink1000
+    def get_saccade_number(self):
+        ''' returns the number of saccades in the trial '''
+        return len(self.saccades)
+
+
+    def get_saccade(self):
+        ''' returns the saccades in the trial '''
+        return self.saccades.values()
+
+
+    def get_blink_number(self):
+        ''' returns the number of blinks in the trial '''
+        return len(self.blinks)
+
+
+    def get_blink(self):
+        ''' returns the blinks in the trial '''
+        return self.blinks.values()
+
+    def draw_trial(self, images_path, save_image=False):
+        trial_image = self.trial_image
+
+        background_size = (1024,768)
+        trial_location = (10, 375)
+
+        img = Image.new('RGBA', background_size, color='black')
+        foreground = Image.open(images_path + trial_image)
+
+        img.paste(foreground, trial_location, foreground.convert('RGBA'))
+
+        draw = ImageDraw.Draw(img)
+
+        for count, fixation in self.fixations.items():
+            duration = fixation.duration
+            if 5 * (duration / 100) < 5:
+                r = 3
+            else:
+                r = 5 * (duration / 100)
+
+            x = fixation.x_cord
+            y = fixation.y_cord
+
+            bound = (x-r, y-r, x+r, y+r)
+            outline_color = (255, 255, 0, 255)
+            fill_color = (121, 128, 0, 255)
+            draw.ellipse(bound, fill=fill_color, outline=outline_color)
+
+            text_bound = (x, y-r/2)
+            text_color = (255, 0, 0, 255)
+            draw.text(text_bound, str(count), fill=text_color)
+
+        for count, saccade in self.saccades.items():
+            x = saccade.x_cord
+            y = saccade.y_cord
+            x1 = saccade.x1_cord
+            y1 = saccade.y1_cord
+
+            bound = (x, y, x1, y1)
+            line_color = (122, 122, 0, 255)
+            penwidth = 2
+            draw.line(bound, fill=line_color, width=penwidth)
+
+            text_bound = ((x+x1)/2, (y+y1)/2)
+            text_color = (255, 0, 0, 255)
+            draw.text(text_bound, str(count), fill=text_color)
+
+
+        return img
 
 class Experiment():
     '''each subject data represnets an experiment with multiple trials'''
 
 
-    def __init__(self, tfile):
+    def __init__(self, tfile, eyetracker):
         ''' initialize each experiment with raw data file
         This method splits data into a bunch of trials based on JPG
 
 
         tfile: String
 		raw data TSV file.
+
+        eyetracker: String
+        typle of eye tracker used
+        '''
+
+        if eyetracker == 'SMIRed250':
+            self.parse_tsv(tfile)
+        elif eyetracker == 'EyeLink1000':
+            self.parse_asc(tfile)
+
+
+    def parse_tsv(self, tfile):
+        '''Parse SMIRed250's tsv file
+
+        tfile : str
+        name of the tsv file
         '''
 
         # reading raw data file from EMIP dataset
@@ -418,26 +632,154 @@ class Experiment():
                     trial_ID = len(self.trial)
                     participant_ID = tfile.split('/')[-1].split('_')[0]
 
-                    self.trial.append(Trial( trial_ID,
+                    self.trial.append(SMIRed250_Trial(trial_ID,
                                             participant_ID,
                                             trial_data[:-1],
-                                            trial_image[-2][-1])  )
+                                            trial_image[-2][-1]))
 
                     trial_data.clear()
 
                 active = True
 
         # adds the last trial
-        self.trial.append(Trial(len(self.trial),
+        self.trial.append(SMIRed250_Trial(len(self.trial),
         						tfile.split('/')[-1][:3],
         						trial_data,
         						trial_image[-1][-1]))
 
 
+    def parse_asc(self, tfile):
+        '''Parse EyeLink1000's asc file
+
+        tfile : str
+        name of the asc file
+        '''
+
+        asc_file = open(tfile)
+        print("parsing file:", tfile)
+
+        self.trial = []
+
+        text = asc_file.read()
+        text_lines = text.split('\n')
+
+        trial_ID = -1
+        participant_ID = tfile.split('.')[0]
+
+        # [UPDATE] Store in dictionary for order
+        trial_fixations = {}
+        trial_saccades = {}
+        trial_blinks = {}
+
+        count = 0
+
+        for line in text_lines:
+
+            token = line.split()
+
+            if token == []:
+                continue
+
+            if "TRIALID" in token:
+                # List of eye events
+                if trial_ID == -1:
+                    trial_ID = int(token[-1])
+                    continue
+
+                # Read image location
+                index = str(int(trial_ID)+1)
+                experiment = participant_ID.split('/')[-1]
+                location = f'runtime/dataviewer/{experiment}/graphics/VC_{index}.vcl'
+                with open(location, 'r') as file:
+                    image = file.readlines()[1].split()[-3].split('/')[-1]
+
+                # Append fixations and saccades list here
+                self.trial.append(EyeLink1000_Trial(trial_ID,
+                                                    participant_ID,
+                                                    image, # [UPDATE] Add image
+                                                    trial_fixations,
+                                                    trial_saccades,
+                                                    trial_blinks))
+                # [UPDATE] Fix same reference issue
+                trial_fixations = {}
+                trial_saccades = {}
+                trial_blinks = {}
+                count = 0
+                trial_ID = int(token[-1])
+
+            if token[0] == "EFIX":
+                timestamp = int(token[2])
+                duration = int(token[4])
+                x_cord = float(token[5])
+                y_cord = float(token[6])
+                pupil = int(token[7])
+
+                trial_fixations[count] = EyeLink1000_Fixation(trial_ID,
+                                                participant_ID,
+                                                timestamp,
+                                                duration,
+                                                x_cord,
+                                                y_cord,
+                                                "", # Token Needed
+                                                pupil)
+                count += 1
+
+            if token[0] == "ESACC":
+                timestamp = int(token[2])
+                duration = int(token[4])
+                # [Question] "." Exist in asc file
+                x_cord = float(token[5]) if token[5] != '.' else 0.0
+                y_cord = float(token[6]) if token[6] != '.' else 0.0
+                x1_cord = float(token[7]) if token[7] != '.' else 0.0
+                y1_cord = float(token[8]) if token[8] != '.' else 0.0
+                amplitude = float(token[9])
+                peak_velocity = int(token[10])
+                trial_saccades[count] = EyeLink1000_Saccade(trial_ID,
+                                            participant_ID,
+                                            timestamp,
+                                            duration,
+                                            x_cord,
+                                            y_cord,
+                                            x1_cord,
+                                            y1_cord,
+                                            amplitude,
+                                            peak_velocity)
+                count += 1
+
+            if token[0] == "EBLINK":
+                timestamp = int(token[2])
+                duration = int(token[4])
+                trial_blinks[count] = EyeLink1000_Blink(trial_ID,
+                                                    participant_ID,
+                                                    timestamp,
+                                                    duration)
+                count += 1
+
+        # Read image location
+        index = str(int(trial_ID)+1)
+        experiment = participant_ID.split('/')[-1]
+        location = f'runtime/dataviewer/{experiment}/graphics/VC_{index}.vcl'
+        with open(location, 'r') as file:
+            image = file.readlines()[1].split()[-3].split('/')[-1]
+            image = f'runtime/images/{image}'
+
+        # Add the last trial
+        self.trial.append(EyeLink1000_Trial(trial_ID,
+                                            participant_ID,
+                                            image, # Image Needed
+                                            trial_fixations,
+                                            trial_saccades,
+                                            trial_blinks))
+
+        asc_file.close()
+        trial_fixations = []
+        trial_saccades = []
+        trial_blinks = []
+
+
     def get_number_of_trials(self):
         '''returns the number of trials in the experiment'''
         return len(self.trial)
-
 
 
 import pandas as pd
@@ -803,25 +1145,25 @@ def hit_test(trial, aois_tokens, radius = 25 ):
                 df = pandas.DataFrame([[fix.trial_ID,
                                         fix.participant,
                                         row.image,
-	                                    row.image,
-	                                    fix.timestamp,
-	                                    fix.duration,
-	                                    fix.x_cord,
-	                                    fix.y_cord,
-	                                    row.x,
-	                                    row.y,
-	                                    row.width,
-	                                    row.height,
-	                                    row.token,
-	                                    len(row.token),
-	                                    row.srcML_tag],], columns=header)
+                                        row.image,
+                                        fix.timestamp,
+                                        fix.duration,
+                                        fix.x_cord,
+                                        fix.y_cord,
+                                        row.x,
+                                        row.y,
+                                        row.width,
+                                        row.height,
+                                        row.token,
+                                        len(row.token),
+                                        row.srcML_tag],], columns=header)
 
                 result = result.append(df, ignore_index=True)
 
     return result
 
 
-def EMIP_dataset(path, sample_size = 216):
+def EMIP_dataset(path, sample_size = 216, eyetracker='SMIRed250'):
     '''
 
     path : String
@@ -849,14 +1191,23 @@ def EMIP_dataset(path, sample_size = 216):
                 participant_ID = file.split('/')[-1].split('_')[0]
 
                 if subject.get(participant_ID, -1) == -1:
-                    subject[participant_ID] = Experiment(os.path.join(r, file))
+                    subject[participant_ID] = Experiment(tfile=os.path.join(r, file), eyetracker=eyetracker)
                 else:
                     print("Error, experiment already in dictionary")
 
-                count += 1
+            if '.asc' in file:
 
-                # breaks after sample_size
-                if count == sample_size:
-                    break
+                participant_ID = file.split('.')[0]
+
+                if subject.get(participant_ID, -1) == -1:
+                    subject[participant_ID] = Experiment(tfile=os.path.join(r, file), eyetracker=eyetracker)
+                else:
+                    print("Error, experiment already in dictionary")
+
+            count += 1
+
+            # breaks after sample_size
+            if count == sample_size:
+                break
 
     return subject
