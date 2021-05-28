@@ -2,7 +2,10 @@
 The EMIP Toolkit can be used under the CC 4.0 license
 (https://creativecommons.org/licenses/by/4.0/)
 
-Author: Naser Al Madi (nsalmadi@colby.edu)
+Authors: 
+Naser Al Madi (nsalmadi@colby.edu)
+Ricky Peng
+
 """
 
 import math
