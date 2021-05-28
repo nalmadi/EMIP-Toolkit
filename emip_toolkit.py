@@ -374,7 +374,6 @@ class Experiment():
         ''' initialize each experiment with raw data file
         This method splits data into a bunch of trials based on JPG
 
-
         tfile: String
 		raw data TSV file.
         '''
@@ -429,7 +428,7 @@ class Experiment():
         
         # adds the last trial
         self.trial.append(Trial(len(self.trial), 
-        						tfile.split('/')[-1][:3], 
+        						tfile.split('/')[-1].split('_')[0], 
         						trial_data, 
         						trial_image[-1][-1]))    
           
