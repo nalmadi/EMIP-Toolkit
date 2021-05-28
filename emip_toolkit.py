@@ -881,7 +881,7 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
         width = x0 - x
         height = y0 - y
         local_id = np.nan
-        image = code_image
+        image = code_image.split('/')[-1]
 
         # For better rectangles
         x += margin_width / 2
@@ -935,6 +935,7 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     '''
 
     image_name = aois_raw["image"][1]
+    file_name = ""
 
     # rectangle files
     if image_name == "rectangle_java.jpg":
