@@ -876,21 +876,20 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
         line_count += 1
 
     # Format pandas dataframe
-    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'local_id', 'image']
+    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'image']
     aoi_df = pd.DataFrame(columns=columns)
 
     for entry in final_result:
         kind, name, x, y, x0, y0 = entry
         width = x0 - x
         height = y0 - y
-        local_id = np.nan
         image = code_image.split('/')[-1]
 
         # For better rectangles
         x += margin_width / 2
         width -= margin_width
 
-        value = [kind, name, x, y, width, height, local_id, image]
+        value = [kind, name, x, y, width, height, image]
         dic = dict(zip(columns, value))
 
         aoi_df = aoi_df.append(dic, ignore_index=True)
