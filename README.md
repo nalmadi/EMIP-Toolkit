@@ -41,6 +41,10 @@ Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EM
 
 # Requirements:
 numpy==1.18.1
+
 pandas==1.0.1
+
 matplotlib==3.1.3
+
 Pillow==8.1.2
+
