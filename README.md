@@ -34,7 +34,7 @@ The toolkit is specifically designed to make using the EMIP dataset easier and m
 
 
 # Examples and tutorial:
-The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a tutorial on using the EMIP Toolkit. The file describes the file structure and raw EMIP files and metadata from http://emipws.org/.
+The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a tutorial on using the EMIP Toolkit. The file describes the required file structure and raw EMIP files and metadata from http://emipws.org/.
 
 
 # Corrected Dataset:
