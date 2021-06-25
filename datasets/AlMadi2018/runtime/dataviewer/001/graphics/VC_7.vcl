@@ -1,0 +1,2 @@
+0 CLEAR 0 0 0
+0 IMGLOAD TOP_LEFT ../../runtime/images/-2683174645433713120.png 10 375
