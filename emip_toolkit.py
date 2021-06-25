@@ -2,15 +2,15 @@
 The EMIP Toolkit can be used under the CC 4.0 license
 (https://creativecommons.org/licenses/by/4.0/)
 
-Authors: 
+Authors:
 Naser Al Madi (nsalmadi@colby.edu)
-Ricky Peng
+Ricky Peng (siyuan.peng@colby.edu)
 
 """
 
 import math
 import statistics
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from matplotlib import pyplot as plt
 from matplotlib.pyplot import imshow
 import numpy as np
@@ -18,7 +18,7 @@ from numpy.lib.ufunclike import fix
 import pandas
 
 
-class Fixation():
+class Fixation:
     ''' Basic container for storing Fixation data '''
 
     def __init__(self, trial, participant, timestamp, duration, x_cord, y_cord, token):
@@ -517,18 +517,40 @@ class EyeLink1000_Trial(Trial):
         ''' returns the blinks in the trial '''
         return self.blinks.values()
 
-    def draw_trial(self, images_path, save_image=False):
+    def find_AOI(self, aoi_path):
+        experiment_id = self.get_subject_ID().split('/')[-1]
+        aoi_path = f'{aoi_path}/{experiment_id}/aoi/IA_{self.trial_ID+1}.ias'
+
+        with open(aoi_path, 'r') as file:
+            bounds = [line.split()[3:7] for line in file.readlines()]
+
+        return np.array(bounds).astype('int').tolist()
+
+    def draw_trial(self, images_path, aoi_path, save_image=False):
         trial_image = self.trial_image
 
         background_size = (1024,768)
-        trial_location = (10, 375)
+        img = Image.new('RGB', background_size, color='black')
 
-        img = Image.new('RGBA', background_size, color='black')
         foreground = Image.open(images_path + trial_image)
+        *_, width, _ = foreground.getbbox()
+        offset = int((1024 - width) / 2) - 10
+        trial_location = (10 + offset, 375)
 
         img.paste(foreground, trial_location, foreground.convert('RGBA'))
 
-        draw = ImageDraw.Draw(img)
+        draw = ImageDraw.Draw(img, 'RGBA')
+
+        font = ImageFont.truetype('Tohoma.ttf', 16)
+
+        aoi_bounds = self.find_AOI(aoi_path)
+
+        for aoi_bound in aoi_bounds:
+            x0, y0, x1, y1 = aoi_bound
+            x0 = x0 + offset
+            x1 = x1 + offset
+            rectangle_bound = (x0, y0, x1-2, y1-2)
+            draw.rectangle(rectangle_bound, outline='white')
 
         for count, fixation in self.fixations.items():
             duration = fixation.duration
@@ -537,32 +559,32 @@ class EyeLink1000_Trial(Trial):
             else:
                 r = 5 * (duration / 100)
 
-            x = fixation.x_cord
+            x = fixation.x_cord + offset
             y = fixation.y_cord
 
             bound = (x-r, y-r, x+r, y+r)
             outline_color = (255, 255, 0, 255)
-            fill_color = (121, 128, 0, 255)
+            fill_color = (242, 255, 0, 128)
             draw.ellipse(bound, fill=fill_color, outline=outline_color)
 
             text_bound = (x, y-r/2)
             text_color = (255, 0, 0, 255)
-            draw.text(text_bound, str(count), fill=text_color)
+            draw.text(text_bound, str(count+2), font=font, fill=text_color)
 
         for count, saccade in self.saccades.items():
-            x = saccade.x_cord
-            y = saccade.y_cord
-            x1 = saccade.x1_cord
+            x0 = saccade.x_cord + offset
+            y0 = saccade.y_cord
+            x1 = saccade.x1_cord + offset
             y1 = saccade.y1_cord
 
-            bound = (x, y, x1, y1)
+            bound = (x0, y0, x1, y1)
             line_color = (122, 122, 0, 255)
             penwidth = 2
             draw.line(bound, fill=line_color, width=penwidth)
 
             text_bound = ((x+x1)/2, (y+y1)/2)
-            text_color = (255, 0, 0, 255)
-            draw.text(text_bound, str(count), fill=text_color)
+            text_color = 'darkred'
+            draw.text(text_bound, str(count+2), font=font, fill=text_color)
 
 
         return img
@@ -787,7 +809,7 @@ class Experiment():
 
 import pandas as pd
 
-def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=7):
+def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=7, bg_color='white'):
     ''' returns a dataframe with AOIs as rectangles with line and part number
     AOI x-coordinate, AOI y-coordinate, width, height, and image file name.
 
@@ -822,16 +844,23 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
         minimum, maximum = img.crop(box).getextrema()
 
         if upper > 1:
-            if vertical_result[-1][2] == 255 and minimum == 0:
-                # Rectangle detects black color for the first time in a while -> Start of one line
-                upper_bounds.append(upper)
-            if vertical_result[-1][2] == 0 and minimum == 255:
-                # Rectangle detects white color for the first time in a while -> End of one line
-                lower_bounds.append(lower)
+            if bg_color == 'black':
+                if vertical_result[-1][3] == 0 and maximum == 255:
+                    # Rectangle detects white color for the first time in a while -> Start of one line
+                    upper_bounds.append(upper)
+                if vertical_result[-1][3] == 255 and maximum == 0:
+                    # Rectangle detects black color for the first time in a while -> End of one line
+                    lower_bounds.append(lower)
+            elif bg_color == 'white':
+                if vertical_result[-1][2] == 255 and minimum == 0:
+                    # Rectangle detects black color for the first time in a while -> Start of one line
+                    upper_bounds.append(upper)
+                if vertical_result[-1][2] == 0 and minimum == 255:
+                    # Rectangle detects white color for the first time in a while -> End of one line
+                    lower_bounds.append(lower)
 
         # Storing all detection result
         vertical_result.append([upper, lower, minimum, maximum])
-
 
     final_result = []
 
@@ -852,12 +881,20 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
             minimum, maximum = img.crop(box).getextrema()
 
             if left > 1:
-                if horizontal_result[-1][2] == 255 and minimum == 0:
-                    # Rectangle detects black color for the first time in a while -> Start of one word
-                    left_bounds.append(left)
-                if horizontal_result[-1][2] == 0 and minimum == 255:
-                    # Rectangle detects white color for the first time in a while -> End of one word
-                    right_bounds.append(right)
+                if bg_color == 'black':
+                    if horizontal_result[-1][3] == 0 and maximum == 255:
+                        # Rectangle detects black color for the first time in a while -> Start of one word
+                        left_bounds.append(left)
+                    if horizontal_result[-1][3] == 255 and maximum == 0:
+                        # Rectangle detects white color for the first time in a while -> End of one word
+                        right_bounds.append(right)
+                elif bg_color == 'white':
+                    if horizontal_result[-1][2] == 255 and minimum == 0:
+                        # Rectangle detects black color for the first time in a while -> Start of one word
+                        left_bounds.append(left)
+                    if horizontal_result[-1][2] == 0 and minimum == 255:
+                        # Rectangle detects white color for the first time in a while -> End of one word
+                        right_bounds.append(right)
 
             # Storing all detection result
             horizontal_result.append([left, right, minimum, maximum])
@@ -871,25 +908,26 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
                 part_count += 1
 
         elif level == 'line':
-            final_result.append(['line', f'line {line_count}', left_bounds[0], up, right_bounds[-1], low])
+            final_result.append(['line', f'line {line_count}', left_bounds[0], upper_bound, right_bounds[-1], lower_bound])
 
         line_count += 1
 
     # Format pandas dataframe
-    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'image']
+    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'local_id', 'image']
     aoi_df = pd.DataFrame(columns=columns)
 
     for entry in final_result:
         kind, name, x, y, x0, y0 = entry
         width = x0 - x
         height = y0 - y
-        image = code_image.split('/')[-1]
+        local_id = np.nan
+        image = code_image
 
         # For better rectangles
         x += margin_width / 2
         width -= margin_width
 
-        value = [kind, name, x, y, width, height, image]
+        value = [kind, name, x, y, width, height, local_id, image]
         dic = dict(zip(columns, value))
 
         aoi_df = aoi_df.append(dic, ignore_index=True)
@@ -899,7 +937,7 @@ def find_rectangles(code_image, level="sub-line", margin_height=4, margin_width=
 from PIL import ImageEnhance
 
 
-def draw_rectangles(aoi_rectangles, code_image):
+def draw_rectangles(aoi_rectangles, code_image, bg_color='white'):
     ''' Draws AOI rectangles on to an image.
 
     aoi_rectangles : Pandas Dataframe
@@ -908,6 +946,8 @@ def draw_rectangles(aoi_rectangles, code_image):
     code_image : PIL image
     image on which AOI rectangles will be imposed
     '''
+
+    outline = {'white': '#000000', 'black': '#ffffff'}
 
     # copy original image
     rect_image = code_image.copy()
@@ -921,7 +961,7 @@ def draw_rectangles(aoi_rectangles, code_image):
         width = row[1]['width']
         draw.rectangle([(x_cordinate, y_cordinate),
                         (x_cordinate + width - 1, y_cordinate + height - 1)],
-                        outline = "#000000")
+                        outline = outline[bg_color])
 
     return rect_image
 
@@ -937,7 +977,6 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     '''
 
     image_name = aois_raw["image"][1]
-    file_name = ""
 
     # rectangle files
     if image_name == "rectangle_java.jpg":
@@ -1045,7 +1084,7 @@ def add_srcml_to_AOIs( aois_raw):
         aois_raw["srcML_tag"] = 'na'
         return aois_raw
 
-    srcML_table = pandas.read_csv("./datasets/EMIP2021/" + file_name, sep='\t')
+    srcML_table = pandas.read_csv(file_name, sep='\t')
 
     aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
