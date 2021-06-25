@@ -1045,7 +1045,7 @@ def add_srcml_to_AOIs( aois_raw):
         aois_raw["srcML_tag"] = 'na'
         return aois_raw
 
-    srcML_table = pandas.read_csv(file_name, sep='\t')
+    srcML_table = pandas.read_csv("./datasets/EMIP2021/" + file_name, sep='\t')
 
     aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
