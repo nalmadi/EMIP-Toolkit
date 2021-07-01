@@ -386,7 +386,7 @@ class Trial:
         """
         return len(self.blinks)
 
-    def get_sample_number(self):
+    def get_eye_movements_number(self):
         """Returns the total number of eye movement in the trial
 
         Returns
@@ -405,6 +405,16 @@ class Trial:
             a list of raw eye movement samples
         """
         return self.samples
+
+    def get_number_of_samples(self):
+        """Returns the total number of eye movement in the trial
+
+        Returns
+        -------
+        int
+            total number of eye movement
+        """
+        return len(self.samples)
 
     def get_offset(self):
         """Returns total offset applied by adding all offsets in offset history
@@ -452,20 +462,20 @@ class Trial:
 class Experiment:
     """Each subject data represents an experiment with multiple trials"""
 
-    def __init__(self, trials: list, eye_tracker: str):
+    def __init__(self, trial: list, eye_tracker: str):
         """Initialize each experiment with raw data file
             This method splits data into a bunch of trials based on JPG
 
         Parameters
         ----------
-        trials: list
+        trial: list
             raw data TSV file.
 
         eye_tracker: str
             type of eye tracker used
         """
 
-        self.trials = trials
+        self.trial = trial
         self.eye_tracker = eye_tracker
 
     def get_number_of_trials(self):
@@ -475,7 +485,7 @@ class Experiment:
         -------
         int
             number of trials in the experiment"""
-        return len(self.trials)
+        return len(self.trial)
 
     def get_eye_tracker(self):
         """Returns the name of eye tracker in the experiment
@@ -609,7 +619,7 @@ def read_tsv(filename):
                 # [23] R POR X [px]	 '0.00',
                 # [24] R POR Y [px]	 '0.00',
                 samples.append(token)
-                raw_fixations.append([token[0], token[23], token[24]])
+                raw_fixations.append([int(token[0]), float(token[23]), float(token[24])])
 
         if token[1] == "MSG" and token[3].find(".jpg") != -1:
 
@@ -672,7 +682,7 @@ def read_tsv(filename):
                         blinks={},
                         samples=samples))
 
-    return Experiment(trials=trials, eye_tracker="SMIRed250")
+    return Experiment(trial=trials, eye_tracker="SMIRed250")
 
 
 def read_asc(filename):
@@ -810,7 +820,7 @@ def read_asc(filename):
 
     asc_file.close()
 
-    return Experiment(trials=trials, eye_tracker="EyeLink1000")
+    return Experiment(trial=trials, eye_tracker="EyeLink1000")
 
 
 def __find_background_color(img):
@@ -884,7 +894,7 @@ def find_aoi(image, level="sub-line", margin_height=4, margin_width=7):
 
     vertical_result, upper_bounds, lower_bounds = [], [], []
 
-    # Move the detecting rectangle from the top to the buttom of the image
+    # Move the detecting rectangle from the top to the bottom of the image
     for upper in range(height - margin_height):
 
         lower = upper + margin_height
