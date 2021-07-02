@@ -259,7 +259,7 @@ class Trial:
     """
 
     def __init__(self, trial_id: int, participant_id: str, image: str, fixations: dict, saccades: dict, blinks: dict,
-                 samples: list, eye_tracker : str):
+                 samples: list, eye_tracker: str):
         """Initializes attributes for storing trial data, fixations, saccades, blinks, and
         stores image name
 
@@ -440,7 +440,7 @@ class Trial:
 
         self.sample_offset(x_total, y_total)
 
-        self.offset_history = [[0,0]]
+        self.offset_history = [[0, 0]]
 
     def sample_offset(self, x_offset, y_offset):
         """Moves samples +X and +Y pixels across the viewing window to correct fixation shift or
@@ -473,108 +473,171 @@ class Trial:
                 sample[23] = str(x_cord + x_offset)
                 sample[24] = str(y_cord + y_offset)
 
-    def draw_trial(self, images_path, draw_raw_data, draw_filtered_fixations, aoi=None, save_image=None):
+    def __draw_raw_data(self, draw):
+        """Private method that draws raw sample data
+
+        Parameters
+        ----------
+        draw : PIL.ImageDraw.Draw
+            a Draw object imposed on the image
+        """
+        # draw raw data before fixation filter
+        for sample in self.samples:
+
+            # invalid records
+            if len(sample) > 5:
+                x_cord = float(sample[23])
+                y_cord = float(sample[24])  # - 150
+
+            dot_size = 2
+
+            draw.ellipse((x_cord - (dot_size / 2),
+                          y_cord - (dot_size / 2),
+                          x_cord + dot_size, y_cord + dot_size),
+                         fill=(255, 0, 0, 128))
+
+        return None
+
+    def __draw_fixation(self, draw, draw_number=False):
+        """Private method that draws the fixation, also allow user to draw eye movement order
+
+        Parameters
+        ----------
+        draw : PIL.ImageDraw.Draw
+            a Draw object imposed on the image
+
+        draw_number : bool
+            whether user wants to draw the eye movement number
+        """
+        for count, fixation in self.fixations.items():
+            duration = fixation.duration
+            if 5 * (duration / 100) < 5:
+                r = 3
+            else:
+                r = 5 * (duration / 100)
+
+            x = fixation.x_cord
+            y = fixation.y_cord
+
+            bound = (x - r, y - r, x + r, y + r)
+            outline_color = (255, 255, 0, 0)
+            fill_color = (242, 255, 0, 100)
+            draw.ellipse(bound, fill=fill_color, outline=outline_color)
+
+            if draw_number:
+                text_bound = (x, y - r / 2)
+                text_color = (255, 0, 0, 225)
+                draw.text(text_bound, str(count + 2), fill=text_color)
+
+        return None
+
+    def __draw_aoi(self, draw, aoi, bg_color):
+        """Private method to draw the Area of Interest on the image
+
+        Parameters
+        ----------
+        draw : PIL.ImageDraw.Draw
+            a Draw object imposed on the image
+
+        aoi : pandas.DataFrame
+            a DataFrame that contains the area of interest bounds
+
+        bg_color : str
+            background color
+        """
+
+        outline = {'white': '#000000', 'black': '#ffffff'}
+
+        for row in aoi[['x', 'y', 'width', 'height']].iterrows():
+            y_coordinate = row[1]['y']
+            x_coordinate = row[1]['x']
+            height = row[1]['height']
+            width = row[1]['width']
+            draw.rectangle([(x_coordinate, y_coordinate),
+                            (x_coordinate + width - 1, y_coordinate + height - 1)],
+                           outline=outline[bg_color])
+
+        return None
+
+    def __draw_saccade(self, draw, draw_number=False):
+        """
+
+        Parameters
+        ----------
+        draw : PIL.ImageDraw.Draw
+            a Draw object imposed on the image
+
+        draw_number : bool
+            whether user wants to draw the eye movement number
+        """
+        for count, saccade in self.saccades.items():
+            x0 = saccade.x_cord + offset
+            y0 = saccade.y_cord
+            x1 = saccade.x1_cord + offset
+            y1 = saccade.y1_cord
+
+            bound = (x0, y0, x1, y1)
+            line_color = (122, 122, 0, 255)
+            penwidth = 2
+            draw.line(bound, fill=line_color, width=penwidth)
+
+            font = ImageFont.truetype('Tohoma.ttf', 16)
+
+            if draw_number:
+                text_bound = ((x0 + x1) / 2, (y0 + y1) / 2)
+                text_color = 'darkred'
+                draw.text(text_bound, str(count + 2), font=font, fill=text_color)
+
+    def draw_trial(self, images_path, draw_raw_data=False, draw_fixation=True, draw_saccade=False, draw_number=False,
+                   aoi=None, save_image=None):
         """Draws the trial image and raw-data/fixations over the image
             circle size indicates fixation duration
 
         images_path : str
             path for trial image file.
 
-        draw_raw_data : bool
+        draw_raw_data : bool, optional
             whether user wants raw data drawn.
 
-        draw_filtered_fixations : bool
-            whether user wants filtered fixations drawn.
+        draw_fixation : bool, optional
+            whether user wants filtered fixations drawn
 
-        aoi : pandas.DataFrame
+        draw_saccade : bool, optional
+            whether user wants saccades drawn
+
+        draw_number : bool, optional
+            whether user wants to draw eye movement number
+
+        aoi : pandas.DataFrame, optional
             Area of Interests
 
-        save_image : str
+        save_image : str, optional
             path to save the image, image is saved to this path if it parameter exists
         """
 
         im = Image.open(images_path + self.image)
 
-        draw = ImageDraw.Draw(im)
+        bg_color = __find_background_color(im.copy().convert('1'))
+
+        draw = ImageDraw.Draw(im, 'RGBA')
 
         if draw_raw_data:
-            # draw raw data before fixation filter
-            for sample in self.samples:
-                # TODO for sample in self.samples:
+            self.__draw_raw_data(draw)
 
-                # invalid records
-                if len(sample) > 5:
-                    x_cord = float(sample[23])
-                    y_cord = float(sample[24])  # - 150
+        if draw_fixation:
+            self.__draw_fixation(draw, draw_number)
 
-                dot_size = 3
+        if isinstance(aoi, pd.DataFrame):
+            self.__draw_aoi(draw, aoi, bg_color)
 
-                draw.ellipse((x_cord - (dot_size / 2),
-                              y_cord - (dot_size / 2),
-                              x_cord + dot_size, y_cord + dot_size),
-                             fill=(255, 0, 0, 0))
-
-        if not draw_filtered_fixations:
-
-            # draw fixations
-            for order, fix in self.fixations.items():
-                # fixation coordinates on 1920×1080 px
-                x_cord = fix.get_fixation()[4]
-                y_cord = fix.get_fixation()[5]
-
-                # Circle size is 5
-                dot_size = 5  # fix.get_fixation()[3]  # circle size is based on fixation duration
-
-                draw.ellipse((x_cord - (dot_size / 2),
-                              y_cord - (dot_size / 2),
-                              x_cord + dot_size,
-                              y_cord + dot_size),
-                             fill=(0, 255, 0, 0))
-
-        # TODO give user choice for drawing numbers
-        # TODO Transparent
-        # NOTE Inside if statement, make it a small function  TODO helper function
-
-        if draw_filtered_fixations:
-            # TODO Draw fixation
-            for count, fixation in self.fixations.items():
-                duration = fixation.duration
-                if 5 * (duration / 100) < 5:
-                    r = 3
-                else:
-                    r = 5 * (duration / 100)
-
-                x = fixation.x_cord
-                y = fixation.y_cord
-
-                bound = (x - r, y - r, x + r, y + r)
-                outline_color = (255, 255, 0, 255)
-                fill_color = (242, 255, 0, 128)
-                draw.ellipse(bound, fill=fill_color, outline=outline_color)
-
-                # TODO number to be drawn or not (as a parameter, by default, off)
-                text_bound = (x, y - r / 2)
-                text_color = (255, 0, 0, 255)
-                draw.text(text_bound, str(count + 2), fill=text_color)
-
-        if aoi is not None:
-            # TODO AOI Function
-            for row in aoi[['x','y','width','height']].iterrows():
-                x_coordinate = row[1]['x']
-                y_coordinate = row[1]['y']
-                height = row[1]['height']
-                width = row[1]['width']
-                draw.rectangle([(x_coordinate, y_coordinate),
-                                (x_coordinate + width - 1, y_coordinate + height - 1)],
-                               outline='black')
-
-        i# TODO Saccade function
+        if draw_saccade:
+            self.__draw_saccade(draw, draw_number)
 
         plt.figure(figsize=(17, 15))
         plt.imshow(np.asarray(im), interpolation='nearest')
 
         if save_image is not None:
-            # Save the generated image with offset values applied
+            # Save the image with applied offset
 
             image_name = save_image + \
                          str(self.participant_id) + \
@@ -594,7 +657,7 @@ class Trial:
 class Experiment:
     """Each subject data represents an experiment with multiple trials"""
 
-    def __init__(self, trial: list, eye_tracker: str, type : str):
+    def __init__(self, trial: list, eye_tracker: str, type: str):
         """Initialize each experiment with raw data file
             This method splits data into a bunch of trials based on JPG
 
