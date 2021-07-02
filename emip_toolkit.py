@@ -104,7 +104,7 @@ class Fixation:
         str
             fixation information
         """
-        return f"{self.trial_id} {self.participant_id} {self.timestamp} {self.duration}" \
+        return f"{self.trial_id} {self.participant_id} {self.timestamp} {self.duration} " \
                f"{self.x_cord} {self.y_cord} {self.token} {self.pupil}"
 
 
@@ -259,7 +259,7 @@ class Trial:
     """
 
     def __init__(self, trial_id: int, participant_id: str, image: str, fixations: dict, saccades: dict, blinks: dict,
-                 samples: list):
+                 samples: list, eye_tracker : str):
         """Initializes attributes for storing trial data, fixations, saccades, blinks, and
         stores image name
 
@@ -285,6 +285,9 @@ class Trial:
 
         samples : list
             list of raw data samples
+
+        eye_tracker : str
+            type of eye tracker
         """
         self.trial_id = trial_id
         self.participant_id = participant_id
@@ -294,7 +297,9 @@ class Trial:
         self.blinks = blinks
         self.samples = samples
 
-        self.offset_history = []
+        self.offset_history = [[0, 0]]
+
+        self.eye_tracker = eye_tracker
 
     def get_trial_id(self):
         """Returns the trial id
@@ -306,7 +311,7 @@ class Trial:
         """
         return self.trial_id
 
-    def get_participant_id(self):
+    def get_subject_id(self):
         """Returns the participant id
 
         Returns
@@ -386,7 +391,7 @@ class Trial:
         """
         return len(self.blinks)
 
-    def get_eye_movements_number(self):
+    def get_eye_movement_number(self):
         """Returns the total number of eye movement in the trial
 
         Returns
@@ -406,7 +411,7 @@ class Trial:
         """
         return self.samples
 
-    def get_number_of_samples(self):
+    def get_sample_number(self):
         """Returns the total number of eye movement in the trial
 
         Returns
@@ -424,19 +429,18 @@ class Trial:
         tuple
             x_offset, y_offset
         """
-
         return tuple(np.array(self.offset_history).sum(axis=0))
 
     def reset_offset(self):
         """Resets and changes previously done using offset it implements UNDO feature by
-            removing the last offset from the offset history.
+            removing the all applied offset from the offset history.
         """
 
         x_total, y_total = tuple(np.array(self.offset_history).sum(axis=0) * -1)
 
-        self.offset_history = []
-
         self.sample_offset(x_total, y_total)
+
+        self.offset_history = [[0,0]]
 
     def sample_offset(self, x_offset, y_offset):
         """Moves samples +X and +Y pixels across the viewing window to correct fixation shift or
@@ -444,13 +448,13 @@ class Trial:
 
         Parameters
         ----------
-        x_offset : float
+        x_offset : int
             offset to be applied on all fixations in the x-axis
 
-        y_offset : float
+        y_offset : int
             offset to be applied on all fixations in the y-axis
         """
-        self.offset_history.append((x_offset, y_offset))
+        self.offset_history.append([x_offset, y_offset])
 
         for order in self.fixations.keys():
             self.fixations[order].sample_offset(x_offset, y_offset)
@@ -458,11 +462,139 @@ class Trial:
         for order in self.saccades.keys():
             self.saccades[order].sample_offset(x_offset, y_offset)
 
+        # go over all samples (SMPs) in trial data
+        for sample in self.samples:
+
+            if self.eye_tracker == "SMIRed250":
+                # Filter MSG samples if any exist, or R eye is inValid
+
+                x_cord, y_cord = float(sample[23]), float(sample[24])
+
+                sample[23] = str(x_cord + x_offset)
+                sample[24] = str(y_cord + y_offset)
+
+    def draw_trial(self, images_path, draw_raw_data, draw_filtered_fixations, aoi=None, save_image=None):
+        """Draws the trial image and raw-data/fixations over the image
+            circle size indicates fixation duration
+
+        images_path : str
+            path for trial image file.
+
+        draw_raw_data : bool
+            whether user wants raw data drawn.
+
+        draw_filtered_fixations : bool
+            whether user wants filtered fixations drawn.
+
+        aoi : pandas.DataFrame
+            Area of Interests
+
+        save_image : str
+            path to save the image, image is saved to this path if it parameter exists
+        """
+
+        im = Image.open(images_path + self.image)
+
+        draw = ImageDraw.Draw(im)
+
+        if draw_raw_data:
+            # draw raw data before fixation filter
+            for sample in self.samples:
+                # TODO for sample in self.samples:
+
+                # invalid records
+                if len(sample) > 5:
+                    x_cord = float(sample[23])
+                    y_cord = float(sample[24])  # - 150
+
+                dot_size = 3
+
+                draw.ellipse((x_cord - (dot_size / 2),
+                              y_cord - (dot_size / 2),
+                              x_cord + dot_size, y_cord + dot_size),
+                             fill=(255, 0, 0, 0))
+
+        if not draw_filtered_fixations:
+
+            # draw fixations
+            for order, fix in self.fixations.items():
+                # fixation coordinates on 1920×1080 px
+                x_cord = fix.get_fixation()[4]
+                y_cord = fix.get_fixation()[5]
+
+                # Circle size is 5
+                dot_size = 5  # fix.get_fixation()[3]  # circle size is based on fixation duration
+
+                draw.ellipse((x_cord - (dot_size / 2),
+                              y_cord - (dot_size / 2),
+                              x_cord + dot_size,
+                              y_cord + dot_size),
+                             fill=(0, 255, 0, 0))
+
+        # TODO give user choice for drawing numbers
+        # TODO Transparent
+        # NOTE Inside if statement, make it a small function  TODO helper function
+
+        if draw_filtered_fixations:
+            # TODO Draw fixation
+            for count, fixation in self.fixations.items():
+                duration = fixation.duration
+                if 5 * (duration / 100) < 5:
+                    r = 3
+                else:
+                    r = 5 * (duration / 100)
+
+                x = fixation.x_cord
+                y = fixation.y_cord
+
+                bound = (x - r, y - r, x + r, y + r)
+                outline_color = (255, 255, 0, 255)
+                fill_color = (242, 255, 0, 128)
+                draw.ellipse(bound, fill=fill_color, outline=outline_color)
+
+                # TODO number to be drawn or not (as a parameter, by default, off)
+                text_bound = (x, y - r / 2)
+                text_color = (255, 0, 0, 255)
+                draw.text(text_bound, str(count + 2), fill=text_color)
+
+        if aoi is not None:
+            # TODO AOI Function
+            for row in aoi[['x','y','width','height']].iterrows():
+                x_coordinate = row[1]['x']
+                y_coordinate = row[1]['y']
+                height = row[1]['height']
+                width = row[1]['width']
+                draw.rectangle([(x_coordinate, y_coordinate),
+                                (x_coordinate + width - 1, y_coordinate + height - 1)],
+                               outline='black')
+
+        i# TODO Saccade function
+
+        plt.figure(figsize=(17, 15))
+        plt.imshow(np.asarray(im), interpolation='nearest')
+
+        if save_image is not None:
+            # Save the generated image with offset values applied
+
+            image_name = save_image + \
+                         str(self.participant_id) + \
+                         "-t" + \
+                         str(self.trial_id) + \
+                         "-offsetx" + \
+                         str(self.get_offset()[0]) + \
+                         "y" + \
+                         str(self.get_offset()[1]) + \
+                         ".png"
+
+            plt.savefig(image_name)
+
+            print(image_name, "saved!")
+
 
 class Experiment:
     """Each subject data represents an experiment with multiple trials"""
 
-    def __init__(self, trial: list, eye_tracker: str):
+    def __init__(self, trial: list, eye_tracker: str, type : str):
         """Initialize each experiment with raw data file
             This method splits data into a bunch of trials based on JPG
 
@@ -473,10 +605,14 @@ class Experiment:
 
         eye_tracker: str
             type of eye tracker used
+            
+        type : str
+            type of the file, e.g. "tsv" or "asc
         """
 
         self.trial = trial
         self.eye_tracker = eye_tracker
+        self.type = type
 
     def get_number_of_trials(self):
         """Returns the number of trials in the experiment
@@ -571,7 +707,7 @@ def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximu
     return filter_fixation
 
 
-def read_tsv(filename):
+def read_SMIRed250(filename, type):
     """Read tsv file from SMI Red 250 eye tracker
 
     Parameters
@@ -579,10 +715,13 @@ def read_tsv(filename):
     filename : str
         name of the tsv file
 
+    type : str
+        type of the file, e.g. "tsv"
+
     Returns
     -------
     Experiment
-        an Experiment object of the tsv file
+        an Experiment object from SMIRed250 data
     """
 
     # reading raw data file from EMIP dataset
@@ -625,6 +764,8 @@ def read_tsv(filename):
 
             if active:
                 filter_fixations = idt_classifier(raw_fixations=raw_fixations)
+                # TODO classifier as parameter of this function
+                # TODO saccades
 
                 fixations = {}
                 count = 0
@@ -646,7 +787,8 @@ def read_tsv(filename):
                                     fixations=fixations,
                                     saccades={},
                                     blinks={},
-                                    samples=samples))
+                                    samples=samples,
+                                    eye_tracker="SMIRed250"))
 
                 trial_id += 1
 
@@ -680,18 +822,27 @@ def read_tsv(filename):
                         fixations=fixations,
                         saccades={},
                         blinks={},
-                        samples=samples))
+                        samples=samples,
+                        eye_tracker="SMIRed250"))
 
-    return Experiment(trial=trials, eye_tracker="SMIRed250")
+    return Experiment(trial=trials, eye_tracker="SMIRed250", type="tsv")
 
 
-def read_asc(filename):
+def read_EyeLink1000(filename, type):
     """Read asc file from Eye Link 1000 eye tracker
 
     Parameters
     ----------
     filename : str
         name of the asc file
+        
+    type : str
+        type of the file, e.g. "tsv"
+        
+    Returns
+    -------
+    Experiment
+        an Experiment object of EyeLink1000 data
     """
 
     asc_file = open(filename)
@@ -740,7 +891,8 @@ def read_asc(filename):
                                 fixations=fixations,
                                 saccades=saccades,
                                 blinks=blinks,
-                                samples=samples))
+                                samples=samples,
+                                eye_tracker="EyeLink1000"))
 
             fixations = {}
             saccades = {}
@@ -816,11 +968,12 @@ def read_asc(filename):
                         fixations=fixations,
                         saccades=saccades,
                         blinks=blinks,
-                        samples=samples))
+                        samples=samples,
+                        eye_tracker="EyeLink1000"))
 
     asc_file.close()
 
-    return Experiment(trial=trials, eye_tracker="EyeLink1000")
+    return Experiment(trial=trials, eye_tracker="EyeLink1000", type="asc")
 
 
 def __find_background_color(img):
@@ -842,7 +995,6 @@ def __find_background_color(img):
 
     color_result = []
     box_size = min(width, height) // 20
-    print(box_size)
 
     # Move a tiny rectangle box to obtain most common color
     for x, y in zip(range(0, width, box_size), range(0, height, box_size)):
@@ -860,13 +1012,16 @@ def __find_background_color(img):
     return bg_color
 
 
-def find_aoi(image, level="sub-line", margin_height=4, margin_width=7):
+def find_aoi(image, image_path, level="sub-line", margin_height=4, margin_width=7):
     """Find Area of Interest in the given image and store the aoi attributes in a Pandas Dataframe
 
     Parameters
     ----------
     image : str
         filename for the image, e.g. "vehicle_java.jpg"
+
+    image_path : str
+        path for all images, e.g. "emip_dataset/stimuli/"
 
     level : str, optional
         level of detection in AOIs, "line" for each line as an AOI or "sub-line" for each token as an AOI
@@ -883,7 +1038,7 @@ def find_aoi(image, level="sub-line", margin_height=4, margin_width=7):
         a pandas DataFrame of area of interest detected by the method
     """
 
-    img = Image.open(image).convert('1')
+    img = Image.open(image_path + image).convert('1')
 
     width, height = img.size
 
@@ -996,7 +1151,7 @@ def find_aoi(image, level="sub-line", margin_height=4, margin_width=7):
     return aoi
 
 
-def draw_aoi(aoi, image):
+def draw_aoi(aoi, image, image_path):
     """Draws AOI rectangles on to an image.
 
     Parameters
@@ -1007,13 +1162,16 @@ def draw_aoi(aoi, image):
     image : str
         filename for the image where AOI rectangles will be imposed, e.g. "vehicle_java.jpg"
 
+    image_path : str
+        path for all images, e.g. "emip_dataset/stimuli/"
+
     Returns
     -------
     PIL.Image
         a PIL image where AOIs have been drawn as rectangles
     """
 
-    img = Image.open(image).convert('1')
+    img = Image.open(image_path + image).convert('1')
 
     bg_color = __find_background_color(img)
 
@@ -1315,11 +1473,10 @@ def EMIP_dataset(path, sample_size=216):
     for r, d, f in os.walk(path):
         for file in f:
             if '.tsv' in file:
-
                 participant_id = file.split('/')[-1].split('_')[0]
 
                 if subject.get(participant_id, -1) == -1:
-                    subject[participant_id] = read_tsv(os.path.join(r, file))
+                    subject[participant_id] = read_SMIRed250(os.path.join(r, file), type="tsv")
                 else:
                     print("Error, experiment already in dictionary")
 
@@ -1360,7 +1517,7 @@ def AlMadi_dataset(path, sample_size=216):
                 participant_id = file.split('.')[0]
 
                 if subject.get(participant_id, -1) == -1:
-                    subject[participant_id] = read_asc(os.path.join(r, file))
+                    subject[participant_id] = read_EyeLink1000(os.path.join(r, file), type="asc")
                 else:
                     print("Error, experiment already in dictionary")
 
