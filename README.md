@@ -12,7 +12,7 @@ Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EM
 
 # Features:
 The toolkit is specifically designed to make using the EMIP dataset easier and more accessible by providing the following functions:
-
+ 
 
  - Parsing raw data files from the EMIP dataset into Experiment, Trial, and Fixation containers.
     
