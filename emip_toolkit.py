@@ -1236,21 +1236,20 @@ def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_hei
         line_count += 1
 
     # Format pandas dataframe
-    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'local_id', 'image']
+    columns = ['kind', 'name', 'x', 'y', 'width', 'height', 'image']
     aoi = pd.DataFrame(columns=columns)
 
     for entry in final_result:
         kind, name, x, y, x0, y0 = entry
         width = x0 - x
         height = y0 - y
-        local_id = np.nan
         image = image
 
         # For better visualization
         x += margin_width / 2
         width -= margin_width
 
-        value = [kind, name, x, y, width, height, local_id, image]
+        value = [kind, name, x, y, width, height, image]
         dic = dict(zip(columns, value))
 
         aoi = aoi.append(dic, ignore_index=True)
@@ -1381,7 +1380,7 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     return aois_raw
 
 
-def add_srcml_to_AOIs(aois_raw):
+def add_srcml_to_AOIs(aois_raw, srcML_path):
     """Adds srcML tags to AOIs dataframe and returns it.
         Check https://www.srcml.org/ for more information about srcML
 
@@ -1391,6 +1390,9 @@ def add_srcml_to_AOIs(aois_raw):
     ----------
     aois_raw : pandas.Dataframe
         the dataframe where AOIs are stored
+
+    srcML_path : string
+        the path of the srcML tags file
 
     Returns
     -------
@@ -1430,7 +1432,7 @@ def add_srcml_to_AOIs(aois_raw):
         aois_raw["srcML_tag"] = 'na'
         return aois_raw
 
-    srcML_table = pd.read_csv(file_name, sep='\t')
+    srcML_table = pd.read_csv(srcML_path + file_name, sep='\t')
 
     aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
@@ -1528,14 +1530,14 @@ def hit_test(trial, aois_tokens, radius=25):
     result = pd.DataFrame(columns=header)
     print("all fixations:", len(trial.get_fixations()))
 
-    for fix in trial.get_fixations():
+    for fix in trial.get_fixations().values():
 
         for row in aois_tokens.itertuples(index=True, name='Pandas'):
             # kind	name	x	y	width	height	local_id	image	token
 
             if overlap(fix, row, radius):
-                df = pd.DataFrame([[fix.trial_ID,
-                                    fix.participant,
+                df = pd.DataFrame([[fix.trial_id,
+                                    fix.participant_id,
                                     row.image,
                                     row.image,
                                     fix.timestamp,
