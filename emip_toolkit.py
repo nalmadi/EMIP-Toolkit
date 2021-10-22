@@ -1,4 +1,4 @@
-"""
+ """
 The EMIP Toolkit (EMTK) can be used under the CC 4.0 license
 (https://creativecommons.org/licenses/by/4.0/)
 
@@ -688,7 +688,7 @@ class Experiment:
 
         eye_tracker: str
             type of eye tracker used
-            
+
         filetype : str
             type of the file, e.g. "tsv" or "asc
         """
@@ -934,10 +934,10 @@ def read_EyeLink1000(filename, filetype):
     ----------
     filename : str
         name of the asc file
-        
+
     filetype : str
         filetype of the file, e.g. "tsv"
-        
+
     Returns
     -------
     Experiment
