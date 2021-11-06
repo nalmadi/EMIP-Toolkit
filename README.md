@@ -1,7 +1,7 @@
 
 # EMIP-Toolkit
 
-EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
+EMIP Toolkit (EMTK): A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
 
 [Full Text](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset).
 
