@@ -471,8 +471,6 @@ Trial<wbr> Class</h1>
 <span class="sd">        save_image : str, optional</span>
 <span class="sd">            path to save the image, image is saved to this path if it parameter exists</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-<span><code>image_path = "../../emip_dataset/stimuli/"
-EMIP[subject_ID].trial[trial_num].draw_trial(image_path, draw_raw_data=True, draw_fixation=True)</code></span>
 
         <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">)</span>
 
@@ -1226,10 +1224,33 @@ stores image name</p>
 
             <div class="docstring"><p>Returns the number of fixations in the trial</p>
 
+
 <h2 id="returns">Returns</h2>
 
 <p>int
     number of fixations in the trial</p>
+
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 1000px; display: block; font-size: 15px; border-radius: 0px;">   # select any subject and trial number.
+subject_ID = '106'
+trial_num = 2      # valid source code trials are 2 and 5
+
+# apply fixation filter to specific trial
+# EMIP[subject_ID].trial[trial_num].filter_fixations(minimum_duration=50, sample_duration=4, maxmimum_dispersion=25)
+
+# you can use the method get_fixation_number() to count the fixations after filtering in a trial
+print("number of fixations: ", EMIP[subject_ID].trial[trial_num].get_fixation_number())</code></pre>
+
+<p>number of fixations: 357</p>
+
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 850px; display: block; font-size: 15px; border-radius: 0px;"># accessor for samples count
+print("raw sample count:", EMIP[subject_ID].trial[trial_num].get_sample_number())
+
+# accessor for trial image
+print("trial image:", EMIP[subject_ID].trial[trial_num].get_trial_image())</code></pre>
+
+<p>raw sample count: 18964</p>
+<p>trial image: vehicle_java2.jpg</p>
+
 </div>
 
 
@@ -1490,10 +1511,23 @@ stores image name</p>
 
             <div class="docstring"><p>Returns total offset applied by adding all offsets in offset history</p>
 
+
 <h2 id="returns">Returns</h2>
 
 <p>tuple
     x_offset, y_offset</p>
+
+<p style = "color:blue;">You can get the total applied offset, useful after a few calls to sample_offset method.
+
+Try running this with:
+
+get_offset()</p>
+
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 850px; display: block; font-size: 15px; border-radius: 0px;">print("Current offset:", EMIP[subject_ID].trial[trial_num].get_offset())</code></pre>
+
+<p style = "color: blue;">Current offset: (-200, 100)</p>
+<p>After applying offset to samples you can call fixation filter again to generate fixations from samples at thier new position.</p>
+
 </div>
 
 
@@ -1524,6 +1558,15 @@ stores image name</p>
 
             <div class="docstring"><p>Resets and changes previously done using offset it implements UNDO feature by
 removing the all applied offset from the offset history.</p>
+
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 850px; display: block; font-size: 15px; border-radius: 0px;"># undo all previous offset
+EMIP[subject_ID].trial[trial_num].reset_offset()
+
+# draw trial again
+EMIP[subject_ID].trial[trial_num].draw_trial(image_path, draw_raw_data=True, draw_fixation=True)</code></pre>
+
+
+
 </div>
 
 
@@ -1714,6 +1757,11 @@ removing the all applied offset from the offset history.</p>
 
 <p>save_image : str, optional
     path to save the image, image is saved to this path if it parameter exists</p>
+
+<p style = "color:blue;">You can visualize any trial raw data, filtered fixations, or a combination of the two. Filtered fixations are in green, and raw samples are in red.</p>
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 850px; display: block; font-size: 15px; border-radius: 0px;">image_path = "../../emip_dataset/stimuli/"
+EMIP[subject_ID].trial[trial_num].draw_trial(image_path, draw_raw_data=True, draw_fixation=True)</code></pre>
+<img src = "download.png" alt = "trial_draw output" style="width:685px;height:368px;">
 </div>
 
 

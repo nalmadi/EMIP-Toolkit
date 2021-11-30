@@ -439,6 +439,13 @@ Add description here<wbr></h4>
 
 <p>y_offset : float
     offset to be applied on all fixations in the y-axis</p>
+<p style = "color: blue;">You can apply fixation corection using sample_offset(x_offset, y_offset) on the Trial object.</p>
+<pre><code style = "background-color: #939191; color: maroon; padding: 20px; width: 850px; display: block; font-size: 15px; border-radius: 0px;"># apply offset
+EMIP[subject_ID].trial[trial_num].sample_offset(-200, 100) # x:100 and y:50 just for example
+
+# draw trial again
+EMIP[subject_ID].trial[trial_num].draw_trial(image_path, True, True)</code></pre>
+<img src = "download.png" alt = "sample_offset output" style="width:685px;height:368px;">
 </div>
 
 
