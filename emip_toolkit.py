@@ -1637,3 +1637,11 @@ def AlMadi_dataset(path, sample_size=216):
                 break
 
     return subject
+
+
+def download_EMIP_dataset():
+    pass
+
+
+def extract_data():
+    pass
