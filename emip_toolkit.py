@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import requests, zipfile
 
 
 class Fixation:
@@ -1640,8 +1641,13 @@ def AlMadi_dataset(path, sample_size=216):
 
 
 def download_EMIP_dataset():
-    pass
+    r = requests.get('https://osf.io/j6vt3/download')
 
+    with open('EMIPdata.zip', 'wb') as f:
+        f.write(r.content)
 
-def extract_data():
-    pass
+    with zipfile.ZipFile('EMIPdata.zip', 'r') as data_zip:
+        names = data_zip.namelist()
+        for filename in names:
+            if filename.endswith('rawdata.tsv'):
+                data_zip.extract(filename, 'EMIPdata')
