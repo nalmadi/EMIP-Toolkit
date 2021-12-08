@@ -9,7 +9,7 @@ import emip_toolkit as tk
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
     
-    EMIP = tk.EMIP_dataset('../../emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
 
     assert len(EMIP)==10
     assert EMIP['100'].trial[0].get_subject_id()=='100'
@@ -126,7 +126,7 @@ def test_hit_test():
     assert aoi_fixes['aoi_height'][1]==19
     assert aoi_fixes['token'][1]=='this.x1'
     assert aoi_fixes['length'][1]==7
-    assert aoi_fixes['srcML'][1]=='class->block->constructor->block->block_content'
+    assert aoi_fixes['srcML'][1]=='class->block->constructor->block->block_content->expr_stmt->expr->name->name->operator->name'
 
 
 
