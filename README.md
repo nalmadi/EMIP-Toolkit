@@ -1,4 +1,5 @@
-[![Python application](https://github.com/RPSeaman/EMIP-Toolkit/blob/main/.github/workflows/test.yml/badge.svg?branch=main)](https://github.com/RPSeaman/EMIP-Toolkit/blob/main/.github/workflows/test.yml)
+[![PyTest Passing](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml)
+
 
 # EMIP-Toolkit
 
