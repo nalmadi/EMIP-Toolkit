@@ -1,3 +1,5 @@
+[![PyTest Passing](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml)
+
 
 # EMIP-Toolkit
 
