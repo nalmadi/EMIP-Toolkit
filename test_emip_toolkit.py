@@ -80,7 +80,7 @@ def test_add_tags_and_tokens():
 def test_hit_test():
     '''Tests the hit test between fixation and aois'''
 
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
 
     subject_ID = '106'
     trial_num = 2 
