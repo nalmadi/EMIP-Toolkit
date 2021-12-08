@@ -18,6 +18,7 @@ from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import requests, zipfile
 
+# Dictionary for datasets (so far only 2)- Key = Name, Value = [URL, string of paper citation] - with every extraction, print
 
 class Fixation:
     """ Basic container for storing Fixation data """
@@ -1640,8 +1641,9 @@ def AlMadi_dataset(path, sample_size=216):
     return subject
 
 
-def download_EMIP_dataset():
-    r = requests.get('https://osf.io/j6vt3/download')
+def download(url):
+    # Add comments
+    r = requests.get(url)
 
     with open('EMIPdata.zip', 'wb') as f:
         f.write(r.content)
@@ -1651,3 +1653,7 @@ def download_EMIP_dataset():
         for filename in names:
             if filename.endswith('rawdata.tsv'):
                 data_zip.extract(filename, 'EMIPdata')
+
+# General download dataset function - takes in name of dataset - 1st check if it is already downloaded
+# Put zipped datasets on github- keep AlMadi2018 (everything is needed here) on main repository and try with EMIPData on github
+# Testing with pytest and both jupyter notebooks
