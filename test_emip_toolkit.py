@@ -98,28 +98,28 @@ def test_hit_test():
     
     assert aoi_fixes['trial'][0]==2
     assert aoi_fixes['participant'][0]=='106'
-    assert aoi_fixes['code_file'][0]=='rectangle_java.jpg'
-    assert aoi_fixes['code_language'][0]=='rectangle_java.jpg'
+    assert aoi_fixes['code_file'][0]=='rectangle_java2.jpg'
+    assert aoi_fixes['code_language'][0]=='rectangle_java2.jpg'
     assert aoi_fixes['timestamp'][0]==21891003504
     assert aoi_fixes['duration'][0]==68
-    assert aoi_fixes['x_cord'][0]==807.962353
-    assert aoi_fixes['y_cord'][0]==367.997059
+    assert aoi_fixes['x_cord'][0]==807.9623529411765
+    assert aoi_fixes['y_cord'][0]==367.9970588235294
     assert aoi_fixes['aoi_x'][0]==806.5
     assert aoi_fixes['aoi_y'][0]==367
     assert aoi_fixes['aoi_width'][0]==15
     assert aoi_fixes['aoi_height'][0]==21
     assert aoi_fixes['token'][0]=='='
     assert aoi_fixes['length'][0]==1
-    assert aoi_fixes['srcML'][0]=='class->block->constructor->block->block_conten...'
+    assert aoi_fixes['srcML'][0]=='class->block->constructor->block->block_content->expr_stmt->expr->operator'
 
     assert aoi_fixes['trial'][1]==2
     assert aoi_fixes['participant'][1]=='106'
-    assert aoi_fixes['code_file'][1]=='rectangle_java.jpg'
-    assert aoi_fixes['code_language'][1]=='rectangle_java.jpg'
+    assert aoi_fixes['code_file'][1]=='rectangle_java2.jpg'
+    assert aoi_fixes['code_language'][1]=='rectangle_java2.jpg'
     assert aoi_fixes['timestamp'][1]==21892223446
     assert aoi_fixes['duration'][1]==60
-    assert aoi_fixes['x_cord'][1]==792.258667
-    assert aoi_fixes['y_cord'][1]==326.104667
+    assert aoi_fixes['x_cord'][1]==792.2586666666666
+    assert aoi_fixes['y_cord'][1]==326.1046666666667
     assert aoi_fixes['aoi_x'][1]==730.5
     assert aoi_fixes['aoi_y'][1]==331
     assert aoi_fixes['aoi_width'][1]==71
