@@ -9,9 +9,9 @@ import emip_toolkit as tk
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 216)
 
-    assert len(EMIP)==10
+    assert len(EMIP)==216
     assert EMIP['100'].trial[0].get_subject_id()=='100'
     assert EMIP['100'].get_number_of_trials()==7
     assert EMIP['100'].trial[0].get_sample_number()==12040
