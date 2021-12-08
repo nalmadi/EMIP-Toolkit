@@ -9,9 +9,8 @@ import emip_toolkit as tk
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 216)
-
-    assert len(EMIP)==216
+    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
+    assert len(EMIP)==10
     assert EMIP['100'].trial[0].get_subject_id()=='100'
     assert EMIP['100'].get_number_of_trials()==7
     assert EMIP['100'].trial[0].get_sample_number()==12040
@@ -20,7 +19,7 @@ def test_EMIP_dataset():
 def test_fixation_filter():
     '''Tests getting a specific trial and subject and number of fixations'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
     subject_ID = '106'
     trial_num = 2 
 
@@ -32,7 +31,7 @@ def test_fixation_filter():
 def test_offset():
     '''Testing the offset functionality'''
 
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
     subject_ID ='106'
     trial_num = 2
     image_path = "../../emip_dataset/stimuli/"
