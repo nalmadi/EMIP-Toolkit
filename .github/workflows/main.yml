@@ -37,4 +37,5 @@ jobs:
       # Runs pytest tests
       - name: Test with pytest
         run: | 
-          pytest example.py 
+          pip install pytest
+          pytest
