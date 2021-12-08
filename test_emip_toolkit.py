@@ -9,7 +9,7 @@ import emip_toolkit as tk
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('../../emip_dataset/rawdata/', 10)
 
     assert len(EMIP)==10
     assert EMIP['100'].trial[0].get_subject_id()=='100'
@@ -77,5 +77,56 @@ def test_add_tags_and_tokens():
 
     assert aois_tokens_srcml['srcML_tag'][0] == 'class->specifier'
 
+
+def test_hit_test():
+    '''Tests the hit test between fixation and aois'''
+
+    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+
+    subject_ID = '106'
+    trial_num = 2 
+
+    image_path = "./emip_dataset/stimuli/"
+    image = "rectangle_java2.jpg"
+    aoi = tk.find_aoi(image, image_path, level="sub-line")
+    file_path = "./emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
+    aois_with_tokens = tk.add_tokens_to_AOIs(file_path, aoi)
+    srcML_path = "./datasets/EMIP2021/"
     
+    aois_tokens_srcml = tk.add_srcml_to_AOIs(aois_with_tokens, srcML_path)
+    aoi_fixes = tk.hit_test(EMIP[subject_ID].trial[trial_num], aois_tokens_srcml, radius=25)
+    
+    assert aoi_fixes['trial'][0]==2
+    assert aoi_fixes['participant'][0]=='106'
+    assert aoi_fixes['code_file'][0]=='rectangle_java.jpg'
+    assert aoi_fixes['code_language'][0]=='rectangle_java.jpg'
+    assert aoi_fixes['timestamp'][0]==21891003504
+    assert aoi_fixes['duration'][0]==68
+    assert aoi_fixes['x_cord'][0]==807.962353
+    assert aoi_fixes['y_cord'][0]==367.997059
+    assert aoi_fixes['aoi_x'][0]==806.5
+    assert aoi_fixes['aoi_y'][0]==367
+    assert aoi_fixes['aoi_width'][0]==15
+    assert aoi_fixes['aoi_height'][0]==21
+    assert aoi_fixes['token'][0]=='='
+    assert aoi_fixes['length'][0]==1
+    assert aoi_fixes['srcML'][0]=='class->block->constructor->block->block_conten...'
+
+    assert aoi_fixes['trial'][1]==2
+    assert aoi_fixes['participant'][1]=='106'
+    assert aoi_fixes['code_file'][1]=='rectangle_java.jpg'
+    assert aoi_fixes['code_language'][1]=='rectangle_java.jpg'
+    assert aoi_fixes['timestamp'][1]==21892223446
+    assert aoi_fixes['duration'][1]==60
+    assert aoi_fixes['x_cord'][1]==792.258667
+    assert aoi_fixes['y_cord'][1]==326.104667
+    assert aoi_fixes['aoi_x'][1]==730.5
+    assert aoi_fixes['aoi_y'][1]==331
+    assert aoi_fixes['aoi_width'][1]==71
+    assert aoi_fixes['aoi_height'][1]==19
+    assert aoi_fixes['token'][1]=='this.x1'
+    assert aoi_fixes['length'][1]==7
+    assert aoi_fixes['srcML'][1]=='class->block->constructor->block->block_content'
+
+
 
