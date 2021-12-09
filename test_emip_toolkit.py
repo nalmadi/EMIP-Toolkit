@@ -127,5 +127,30 @@ def test_hit_test():
     assert aoi_fixes['length'][1]==7
     assert aoi_fixes['srcML'][1]=='class->block->constructor->block->block_content->expr_stmt->expr->name->name->operator->name'
 
+def test_AlMadi_Dataset():
+    '''Test reading data in .asc format'''
+    EMIP = tk.AlMadi_dataset('ASCII/', 8)   # gets the structured data of 8 subjects
+    
+    assert len(EMIP)==8
+    assert EMIP['001'].trial[0].get_subject_id()=='ASCII/001'
+    assert EMIP['001'].get_number_of_trials() == 16
+    assert EMIP['001'].trial[0].get_sample_number()==25
+
+    subject_ID = '001'
+    trial_num = 1  
+    
+    assert EMIP[subject_ID].trial[trial_num].get_fixation_number()==14
+    assert EMIP[subject_ID].trial[trial_num].get_sample_number()==29
+    assert EMIP[subject_ID].trial[trial_num].get_trial_image()=="5667346413132987794.png"
 
 
+def test_AlMadi_offset():
+    EMIP = tk.AlMadi_dataset('ASCII/', 8)   # gets the structured data of 8 subjects
+    subject_ID = '001'
+    trial_num = 1  
+
+    EMIP[subject_ID].trial[trial_num].sample_offset(-200, 100)
+    assert EMIP[subject_ID].trial[trial_num].get_offset()==(-200, 100)
+    
+    EMIP[subject_ID].trial[trial_num].reset_offset()
+    assert EMIP[subject_ID].trial[trial_num].get_offset()==(0, 0)
