@@ -16,7 +16,10 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import requests, zipfile
 
+# Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
+data_dictionary = {}
 
 class Fixation:
     """ Basic container for storing Fixation data """
@@ -1637,3 +1640,62 @@ def AlMadi_dataset(path, sample_size=216):
                 break
 
     return subject
+
+def check_data(dataset_name):
+    """Check if the dataset is already in the dataset dictionary
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    Returns
+    -------
+    bool
+        True if dataset is in dataset dictionary
+        False if not
+
+    """
+    keys = data_dictionary.keys()
+    for k in keys:
+        if dataset_name == k:
+            return True
+    return False
+        
+def download(dataset_name, url, is_zipped, citation):
+    """Download any dataset via a link to the data
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    url : str
+        link to the data
+    
+    is_zipped : bool
+        True if the url links to a zip file of the data, False if it simply links to the data
+    
+    citation : str
+        link to the paper where the dataset originates from
+
+    """
+    # Check if dataset has already been downloaded
+    if check_data(dataset_name) == False:
+
+        data_dictionary[dataset_name] = [url, is_zipped, citation] #adds to dataset dict
+
+        #creates a zip file of the data if unzipped
+        if is_zipped == False:
+
+            r = requests.get(url)
+            with open(dataset_name+'.zip', 'wb') as f:
+                f.write(r.content)
+
+        #extract all data
+        with zipfile.ZipFile(dataset_name+'.zip', 'r') as data_zip:
+
+            data_zip.extractall(dataset_name)
+
+    print('Please cite this paper: ', citation)
+
