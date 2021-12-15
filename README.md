@@ -1,6 +1,12 @@
-[![PyTest Passing](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/RPSeaman/EMIP-Toolkit/actions/workflows/test.yml)
+[![PyTest Passing](https://github.com/nalmadi/EMIP-Toolkit/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/nalmadi/EMIP-Toolkit/actions/workflows/test.yml)
+[![Code Size](https://img.shields.io/github/languages/code-size/nalmadi/EMIP-Toolkit?color=gold)](https://github.com/nalmadi/EMIP-Toolkit)
+
+[![Watchers](https://img.shields.io/github/watchers/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
+[![Forks](https://img.shields.io/github/forks/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
+[![Stars](https://img.shields.io/github/stars/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
 
 
+https://img.shields.io/github/watchers/nalmadi/EMIP-Toolkit?color=magenta
 # EMIP-Toolkit
 
 EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
