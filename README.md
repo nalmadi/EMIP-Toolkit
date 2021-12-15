@@ -40,7 +40,7 @@ The toolkit is specifically designed to make using the EMIP dataset easier and m
     
  - Adding source code lexical category tags to eye movement data using [srcML](https://www.srcml.org/). srcML is a static analysis tool and data format that provides very accurate syntactic categories (method signatures, parameters, function names, method calls, declarations and so on) for source code. We use it to enhance the eye movements dataset to enable better querying capabilities. 
 
- - Downloading specific datasets from the [EMIP-Toolkit replication package](https://osf.io/j6vt3/).
+ - Downloading specific datasets from the [EMIP-Toolkit replication package](https://osf.io/j6vt3/) and other data sources.
 
 
 # Examples and tutorial:
