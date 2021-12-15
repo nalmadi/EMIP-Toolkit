@@ -132,10 +132,11 @@ def test_hit_test():
 
 def test_AlMadi_Dataset():
     '''Test reading data in .asc format'''
-    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
+    AlMadiPath = tk.download("AlMadi2018")
+    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
     
     assert len(EMIP)==8
-    assert EMIP['001'].trial[0].get_subject_id()=='datasets/AlMadi2018/ASCII/001'
+    assert EMIP['001'].trial[0].get_subject_id()=='datasets/AlMadi2018/AlMadi2018/ASCII/001'
     assert EMIP['001'].get_number_of_trials() == 16
     assert EMIP['001'].trial[0].get_sample_number()==25
 
@@ -148,7 +149,8 @@ def test_AlMadi_Dataset():
 
 
 def test_AlMadi_offset():
-    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
+    AlMadiPath = tk.download("AlMadi2018")
+    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
     subject_ID = '001'
     trial_num = 1  
 
