@@ -7,15 +7,13 @@ December 7, 2021
 import emip_toolkit as tk
 
 emipPath = tk.download("EMIP")
-print(emipPath)
-
+EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 216)
 # def test_download
 
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
-    
-    EMIP = tk.EMIP_dataset(emipPath, 10)
-    assert len(EMIP)==10
+   
+    assert len(EMIP)==216
     assert EMIP['100'].trial[0].get_subject_id()=='100'
     assert EMIP['100'].get_number_of_trials()==7
     assert EMIP['100'].trial[0].get_sample_number()==12040
@@ -24,7 +22,7 @@ def test_EMIP_dataset():
 def test_fixation_filter():
     '''Tests getting a specific trial and subject and number of fixations'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
+    #EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
     subject_ID = '106'
     trial_num = 2 
 
@@ -36,7 +34,7 @@ def test_fixation_filter():
 def test_offset():
     '''Testing the offset functionality'''
 
-    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
+    #EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
     subject_ID ='106'
     trial_num = 2
     image_path = "../../emip_dataset/stimuli/"
@@ -48,7 +46,7 @@ def test_offset():
 
 def test_aoi():
     '''Testing aoi creation'''
-    image_path = "./emip_dataset/stimuli/"
+    image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
     image = "rectangle_java2.jpg"
     aoi = tk.find_aoi(image, image_path, level="sub-line")
     
@@ -58,10 +56,10 @@ def test_aoi():
 def test_add_token():
     '''Testing token generated aois'''
     
-    image_path = "./emip_dataset/stimuli/"
+    image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
     image = "rectangle_java2.jpg"
     aoi = tk.find_aoi(image, image_path, level="sub-line")
-    file_path = "./emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
+    file_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
     aois_with_tokens = tk.add_tokens_to_AOIs(file_path, aoi)
     
     assert aois_with_tokens['token'][0]=='public'
@@ -70,10 +68,10 @@ def test_add_token():
 def test_add_tags_and_tokens():
     '''Tests the adding of the tags to AOIs and tokens'''
 
-    image_path = "./emip_dataset/stimuli/"
+    image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
     image = "rectangle_java2.jpg"
     aoi = tk.find_aoi(image, image_path, level="sub-line")
-    file_path = "./emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
+    file_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
     aois_with_tokens = tk.add_tokens_to_AOIs(file_path, aoi)
 
     srcML_path = "./datasets/EMIP2021/"
@@ -85,15 +83,15 @@ def test_add_tags_and_tokens():
 def test_hit_test():
     '''Tests the hit test between fixation and aois'''
 
-    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
+    #EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
 
     subject_ID = '106'
     trial_num = 2 
 
-    image_path = "./emip_dataset/stimuli/"
+    image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
     image = "rectangle_java2.jpg"
     aoi = tk.find_aoi(image, image_path, level="sub-line")
-    file_path = "./emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
+    file_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
     aois_with_tokens = tk.add_tokens_to_AOIs(file_path, aoi)
     srcML_path = "./datasets/EMIP2021/"
     
@@ -134,10 +132,10 @@ def test_hit_test():
 
 def test_AlMadi_Dataset():
     '''Test reading data in .asc format'''
-    EMIP = tk.AlMadi_dataset('ASCII/', 8)   # gets the structured data of 8 subjects
+    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
     
     assert len(EMIP)==8
-    assert EMIP['001'].trial[0].get_subject_id()=='ASCII/001'
+    assert EMIP['001'].trial[0].get_subject_id()=='datasets/AlMadi2018/ASCII/001'
     assert EMIP['001'].get_number_of_trials() == 16
     assert EMIP['001'].trial[0].get_sample_number()==25
 
@@ -150,7 +148,7 @@ def test_AlMadi_Dataset():
 
 
 def test_AlMadi_offset():
-    EMIP = tk.AlMadi_dataset('ASCII/', 8)   # gets the structured data of 8 subjects
+    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
     subject_ID = '001'
     trial_num = 1  
 
