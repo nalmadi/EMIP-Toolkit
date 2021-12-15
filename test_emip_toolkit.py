@@ -6,10 +6,15 @@ December 7, 2021
 '''
 import emip_toolkit as tk
 
+emipPath = tk.download("EMIP")
+print(emipPath)
+
+# def test_download
+
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
     
-    EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
+    EMIP = tk.EMIP_dataset(emipPath, 10)
     assert len(EMIP)==10
     assert EMIP['100'].trial[0].get_subject_id()=='100'
     assert EMIP['100'].get_number_of_trials()==7
