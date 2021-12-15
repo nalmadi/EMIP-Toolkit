@@ -150,7 +150,7 @@ def test_AlMadi_Dataset():
 
 def test_AlMadi_offset():
     AlMadiPath = tk.download("AlMadi2018")
-    EMIP = tk.AlMadi_dataset('datasets/AlMadi2018/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
+    EMIP = tk.AlMadi_dataset(AlMadiPath+'/AlMadi2018/ASCII/', 8)   # gets the structured data of 8 subjects
     subject_ID = '001'
     trial_num = 1  
 
