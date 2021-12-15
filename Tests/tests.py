@@ -9,5 +9,5 @@ def test_reading_raw_data_files():
     assert EMIP['99'].trial[0].get_sample_number() == 1399
 
 
-def test_fixation_filter_on_raw():
+def test_fixation_accessor():
     
