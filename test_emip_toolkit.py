@@ -7,7 +7,7 @@ December 7, 2021
 import emip_toolkit as tk
 
 emipPath = tk.download("EMIP")
-EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 216)
+EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 5)
 # def test_download
 
 def test_EMIP_dataset():
