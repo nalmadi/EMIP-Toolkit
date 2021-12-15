@@ -1,11 +1,9 @@
 """
 The EMIP Toolkit (EMTK) can be used under the CC 4.0 license
 (https://creativecommons.org/licenses/by/4.0/)
-
 Authors:
 Naser Al Madi (nsalmadi@colby.edu)
 Ricky Peng (siyuan.peng@colby.edu)
-
 """
 
 import math
@@ -16,37 +14,32 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import requests, zipfile
 
+# Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
+data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
 
 class Fixation:
     """ Basic container for storing Fixation data """
 
     def __init__(self, trial_id, participant_id, timestamp, duration, x_cord, y_cord, token, pupil):
         """Initializes the basic data for each fixation
-
         Parameters
         ----------
         trial_id : int
             trial id that the fixation belongs to
-
         participant_id : str
             participant id that the fixation belongs to
-
         timestamp : int
             fixation time stamp
-
         duration : int
             fixation duration in milliseconds
-
         x_cord : float
             fixation x coordinates
-
         y_cord : float
             fixation y coordinates
-
         token : str
             the source code token which the fixation is on
-
         pupil : float
             pupil size of the fixation
         """
@@ -62,7 +55,6 @@ class Fixation:
 
     def get_fixation(self):
         """Returns fixation attributes as a list
-
         Returns
         -------
         list
@@ -84,12 +76,10 @@ class Fixation:
 
     def sample_offset(self, x_offset, y_offset):
         """Returns the x and y coordinate of the fixation
-
         Parameters
         ----------
         x_offset : float
             offset to be applied on all fixations in the x-axis
-
         y_offset : float
             offset to be applied on all fixations in the y-axis
         """
@@ -98,7 +88,6 @@ class Fixation:
 
     def __str__(self):
         """Returns string information of fixation
-
         Returns
         -------
         str
@@ -112,36 +101,26 @@ class Saccade:
     def __init__(self, trial_id, participant_id, timestamp, duration, x_cord, y_cord, x1_cord, y1_cord, amplitude,
                  peak_velocity):
         """Initializes the basic data for each fixation
-
         Parameters
         ----------
         trial_id : int
             trial id that the fixation belongs to
-
         participant_id : str
             participant id that the fixation belongs to
-
         timestamp : int
             saccade start time stamp
-
         duration : int
             saccade duration in milliseconds
-
         x_cord : float
             saccade start point x coordinate
-
         y_cord : float
             saccade start point y coordinate
-
         x1_cord : float
             saccade end point x coordinate
-
         y1_cord : float
             saccade end point y coordinate
-
         amplitude : float
             amplitude for saccade
-
         peak_velocity : int
             peak velocity during saccade
         """
@@ -159,7 +138,6 @@ class Saccade:
 
     def get_saccade(self):
         """Returns saccade attributes as a list
-
         Returns
         -------
         list
@@ -179,12 +157,10 @@ class Saccade:
 
     def sample_offset(self, x_offset, y_offset):
         """Returns the x and y coordinate of the saccade
-
         Parameters
         ----------
         x_offset : float
             offset to be applied on all fixations in the x-axis
-
         y_offset : float
             offset to be applied on all fixations in the y-axis
         """
@@ -195,7 +171,6 @@ class Saccade:
 
     def __str__(self):
         """Returns string information of saccade
-
         Returns
         -------
         str
@@ -208,18 +183,14 @@ class Saccade:
 class Blink:
     def __init__(self, trial_id, participant_id, timestamp, duration):
         """Initializes the basic data for each blink
-
         Parameters
         ----------
         trial_id : int
             trial id that the blink belongs to
-
         participant_id : str
             participant id that the blink belongs to
-
         timestamp : int
             blink time stamp
-
         duration : int
             blink duration in milliseconds
         """
@@ -230,7 +201,6 @@ class Blink:
 
     def get_blink(self):
         """Returns blink attributes as a list
-
         Returns
         -------
         list
@@ -244,7 +214,6 @@ class Blink:
 
     def __str__(self):
         """Returns string information of blink
-
         Returns
         -------
         str
@@ -262,30 +231,22 @@ class Trial:
                  samples: list, eye_tracker: str):
         """Initializes attributes for storing trial data, fixations, saccades, blinks, and
         stores image name
-
         Parameters
         ----------
         trial_id : int
             id of this trial
-
         participant_id : str
             id of this participant
-
         image : str
             image path for this trial
-
         fixations : dict
             dictionary that stores fixations as values, order of eye movement in the trial as key
-
         saccades : dict
             dictionary that stores saccades as values, order of eye movement in the trial as key
-
         blinks : dict
             dictionary that stores blinks as values, order of eye movement in the trial as key
-
         samples : list
             list of raw data samples
-
         eye_tracker : str
             type of eye tracker
         """
@@ -303,7 +264,6 @@ class Trial:
 
     def get_trial_id(self):
         """Returns the trial id
-
         Returns
         -------
         int
@@ -313,7 +273,6 @@ class Trial:
 
     def get_subject_id(self):
         """Returns the participant id
-
         Returns
         -------
         str
@@ -323,7 +282,6 @@ class Trial:
 
     def get_trial_image(self):
         """Returns the image filename associated with the trial
-
         Returns
         -------
         str
@@ -333,7 +291,6 @@ class Trial:
 
     def get_fixations(self):
         """Returns the fixations in the trial
-
         Returns
         -------
         dict
@@ -343,7 +300,6 @@ class Trial:
 
     def get_fixation_number(self):
         """Returns the number of fixations in the trial
-
         Returns
         -------
         int
@@ -353,7 +309,6 @@ class Trial:
 
     def get_saccades(self):
         """Returns the saccades in the trial
-
         Returns
         -------
         dict
@@ -363,7 +318,6 @@ class Trial:
 
     def get_saccade_number(self):
         """Returns the number of saccades in the trial
-
         Returns
         -------
         int
@@ -373,7 +327,6 @@ class Trial:
 
     def get_blinks(self):
         """Returns the blinks in the trial
-
         Returns
         -------
         dict
@@ -383,7 +336,6 @@ class Trial:
 
     def get_blink_number(self):
         """Returns the number of blinks in the trial
-
         Returns
         -------
         int
@@ -393,7 +345,6 @@ class Trial:
 
     def get_eye_movement_number(self):
         """Returns the total number of eye movement in the trial
-
         Returns
         -------
         int
@@ -403,7 +354,6 @@ class Trial:
 
     def get_samples(self):
         """Returns the raw sample in a list
-
         Returns
         -------
         list
@@ -413,7 +363,6 @@ class Trial:
 
     def get_sample_number(self):
         """Returns the total number of eye movement in the trial
-
         Returns
         -------
         int
@@ -423,7 +372,6 @@ class Trial:
 
     def get_offset(self):
         """Returns total offset applied by adding all offsets in offset history
-
         Returns
         -------
         tuple
@@ -445,12 +393,10 @@ class Trial:
     def sample_offset(self, x_offset, y_offset):
         """Moves samples +X and +Y pixels across the viewing window to correct fixation shift or
             other shifting problems manually
-
         Parameters
         ----------
         x_offset : int
             offset to be applied on all fixations in the x-axis
-
         y_offset : int
             offset to be applied on all fixations in the y-axis
         """
@@ -475,7 +421,6 @@ class Trial:
 
     def __draw_raw_data(self, draw):
         """Private method that draws raw sample data
-
         Parameters
         ----------
         draw : PIL.ImageDraw.Draw
@@ -502,12 +447,10 @@ class Trial:
 
     def __draw_fixation(self, draw, draw_number=False):
         """Private method that draws the fixation, also allow user to draw eye movement order
-
         Parameters
         ----------
         draw : PIL.ImageDraw.Draw
             a Draw object imposed on the image
-
         draw_number : bool
             whether user wants to draw the eye movement number
         """
@@ -535,15 +478,12 @@ class Trial:
 
     def __draw_aoi(self, draw, aoi, bg_color):
         """Private method to draw the Area of Interest on the image
-
         Parameters
         ----------
         draw : PIL.ImageDraw.Draw
             a Draw object imposed on the image
-
         aoi : pandas.DataFrame
             a DataFrame that contains the area of interest bounds
-
         bg_color : str
             background color
         """
@@ -563,12 +503,10 @@ class Trial:
 
     def __draw_saccade(self, draw, draw_number=False):
         """
-
         Parameters
         ----------
         draw : PIL.ImageDraw.Draw
             a Draw object imposed on the image
-
         draw_number : bool
             whether user wants to draw the eye movement number
         """
@@ -594,25 +532,18 @@ class Trial:
                    draw_aoi=None, save_image=None):
         """Draws the trial image and raw-data/fixations over the image
             circle size indicates fixation duration
-
         image_path : str
             path for trial image file.
-
         draw_raw_data : bool, optional
             whether user wants raw data drawn.
-
         draw_fixation : bool, optional
             whether user wants filtered fixations drawn
-
         draw_saccade : bool, optional
             whether user wants saccades drawn
-
         draw_number : bool, optional
             whether user wants to draw eye movement number
-
         draw_aoi : pandas.DataFrame, optional
             Area of Interests
-
         save_image : str, optional
             path to save the image, image is saved to this path if it parameter exists
         """
@@ -680,12 +611,10 @@ class Experiment:
     def __init__(self, trial: list, eye_tracker: str, filetype: str):
         """Initialize each experiment with raw data file
             This method splits data into a bunch of trials based on JPG
-
         Parameters
         ----------
         trial: list
             raw data TSV file.
-
         eye_tracker: str
             type of eye tracker used
             
@@ -699,7 +628,6 @@ class Experiment:
 
     def get_number_of_trials(self):
         """Returns the number of trials in the experiment
-
         Returns
         -------
         int
@@ -708,7 +636,6 @@ class Experiment:
 
     def get_eye_tracker(self):
         """Returns the name of eye tracker in the experiment
-
         Returns
         -------
         str
@@ -720,28 +647,22 @@ class Experiment:
 def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximum_dispersion=25):
     """I-DT classifier based on page 296 of eye tracker manual:
         https://psychologie.unibas.ch/fileadmin/user_upload/psychologie/Forschung/N-Lab/SMI_iView_X_Manual.pdf
-
         Notes:
             remember that some data is MSG for mouse clicks.
             some records are invalid with value -1.
             read right eye data only.
-
     Parameters
     ----------
     raw_fixations : list
         a list of fixations information containing timestamp, x_cord, and y_cord
-
     minimum_duration : int, optional
         minimum duration for a fixation in milliseconds, less than minimum is considered noise.
         set to 50 milliseconds by default
-
     sample_duration : int, optional
         Sample duration in milliseconds, this is 4 milliseconds based on this eye tracker
-
     maximum_dispersion : int, optional
         maximum distance from a group of samples to be considered a single fixation.
         Set to 25 pixels by default
-
     Returns
     -------
     list
@@ -792,26 +713,20 @@ def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximu
 
 def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, maximum_dispersion=25):
     """Read tsv file from SMI Red 250 eye tracker
-
     Parameters
     ----------
     filename : str
         name of the tsv file
-
     filetype : str
         type of the file, e.g. "tsv"
-
     minimum_duration : int, optional
         minimum duration for a fixation in milliseconds, less than minimum is considered noise.
         set to 50 milliseconds by default.
-
     sample_duration : int, optional
         Sample duration in milliseconds, this is 4 milliseconds based on this eye tracker.
-
     maximum_dispersion : int, optional
         maximum distance from a group of samples to be considered a single fixation.
         Set to 25 pixels by default.
-
     Returns
     -------
     Experiment
@@ -929,7 +844,6 @@ def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, m
 
 def read_EyeLink1000(filename, filetype):
     """Read asc file from Eye Link 1000 eye tracker
-
     Parameters
     ----------
     filename : str
@@ -1077,12 +991,10 @@ def read_EyeLink1000(filename, filetype):
 
 def find_background_color(img):
     """Private function that identifies the background color of the image
-
     Parameters
     ----------
     img : PIL.Image
         a PIL (pillow fork) Image object
-
     Returns
     -------
     str
@@ -1113,27 +1025,20 @@ def find_background_color(img):
 
 def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_height=4, margin_width=7):
     """Find Area of Interest in the given image and store the aoi attributes in a Pandas Dataframe
-
     Parameters
     ----------
     image : str
         filename for the image, e.g. "vehicle_java.jpg"
-
     image_path : str
         path for all images, e.g. "emip_dataset/stimuli/"
-
     img : PIL.Image, optional
         PIL.Image object if user chooses to input an PIL image object
-
     level : str, optional
         level of detection in AOIs, "line" for each line as an AOI or "sub-line" for each token as an AOI
-
     margin_height : int, optional
         marginal height when finding AOIs, use smaller number for tight text layout
-
     margin_width : int, optional
         marginal width when finding AOIs, use smaller number for tight text layout
-
     Returns
     -------
     pandas.DataFrame
@@ -1259,18 +1164,14 @@ def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_hei
 
 def draw_aoi(aoi, image, image_path):
     """Draws AOI rectangles on to an image.
-
     Parameters
     ----------
     aoi : pandas.DataFrame
         a pandas DataFrame containing rectangle attributes representing areas of interest (AOIs)
-
     image : str
         filename for the image where AOI rectangles will be imposed, e.g. "vehicle_java.jpg"
-
     image_path : str
         path for all images, e.g. "emip_dataset/stimuli/"
-
     Returns
     -------
     PIL.Image
@@ -1302,15 +1203,12 @@ def draw_aoi(aoi, image, image_path):
 
 def add_tokens_to_AOIs(file_path, aois_raw):
     """Adds tokens from code files to aois dataframe and returns it.
-
     Parameters
     ----------
     file_path : str
         path to directory where code files are stored. In EMIP this is "emip_stimulus_programs"
-
     aois_raw : pandas.Dataframe
         the dataframe where AOIs are stored.
-
     Returns
     -------
     pandas.DataFrame
@@ -1383,17 +1281,13 @@ def add_tokens_to_AOIs(file_path, aois_raw):
 def add_srcml_to_AOIs(aois_raw, srcML_path):
     """Adds srcML tags to AOIs dataframe and returns it.
         Check https://www.srcml.org/ for more information about srcML
-
         The files: rectangle.tsv and vehicle.tsv should be in the same directory as the code.
-
     Parameters
     ----------
     aois_raw : pandas.Dataframe
         the dataframe where AOIs are stored
-
     srcML_path : string
         the path of the srcML tags file
-
     Returns
     -------
     pandas.DataFrame
@@ -1461,19 +1355,15 @@ def add_srcml_to_AOIs(aois_raw, srcML_path):
 
 def overlap(fix, AOI, radius=25):
     """Checks if fixation is within radius distance or over an AOI. Returns True/False.
-
     Parameters
     ----------
     fix : Fixation
         A single fixation in a trial being considered for overlapping with the AOI
-
     AOI : pandas.DataFrame
         contains AOI #kind	name	x	y	width	height	local_id	image	token
-
     radius : int, optional
         radius around AOI to consider fixations in it within the AOI.
         default is 25 pixel since the fixation filter groups samples within 25 pixels.
-
     Returns
     -------
     bool
@@ -1491,19 +1381,15 @@ def overlap(fix, AOI, radius=25):
 def hit_test(trial, aois_tokens, radius=25):
     """Checks if fixations are within AOI with a fixation radius of 25 px
         (since each fix is a sum of samples within 25px)
-
     Parameters
     ----------
     trial : Trial
         contains fixations and other metadata (trial#, participant, code_file, code_language)
             - fixation includes timestamp, duration, x_cord, y_cord
-
     aois_tokens : pandas.Dataframe
         contains each AOI location and dimension and token text
-
     radius : int, optional
         radius of circle using in hit test
-
     Returns
     -------
     pandas.DataFrame
@@ -1559,15 +1445,12 @@ def hit_test(trial, aois_tokens, radius=25):
 
 def EMIP_dataset(path, sample_size=216):
     """Import the EMIP dataset
-
     Parameters
     ----------
     path : str
         path to EMIP dataset raw data directory, e.g. '../../emip_dataset/rawdata/'
-
     sample_size : int, optional
         the number of subjects to be processed, the default is 216
-
     Returns
     -------
     dict
@@ -1600,15 +1483,12 @@ def EMIP_dataset(path, sample_size=216):
 
 def AlMadi_dataset(path, sample_size=216):
     """Import the Al Madi's dataset
-
     Parameters
     ----------
     path : str
         path to Al Madi's dataset raw data directory, e.g. '../../AlMadi2018/'
-
     sample_size : int, optional
         the number of subjects to be processed, the default is 216
-
     Returns
     -------
     dict
@@ -1637,3 +1517,74 @@ def AlMadi_dataset(path, sample_size=216):
                 break
 
     return subject
+
+
+def check_downloaded(dataset_name):
+    """Check if the dataset is already in the dataset dictionary
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+    Returns
+    -------
+    bool
+        True if dataset is in dataset folder
+        False if not
+    """
+    return os.path.isfile('./datasets/' + dataset_name + '.zip')
+
+
+def check_unzipped(dataset_name):
+    """Check if the dataset is already unzipped in the datasets dictionary
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+    Returns
+    -------
+    bool
+        True if dataset is unzipped in dataset folder
+        False if not
+    """
+    return os.path.isdir('./datasets/' + dataset_name)
+
+        
+def download(dataset_name):
+    """Download any dataset via a link to the data
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+    url : str
+        link to the data
+    
+    is_zipped : bool
+        True if the url links to a zip file of the data, False if it simply links to the data
+    
+    citation : str
+        link to the paper where the dataset originates from
+    """
+    url, is_zipped, citation = data_dictionary[dataset_name]
+
+    # Check if dataset has already been downloaded
+    if not check_downloaded(dataset_name):
+        print('Downloading...')
+        
+        #creates a zip file of the data if unzipped
+        if is_zipped == False:
+
+            r = requests.get(url)
+            with open('./datasets/' + dataset_name + '.zip', 'wb') as f:
+                f.write(r.content)
+
+    if not check_unzipped(dataset_name):
+        print('unzipping...')
+
+        #extract all data
+        with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip:
+
+            data_zip.extractall('./datasets/' + dataset_name)
+
+    print('Please cite this paper: ', citation)
+
+    return './datasets/' + dataset_name
