@@ -85,7 +85,7 @@ def test_hit_test():
 
     #EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
 
-    subject_ID = '177'
+    subject_ID = '6'
     trial_num = 2 
 
     image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
