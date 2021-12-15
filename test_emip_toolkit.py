@@ -105,30 +105,30 @@ def test_hit_test():
     assert aoi_fixes['timestamp'][0]==2768972532
     assert aoi_fixes['duration'][0]==96
     assert aoi_fixes['x_cord'][0]==677.545000
-    assert aoi_fixes['y_cord'][0]==217.174583
-    assert aoi_fixes['aoi_x'][0]==806.5
-    assert aoi_fixes['aoi_y'][0]==367
-    assert aoi_fixes['aoi_width'][0]==15
+    assert aoi_fixes['y_cord'][0]==217.17458333333335
+    assert aoi_fixes['aoi_x'][0]==657.5
+    assert aoi_fixes['aoi_y'][0]==222
+    assert aoi_fixes['aoi_width'][0]==52
     assert aoi_fixes['aoi_height'][0]==21
-    assert aoi_fixes['token'][0]=='='
-    assert aoi_fixes['length'][0]==1
-    assert aoi_fixes['srcML'][0]=='class->block->constructor->block->block_content->expr_stmt->expr->operator'
+    assert aoi_fixes['token'][0]=='class'
+    assert aoi_fixes['length'][0]==5
+    assert aoi_fixes['srcML'][0]=='class'
 
     assert aoi_fixes['trial'][1]==2
-    assert aoi_fixes['participant'][1]=='106'
+    assert aoi_fixes['participant'][1]=='6'
     assert aoi_fixes['code_file'][1]=='rectangle_java2.jpg'
     assert aoi_fixes['code_language'][1]=='rectangle_java2.jpg'
-    assert aoi_fixes['timestamp'][1]==21892223446
+    assert aoi_fixes['timestamp'][1]==2770019801
     assert aoi_fixes['duration'][1]==60
-    assert aoi_fixes['x_cord'][1]==792.2586666666666
-    assert aoi_fixes['y_cord'][1]==326.1046666666667
-    assert aoi_fixes['aoi_x'][1]==730.5
-    assert aoi_fixes['aoi_y'][1]==331
-    assert aoi_fixes['aoi_width'][1]==71
-    assert aoi_fixes['aoi_height'][1]==19
-    assert aoi_fixes['token'][1]=='this.x1'
-    assert aoi_fixes['length'][1]==7
-    assert aoi_fixes['srcML'][1]=='class->block->constructor->block->block_content->expr_stmt->expr->name->name->operator->name'
+    assert aoi_fixes['x_cord'][1]==744.0753333333333
+    assert aoi_fixes['y_cord'][1]==216.61266666666666
+    assert aoi_fixes['aoi_x'][1]==715.5
+    assert aoi_fixes['aoi_y'][1]==222
+    assert aoi_fixes['aoi_width'][1]==90
+    assert aoi_fixes['aoi_height'][1]==21
+    assert aoi_fixes['token'][1]=='Rectangle'
+    assert aoi_fixes['length'][1]==9
+    assert aoi_fixes['srcML'][1]=='class->name'
 
 def test_AlMadi_Dataset():
     '''Test reading data in .asc format'''
