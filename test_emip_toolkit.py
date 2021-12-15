@@ -7,7 +7,7 @@ December 7, 2021
 import emip_toolkit as tk
 
 emipPath = tk.download("EMIP")
-EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 5)
+EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 216)
 # def test_download
 
 def test_EMIP_dataset():
@@ -99,13 +99,13 @@ def test_hit_test():
     aoi_fixes = tk.hit_test(EMIP[subject_ID].trial[trial_num], aois_tokens_srcml, radius=25)
     
     assert aoi_fixes['trial'][0]==2
-    assert aoi_fixes['participant'][0]=='177'
+    assert aoi_fixes['participant'][0]=='6'
     assert aoi_fixes['code_file'][0]=='rectangle_java2.jpg'
     assert aoi_fixes['code_language'][0]=='rectangle_java2.jpg'
-    assert aoi_fixes['timestamp'][0]==21891003504
-    assert aoi_fixes['duration'][0]==68
-    assert aoi_fixes['x_cord'][0]==807.9623529411765
-    assert aoi_fixes['y_cord'][0]==367.9970588235294
+    assert aoi_fixes['timestamp'][0]==2768972532
+    assert aoi_fixes['duration'][0]==96
+    assert aoi_fixes['x_cord'][0]==677.545000
+    assert aoi_fixes['y_cord'][0]==217.174583
     assert aoi_fixes['aoi_x'][0]==806.5
     assert aoi_fixes['aoi_y'][0]==367
     assert aoi_fixes['aoi_width'][0]==15
