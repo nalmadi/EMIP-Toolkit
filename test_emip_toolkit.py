@@ -7,13 +7,13 @@ December 7, 2021
 import emip_toolkit as tk
 
 emipPath = tk.download("EMIP")
-EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 216)
+EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 5)
 # def test_download
 
 def test_EMIP_dataset():
     '''Testing reading raw files from EMIP Dataset'''
    
-    assert len(EMIP)==216
+    assert len(EMIP)==5
     assert EMIP['100'].trial[0].get_subject_id()=='100'
     assert EMIP['100'].get_number_of_trials()==7
     assert EMIP['100'].trial[0].get_sample_number()==12040
