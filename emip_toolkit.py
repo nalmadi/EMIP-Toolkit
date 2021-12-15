@@ -1466,7 +1466,7 @@ def EMIP_dataset(path, sample_size=216):
         for file in f:
             if '.tsv' in file:
                 participant_id = file.split('/')[-1].split('_')[0]
-
+                print(file)
                 if subject.get(participant_id, -1) == -1:
                     subject[participant_id] = read_SMIRed250(os.path.join(r, file), filetype="tsv")
                 else:
