@@ -105,7 +105,7 @@ def test_hit_test():
     assert aoi_fixes['timestamp'][0]==2768972532
     assert aoi_fixes['duration'][0]==96
     assert aoi_fixes['x_cord'][0]==677.545000
-    assert aoi_fixes['y_cord'][0]==217.17458333333335
+    assert aoi_fixes['y_cord'][0]==217.17458333333332
     assert aoi_fixes['aoi_x'][0]==657.5
     assert aoi_fixes['aoi_y'][0]==222
     assert aoi_fixes['aoi_width'][0]==52
