@@ -69,7 +69,7 @@ def test_add_tags_and_tokens():
     '''Tests the adding of the tags to AOIs and tokens'''
 
     image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
-    image = "rectangle_java2.jpg"
+    image = "rectangle_java.jpg"
     aoi = tk.find_aoi(image, image_path, level="sub-line")
     file_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/"
     aois_with_tokens = tk.add_tokens_to_AOIs(file_path, aoi)
@@ -85,7 +85,7 @@ def test_hit_test():
 
     #EMIP = tk.EMIP_dataset('./emip_dataset/testdata/', 10)
 
-    subject_ID = '106'
+    subject_ID = '177'
     trial_num = 2 
 
     image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/"
@@ -99,7 +99,7 @@ def test_hit_test():
     aoi_fixes = tk.hit_test(EMIP[subject_ID].trial[trial_num], aois_tokens_srcml, radius=25)
     
     assert aoi_fixes['trial'][0]==2
-    assert aoi_fixes['participant'][0]=='106'
+    assert aoi_fixes['participant'][0]=='177'
     assert aoi_fixes['code_file'][0]=='rectangle_java2.jpg'
     assert aoi_fixes['code_language'][0]=='rectangle_java2.jpg'
     assert aoi_fixes['timestamp'][0]==21891003504
