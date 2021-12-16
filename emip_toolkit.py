@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import requests, zipfile
 
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
 data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425'],
