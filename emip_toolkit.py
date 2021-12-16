@@ -1700,6 +1700,7 @@ def download(dataset_name):
     """
 
     url, is_zipped, citation = data_dictionary[dataset_name]
+    target_path = './datasets/' + dataset_name
 
     # Check if dataset has already been downloaded
     if not check_downloaded(dataset_name):
@@ -1723,16 +1724,15 @@ def download(dataset_name):
         print('unzipping...')
 
         #extract all data
-        with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip:
-            # data_zip.extractall('./datasets/' + dataset_name)
+        with zipfile.ZipFile(target_path + '.zip', 'r') as data_zip:
 
             for member in tqdm(data_zip.infolist(), desc='Extracting '):
                 try:
-                    data_zip.extract(member, './datasets/' + dataset_name)
+                    data_zip.extract(member, target_path)
                 except zipfile.error as e:
                     pass
 
 
     print('Please cite this paper: ', citation)
 
-    return './datasets/' + dataset_name
+    return target_path
