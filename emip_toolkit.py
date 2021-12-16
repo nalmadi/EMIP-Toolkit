@@ -17,6 +17,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import requests, zipfile
+from clint.textui import progress
 
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
 data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
@@ -1696,28 +1697,36 @@ def download(dataset_name):
         link to the paper where the dataset originates from
 
     """
+
     url, is_zipped, citation = data_dictionary[dataset_name]
 
     # Check if dataset has already been downloaded
     if not check_downloaded(dataset_name):
-        print('Downloading...')
-        
+        print("Downloading {}".format(dataset_name))
+
         #creates a zip file of the data if unzipped
         if is_zipped == False:
 
             r = requests.get(url)
-            with open('./datasets/' + dataset_name + '.zip', 'wb') as f:
+            path = './datasets/' + dataset_name + '.zip'
+            total_length = int(r.headers.get('content-length'))
+            with open(path, 'wb') as f:
                 f.write(r.content)
+                for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1): 
+                    if chunk:
+                        f.write(chunk)
+                        f.flush()
+
 
     if not check_unzipped(dataset_name):
         print('unzipping...')
 
         #extract all data
         with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip:
-
             data_zip.extractall('./datasets/' + dataset_name)
 
     print('Please cite this paper: ', citation)
 
     return './datasets/' + dataset_name
-
+    
+download('EMIP')
