@@ -1728,5 +1728,4 @@ def download(dataset_name):
     print('Please cite this paper: ', citation)
 
     return './datasets/' + dataset_name
-    
-download('EMIP')
+  
