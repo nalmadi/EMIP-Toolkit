@@ -1079,6 +1079,64 @@ def read_EyeLink1000(filename, filetype):
     return Experiment(trial=trials, eye_tracker="EyeLink1000", filetype=filetype)
 
 
+#TODO: don't know what's name is more proper: pls change the name
+#TODO: can't figure out the specifics, pls modify
+def read_Fixation(data, participant_id):
+    """Read the csv file to create a dictionary
+    
+    Parameters
+    ----------
+    data:
+        Pandas dataframe that has the same participant id
+        
+    participant_id:
+        participant id
+
+    Returns
+    -------
+    Experiment
+        an Experiment object
+    """
+    
+    trials = []
+    unique_trial_ids = data['trial'].unique()
+    
+    fixations = {}
+    saccades = {}
+    blinks = {}
+    samples = {}
+    
+    count = 0
+    
+    for trial_id in unique_trial_ids:
+        sub_data = data[data['trial']==trial_id]
+        image = sub_data['code_file']
+        for row in sub_data.iterrows():
+            timestamp = int(row[1]['timestamp'])
+            duration = int(row[1]['duration'])
+            x_cord = float(row[1]['x_cord'])
+            y_cord = float(row[1]['y_cord'])
+            fixations[count] = Fixation(trial_id=trial_id,
+                                        participant_id=participant_id,
+                                        timestamp=timestamp,
+                                        duration=duration,
+                                        x_cord=x_cord,
+                                        y_cord=y_cord,
+                                        token="",
+                                        pupil=-1) #TODO: can't find the pupil value
+        trials.append(Trial(trial_id=trial_id,
+                                participant_id=participant_id,
+                                image=image,
+                                fixations=fixations,
+                                saccades=saccades,
+                                blinks=blinks,
+                                samples=samples,
+                                eye_tracker="Unknown")) #TODO: don't know what eyetracker it is
+        
+    return Experiment(trial=trials, eye_tracker="Unknown", filetype = "csv")
+    
+
+
 def find_background_color(img):
     """Private function that identifies the background color of the image
 
@@ -1602,39 +1660,6 @@ def EMIP_dataset(path, sample_size=216):
     return subject
 
 
-def corrected_EMIP_dataset(path, sample_size=216):
-    """Import the corrected EMIP dataset
-
-    Parameters
-    ----------
-    path : str
-        path to EMIP dataset raw data directory, e.g. './datasets/correctedEMIP/finalset_line_part.csv'
-
-    sample_size : int, optional
-        the number of subjects to be processed, the default is 216
-
-    Returns
-    -------
-    dict
-        a dictionary of experiments where the key is the subject ID
-    """
-    
-    subject = {}
-    count = 0
-    
-    data = pd.read_csv(path, header=0, index_col=0)
-    for row in data.iterrows():
-        series = row[1]
-        participant_id = series.get('participant')     
-        count += 1
-
-        # breaks after sample_size
-        if count == sample_size:
-            break
-    
-    return subject            
-
-
 def AlMadi_dataset(path, sample_size=216):
     """Import the Al Madi's dataset
 
@@ -1674,6 +1699,34 @@ def AlMadi_dataset(path, sample_size=216):
                 break
 
     return subject
+
+def corrected_EMIP_dataset(path, sample_size=216):
+    """Import the corrected EMIP dataset
+
+    Parameters
+    ----------
+    path : str
+        path to EMIP dataset raw data directory, e.g. './datasets/correctedEMIP/finalset_line_part.csv'
+
+    sample_size : int, optional
+        the number of subjects to be processed, the default is 216
+
+    Returns
+    -------
+    dict
+        a dictionary of experiments where the key is the subject ID
+    """
+    
+    subject = {}
+    
+    data = pd.read_csv(path, header=0, index_col=0)
+    unique_participants = data['participant'].unique()
+    for i in range(sample_size):
+        participant_id = unique_participants[i]
+        sub_data = data[data['participant']==participant_id]
+        subject[participant_id] = read_Fixation(sub_data, participant_id)  
+  
+    return subject    
 
 
 def check_downloaded(dataset_name):
