@@ -17,8 +17,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import requests, zipfile
-from clint.textui import progress
 from tqdm import tqdm
+import sys
 
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
 data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
@@ -1704,21 +1704,31 @@ def download(dataset_name):
 
     # Check if dataset has already been downloaded
     if not check_downloaded(dataset_name):
-        print("Downloading {}".format(dataset_name))
 
         #creates a zip file of the data if unzipped
         if is_zipped == False:
 
-            r = requests.get(url)
             path = './datasets/' + dataset_name + '.zip'
-            total_length = int(r.headers.get('content-length'))
             with open(path, 'wb') as f:
-                f.write(r.content)
-                for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1): 
-                    if chunk:
-                        f.write(chunk)
-                        f.flush()
+                print("Downloading %s" % dataset_name)
 
+                response = requests.get(url, stream=True)
+                total_length = response.headers.get('content-length')
+
+                if total_length is None:
+                    f.write(response.content)
+                else:
+                    downloaded = 0
+                    total_length = int(total_length)
+
+                    for chunk in response.iter_content(chunk_size=1024):
+                        downloaded += len(chunk)
+                        f.write(chunk)
+                        done = int(50*downloaded/total_length)
+                        sys.stdout.write('\r[{}{}]'.format('█' * done, '.' * (50-done)))
+                        sys.stdout.flush()
+
+            sys.stdout.write('\n')
 
     if not check_unzipped(dataset_name):
         print('unzipping...')
@@ -1731,7 +1741,6 @@ def download(dataset_name):
                     data_zip.extract(member, target_path)
                 except zipfile.error as e:
                     pass
-
 
     print('Please cite this paper: ', citation)
 
