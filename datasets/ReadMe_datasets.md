@@ -12,4 +12,11 @@
   - is_zipped = True
   - citation = 'https://dl.acm.org/doi/10.1145/3448018.345742'
 
+## Corrected EMIP dataset:
+
+  - dataset_name = correctedEMIP
+  - url = 'https://osf.io/j6vt3/download'
+  - is_zipped = False
+  - citation = 'https://dl.acm.org/doi/10.1145/3448018.345742'
+
 # If you have a dataset to add, please add it to this file with these 4 parameters.

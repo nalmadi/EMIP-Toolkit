@@ -949,6 +949,7 @@ def read_EyeLink1000(filename, filetype):
 
     asc_file = open(filename)
     print("parsing file:", filename)
+    print(filename)
 
     trials = []
 
@@ -982,7 +983,7 @@ def read_EyeLink1000(filename, filetype):
             # Read image location
             index = str(int(trial_id) + 1)
             experiment = participant_id.split('/')[-1]
-            location = 'runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
+            location = 'datasets/AlMadi2018/runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
             with open(location, 'r') as file:
                 image = file.readlines()[1].split()[-3].split('/')[-1]
 
@@ -1059,7 +1060,7 @@ def read_EyeLink1000(filename, filetype):
     # Read image location
     index = str(int(trial_id) + 1)
     experiment = participant_id.split('/')[-1]
-    location = 'runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
+    location = 'datasets/AlMadi2018/runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
     with open(location, 'r') as file:
         image = file.readlines()[1].split()[-3].split('/')[-1]
 
@@ -1601,6 +1602,39 @@ def EMIP_dataset(path, sample_size=216):
     return subject
 
 
+def corrected_EMIP_dataset(path, sample_size=216):
+    """Import the corrected EMIP dataset
+
+    Parameters
+    ----------
+    path : str
+        path to EMIP dataset raw data directory, e.g. './datasets/correctedEMIP/finalset_line_part.csv'
+
+    sample_size : int, optional
+        the number of subjects to be processed, the default is 216
+
+    Returns
+    -------
+    dict
+        a dictionary of experiments where the key is the subject ID
+    """
+    
+    subject = {}
+    count = 0
+    
+    data = pd.read_csv(path, header=0, index_col=0)
+    for row in data.iterrows():
+        series = row[1]
+        participant_id = series.get('participant')     
+        count += 1
+
+        # breaks after sample_size
+        if count == sample_size:
+            break
+    
+    return subject            
+
+
 def AlMadi_dataset(path, sample_size=216):
     """Import the Al Madi's dataset
 
@@ -1629,7 +1663,7 @@ def AlMadi_dataset(path, sample_size=216):
                 participant_id = file.split('.')[0]
 
                 if subject.get(participant_id, -1) == -1:
-                    subject[participant_id] = read_EyeLink1000(os.path.join(r, file), filetype="asc")
+                    subject[participant_id] = read_EyeLink1000(r+"/"+file, filetype="asc")
                 else:
                     print("Error, experiment already in dictionary")
 
