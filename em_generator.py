@@ -5,8 +5,6 @@ import random
 Generates a synthetic set of eye movements for rectangle
 """
 
-eye_movements = []
-
 # fixation: x_cord, y_cord, token
 
 def rectangle_center(x, y, width, height):
@@ -26,13 +24,28 @@ def rectangle_center(x, y, width, height):
 
     center_x = x + width / 2
     center_y = y + height / 2
+
     return center_x, center_y
 
+def left_of_center(x, y, width, height):
+    """ returns left-shifted coordinates
 
-def left_of_rec_center(center_x, center_y, x_offset):
-    """ returns the left of the center of a rectangle by the value of x_offset
+    Parameters
+    ----------
+    x : float, x-coordinate of the upper left corner of a rectangle
+    y : float, y-coordinate of the upper left corner of a rectangle
+    width: width of a rectangle
+    height: height of a rectangle
+
+    Returns
+    -------
+    int tuple, a tuple of x- and y-coordinates
     """
-    return center_x - x_offset, center_y
+
+    x += width / 3 + random.randint(-10, 10)
+    y += height / 2 + random.randint(-10, 10)
+
+    return round(x, 1), y
 
 def is_skipped(token, threshold, probability):
     """ checks if a token should be skipped
@@ -54,3 +67,45 @@ def is_skipped(token, threshold, probability):
             return False
     else:
         return False
+
+def generate_fixations_left_regression(aois_with_tokens, regression_probability):
+    """ checks if a token should be skipped
+
+    Parameters
+    ----------
+    aois_with_tokens: pandas Dataframe
+    regression_probability: float (0.0-1.0), the probability of regression
+
+    Returns
+    -------
+    list, a list of fixations
+    """
+
+    fixations = []
+    
+    # aoi_list = aois_with_tokens.values.tolist()
+    
+    index = 0
+
+    while index < len(aois_with_tokens):
+        x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
+        
+        fixation_x, fixation_y = left_of_center(x, y, width, height)
+
+        fixations.append([fixation_x, fixation_y, token])
+        
+        if random.random() < regression_probability:
+            index -= random.randint(1, 10)
+
+            if index < 0:
+                index = 0
+
+            x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
+            
+            fixation_x, fixation_y = left_of_center(x, y, width, height)
+
+            fixations.append([fixation_x, fixation_y, token]) 
+
+        index += 1   
+
+    return fixations
