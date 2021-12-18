@@ -1484,6 +1484,9 @@ def overlap(fix, AOI, radius=25):
     box_y = AOI.y - (radius / 2)
     box_w = AOI.width + (radius / 2)
     box_h = AOI.height + (radius / 2)
+    print(fix.x_cord)
+    print(fix.y_cord)
+    print(box_x)
 
     return box_x <= fix.x_cord <= box_x + box_w and box_y <= fix.y_cord <= box_y + box_h
 

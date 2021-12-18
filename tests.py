@@ -91,12 +91,42 @@ def test_add_srcml_to_AOIs():
     aois_raw = tk.find_aoi(image= "vehicle_java.jpg" , image_path = '../emip_dataset/stimuli/' )
     srcML_path = '../EMIP-Toolkit/datasets/EMIP2021/'
     AOIs_wSRCs= tk.add_srcml_to_AOIs(aois_raw, srcML_path)
+    
     assert type(AOIs_wSRCs) == pd.core.frame.DataFrame
+    assert type(AOIs_wSRCs["srcML_tag"]) == pd.Series
+    assert len(AOIs_wSRCs["srcML_tag"]) != 0
+    assert type(AOIs_wSRCs["srcML_tag"][1]) == str
+
+
+def test_overlap():
+    EMIP = tk.EMIP_dataset('../emip_dataset/rawdata/', 10)
+    file_path = '../emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
+    img_path = '../emip_dataset/stimuli/'
+    fixNum = EMIP['99'].trial[5].get_fixation_number()
+    fix = EMIP['99'].trial[5].get_fixations()
+    img = EMIP['99'].trial[5].get_trial_image()
+    specFix  = fix[5]
+
+    
+    Aoi=tk.find_aoi(image=img,image_path=img_path)
+    Aoi = Aoi.loc[[1]]
+    #xAoi = tk.add_tokens_to_AOIs(file_path,Aoi)
+    #tk.overlap(specFix,Aoi,radius=100)
+    #tk.overlap(specFix,Aoi,radius = 0)
+    #assert Aoi.shape == [1,9]
+    #assert specFix.x_cord == tk.Fixation
+    assert img == 'vehicle_java2.jpg'
+    #assert Aoi.get('kind') == 504
+    assert type(fix) == dict
+    assert tk.overlap(specFix,Aoi,radius=25) == True 
+    assert tk.overlap(specFix,Aoi,radius=0) == False
     
 
 
+    #assert type(fix) == dict
+    #aois_raw - tk.find_aoi
 
-    
+
 
 #def test_fixation_class():
 
