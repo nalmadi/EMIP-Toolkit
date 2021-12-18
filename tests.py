@@ -1,9 +1,11 @@
+import numpy as np
 import emip_toolkit as tk
 import random as ran
 import pytest
 import os
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import pandas as pd
+
 
 @pytest.mark.skip(reason="not needed at this time")
 def test_EMIP_dataset():
