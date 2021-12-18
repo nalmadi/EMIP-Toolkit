@@ -2,7 +2,7 @@ import emip_toolkit as emtk
 import random
 
 """
-Generates a synthetic set of eye movements for rectangle
+Generates a synthetic set of eye movements
 """
 
 # fixation: x_cord, y_cord, token
@@ -70,6 +70,7 @@ def is_skipped(token, threshold, probability):
 
 def generate_fixations_left_regression(aois_with_tokens, regression_probability):
     """ checks if a token should be skipped
+    (modified from Dr. Naser Al Madi's code)
 
     Parameters
     ----------
@@ -82,8 +83,6 @@ def generate_fixations_left_regression(aois_with_tokens, regression_probability)
     """
 
     fixations = []
-    
-    # aoi_list = aois_with_tokens.values.tolist()
     
     index = 0
 
