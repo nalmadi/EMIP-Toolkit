@@ -1,0 +1,9 @@
+References
+
+- Rectangle
+Based on a Python program by Michael Hansen
+http://eyecode.synesthesiam.com/stories/programs.html#rectangle
+
+- Vehicle
+Shortened and slightly adapted from Java teaching material provided by Falko Ripsas a CS high school teacher from Berlin
+
