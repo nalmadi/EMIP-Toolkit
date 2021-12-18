@@ -3,4 +3,3 @@ pandas
 matplotlib
 Pillow
 requests
-zipfile
