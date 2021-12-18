@@ -9,7 +9,7 @@ import pandas as pd
 
 @pytest.mark.skip(reason="not needed at this time")
 def test_EMIP_dataset():
-    EMIP = tk.EMIP_dataset('../emip_dataset/rawdata/', 10)
+    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
     assert len(EMIP) == 10
     assert EMIP['99'].trial[0].get_subject_id() == '99'
     assert EMIP['99'].get_number_of_trials() == 7 
@@ -17,7 +17,7 @@ def test_EMIP_dataset():
 
 
 def test_read_SMIRed250():
-    filename = '../emip_dataset/rawdata/1_rawdata.tsv'
+    filename = './emip_dataset/rawdata/1_rawdata.tsv'
     filetype = 'tsv'
     Ex = tk.read_SMIRed250(filename,filetype)
     assert type(Ex) is tk.Experiment
@@ -28,7 +28,7 @@ def test_read_SMIRed250():
     
 
 def test_idt_classifier():
-    filename = '../emip_dataset/rawdata/1_rawdata.tsv'
+    filename = './emip_dataset/rawdata/1_rawdata.tsv'
     filetype = 'tsv'
     Ex = tk.read_SMIRed250(filename,filetype)
     fixations = Ex.trial[0].get_fixations()
@@ -78,7 +78,7 @@ def test_draw_aoi():
 
 
 def test_add_tokens_to_AOI():
-    file_path = '../emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
+    file_path = './emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
     aois_raw = tk.find_aoi(image= "vehicle_java.jpg" , image_path = '../emip_dataset/stimuli/' )
     aois_tokens = tk.add_tokens_to_AOIs(file_path,aois_raw)
     assert type(aois_tokens) == pd.core.frame.DataFrame
@@ -89,9 +89,9 @@ def test_add_tokens_to_AOI():
 
 
 def test_add_srcml_to_AOIs():
-    file_path = '../emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
+    file_path = './emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
     aois_raw = tk.find_aoi(image= "vehicle_java.jpg" , image_path = '../emip_dataset/stimuli/' )
-    srcML_path = '../EMIP-Toolkit/datasets/EMIP2021/'
+    srcML_path = './EMIP-Toolkit/datasets/EMIP2021/'
     AOIs_wSRCs= tk.add_srcml_to_AOIs(aois_raw, srcML_path)
     
     assert type(AOIs_wSRCs) == pd.core.frame.DataFrame
@@ -101,9 +101,9 @@ def test_add_srcml_to_AOIs():
 
 @pytest.mark.skip(reason="not needed at this time")
 def test_overlap():
-    EMIP = tk.EMIP_dataset('../emip_dataset/rawdata/', 10)
-    file_path = '../emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
-    img_path = '../emip_dataset/stimuli/'
+    EMIP = tk.EMIP_dataset('./emip_dataset/rawdata/', 10)
+    file_path = './emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
+    img_path = './emip_dataset/stimuli/'
     fixNum = EMIP['99'].trial[5].get_fixation_number()
     fix = EMIP['99'].trial[5].get_fixations()
     img = EMIP['99'].trial[5].get_trial_image()
