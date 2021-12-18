@@ -97,7 +97,7 @@ def test_add_srcml_to_AOIs():
     assert len(AOIs_wSRCs["srcML_tag"]) != 0
     assert type(AOIs_wSRCs["srcML_tag"][1]) == str
 
-
+@pytest.mark.skip(reason="not needed at this time")
 def test_overlap():
     EMIP = tk.EMIP_dataset('../emip_dataset/rawdata/', 10)
     file_path = '../emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
@@ -139,12 +139,6 @@ def test_overlap():
 # def test_experiment_class():
 
 # def test_read_EyeLink1000():
-
-
-
-# def test_add_srcml_to_AOIs():
-
-# def test_overlap():
 
 # def test_hit_test():
 
