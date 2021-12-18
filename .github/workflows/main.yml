@@ -40,4 +40,4 @@ jobs:
             pip install pytest
             pip install numpy
             pip install pandas
-            pytest ./Tests/tests.py
+            pytest ./tests.py
