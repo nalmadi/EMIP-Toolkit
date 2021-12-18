@@ -26,9 +26,10 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Test with pytest
-        run: | 
-          pip install pytest
-          pytest /Tests/tests.py
+        run: |
+          working-directory: Tests
+              pip install pytest
+              pytest tests.py
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
