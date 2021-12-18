@@ -38,4 +38,6 @@ jobs:
       - name: Test with pytest
         run: |
             pip install pytest
-            pytest ./Tests/tests.py
+            pip install numpy
+            pip install pandas
+            pytest ./tests.py
