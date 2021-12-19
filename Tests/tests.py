@@ -86,7 +86,7 @@ def test_add_tokens_to_AOI():
 def test_add_srcml_to_AOIs():
     file_path = emipPath+'/EMIP-Toolkit- replication package/emip_dataset/EMIP_DataCollection_Materials/emip_stimulus_programs/'
     aois_raw = tk.find_aoi(image= "vehicle_java.jpg" , image_path = emipPath+"/EMIP-Toolkit- replication package/emip_dataset/stimuli/" )
-    srcML_path = '../datasets/EMIP2021/'
+    srcML_path = emipPath+'/EMIP-Toolkit- replication package/datasets/EMIP2021/'
     AOIs_wSRCs= tk.add_srcml_to_AOIs(aois_raw, srcML_path)
     
     assert type(AOIs_wSRCs) == pd.core.frame.DataFrame
