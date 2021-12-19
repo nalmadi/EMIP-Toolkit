@@ -1113,7 +1113,6 @@ def find_background_color(img):
 
     return bg_color
 
-
 def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_height=4, margin_width=7):
     """Find Area of Interest in the given image and store the aoi attributes in a Pandas Dataframe
 
@@ -1302,7 +1301,6 @@ def draw_aoi(aoi, image, image_path):
 
     return rect_image
 
-
 def add_tokens_to_AOIs(file_path, aois_raw):
     """Adds tokens from code files to aois dataframe and returns it.
 
@@ -1319,51 +1317,42 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     pandas.DataFrame
         a dataframe of AOIs with token information
     """
+<<<<<<< HEAD
     print(1)
+=======
+    if aois_raw.kind[0] == "line":
+        msg = rf"cannot add a token when AOI kind is line"
+        raise TypeError(msg)
+    
+>>>>>>> df9db7066ad5091e146450d52fa454452f5ac895
     image_name = aois_raw["image"][1]
+    file = {
+        "rectangle_java.jpg":"Rectangle.java",
+        "rectangle_java2.jpg":"Rectangle.java",
+        "rectangle_python.jpg":"Rectangle.py",
+        "rectangle_scala.jpg":"Rectangle.scala",
+        "vehicle_java.jpg":"Vehicle.java",
+        "vehicle_java2.jpg":"Vehicle.java",
+        "vehicle_python.jpg":"vehicle.py",
+        "vehicle_scala.jpg":"Vehicle.scala"
+    }
 
-    # rectangle files
-    if image_name == "rectangle_java.jpg":
-        file_name = "Rectangle.java"
-
-    if image_name == "rectangle_java2.jpg":
-        file_name = "Rectangle.java"
-
-    if image_name == "rectangle_python.jpg":
-        file_name = "Rectangle.py"
-
-    if image_name == "rectangle_scala.jpg":
-        file_name = "Rectangle.scala"
-
-    # vehicle files
-    if image_name == "vehicle_java.jpg":
-        file_name = "Vehicle.java"
-
-    if image_name == "vehicle_java2.jpg":
-        file_name = "Vehicle.java"
-
-    if image_name == "vehicle_python.jpg":
-        file_name = "vehicle.py"
-
-    if image_name == "vehicle_scala.jpg":
-        file_name = "Vehicle.scala"
-
-    code_file = open(file_path + file_name)
+    code_file = open(file_path + file[image_name])
 
     code_text = code_file.read()
 
-    code_line = code_text.replace('\t', '').replace('        ', '').replace('    ', '').split('\n')
-
+    #code_line = code_text.replace('\t', '').replace('        ', '').replace('    ', '').split('\n')
+    code_line = code_text.replace('\t', '').split('\n')
     filtered_line = []
-
     for line in code_line:
         if len(line) != 0:
-            filtered_line.append(line.split(' '))
+            correctedstring = " ".join(line.split())
+            filtered_line.append(correctedstring.split(' '))
 
     # after the code file has been tokenized and indexed
     # we can attach tokens to correct AOI
 
-    aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
+    #aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
     tokens = []
 
@@ -1403,6 +1392,10 @@ def add_srcml_to_AOIs(aois_raw, srcML_path):
         AOI dataframe with srcML
     """
 
+    if aois_raw.kind[0] == "line":
+        msg = rf"cannot add a token when AOI kind is line"
+        raise TypeError(msg)
+
     image_name = aois_raw["image"][1]
 
     # srcML rectangle files
@@ -1436,8 +1429,6 @@ def add_srcml_to_AOIs(aois_raw, srcML_path):
         return aois_raw
 
     srcML_table = pd.read_csv(srcML_path + file_name, sep='\t')
-
-    aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
     # after the srcML file has been recognized
     # we can attach tokens to correct AOI
@@ -1721,3 +1712,5 @@ def download(dataset_name):
 
     return './datasets/' + dataset_name
 
+def checkprint():
+    print(1)
