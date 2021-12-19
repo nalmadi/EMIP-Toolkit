@@ -16,7 +16,10 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import requests, zipfile
 
+# Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
+data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
 
 class Fixation:
     """ Basic container for storing Fixation data """
@@ -1641,3 +1644,84 @@ def AlMadi_dataset(path, sample_size=216):
                 break
 
     return subject
+
+
+def check_downloaded(dataset_name):
+    """Check if the dataset is already in the dataset dictionary
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    Returns
+    -------
+    bool
+        True if dataset is in dataset folder
+        False if not
+
+    """
+    return os.path.isfile('./datasets/' + dataset_name + '.zip')
+
+
+def check_unzipped(dataset_name):
+    """Check if the dataset is already unzipped in the datasets dictionary
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    Returns
+    -------
+    bool
+        True if dataset is unzipped in dataset folder
+        False if not
+
+    """
+    return os.path.isdir('./datasets/' + dataset_name)
+
+        
+def download(dataset_name):
+    """Download any dataset via a link to the data
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    url : str
+        link to the data
+    
+    is_zipped : bool
+        True if the url links to a zip file of the data, False if it simply links to the data
+    
+    citation : str
+        link to the paper where the dataset originates from
+
+    """
+    url, is_zipped, citation = data_dictionary[dataset_name]
+
+    # Check if dataset has already been downloaded
+    if not check_downloaded(dataset_name):
+        print('Downloading...')
+        
+        #creates a zip file of the data if unzipped
+        if is_zipped == False:
+
+            r = requests.get(url)
+            with open('./datasets/' + dataset_name + '.zip', 'wb') as f:
+                f.write(r.content)
+
+    if not check_unzipped(dataset_name):
+        print('unzipping...')
+
+        #extract all data
+        with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip:
+
+            data_zip.extractall('./datasets/' + dataset_name)
+
+    print('Please cite this paper: ', citation)
+
+    return './datasets/' + dataset_name
+
