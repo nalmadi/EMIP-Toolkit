@@ -8,9 +8,9 @@ import os
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import pandas as pd
 
+emipPath = tk.download("EMIP")
 
 def test_EMIP_dataset():
-    emipPath = tk.download("EMIP")
     EMIP = tk.EMIP_dataset(emipPath+"/EMIP-Toolkit- replication package/emip_dataset/rawdata/", 10)
     assert len(EMIP) == 10
     assert EMIP['177'].trial[0].get_subject_id() == '177'
