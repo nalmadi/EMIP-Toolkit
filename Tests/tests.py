@@ -19,7 +19,7 @@ def test_EMIP_dataset():
 
 
 def test_read_SMIRed250():
-    filename = emipPath + "/EMIP-Toolkit- replication package/emip_dataset/rawdata/30_rawdata.tsv'
+    filename = emipPath + "/EMIP-Toolkit- replication package/emip_dataset/rawdata/30_rawdata.tsv"
     filetype = 'tsv'
     Ex = tk.read_SMIRed250(filename,filetype)
     assert type(Ex) is tk.Experiment
@@ -29,7 +29,7 @@ def test_read_SMIRed250():
     assert Ex.get_number_of_trials() == 7
     
 def test_idt_classifier():
-    filename = emipPath + "/EMIP-Toolkit- replication package/emip_dataset/rawdata/30_rawdata.tsv'
+    filename = emipPath + "/EMIP-Toolkit- replication package/emip_dataset/rawdata/30_rawdata.tsv"
     filetype = 'tsv'
     Ex = tk.read_SMIRed250(filename,filetype)
     fixations = Ex.trial[0].get_fixations()
