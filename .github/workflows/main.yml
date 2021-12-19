@@ -41,4 +41,4 @@ jobs:
             pip install numpy
             pip install pandas
             pip install matplotlib
-            pytest ./tests.py
+            pytest tests.py
