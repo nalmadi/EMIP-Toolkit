@@ -1256,7 +1256,6 @@ def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_hei
         dic = dict(zip(columns, value))
 
         aoi = aoi.append(dic, ignore_index=True)
-
     return aoi
 
 
@@ -1299,6 +1298,7 @@ def draw_aoi(aoi, image, image_path):
         draw.rectangle([(x_coordinate, y_coordinate),
                         (x_coordinate + width - 1, y_coordinate + height - 1)],
                        outline=outline[bg_color])
+    print(1)
 
     return rect_image
 
@@ -1319,7 +1319,7 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     pandas.DataFrame
         a dataframe of AOIs with token information
     """
-
+    print(1)
     image_name = aois_raw["image"][1]
 
     # rectangle files
