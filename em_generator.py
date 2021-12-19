@@ -85,7 +85,7 @@ def generate_fixations_left(aois_with_tokens):
 
     fixations = []
     
-    for i in range(len(aois_with_tokens)):
+    for index in range(len(aois_with_tokens)):
         x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
         fixation_x, fixation_y = left_of_center(x, y, width, height)
         fixations.append([fixation_x, fixation_y, token])
@@ -109,7 +109,7 @@ def generate_fixations_skip(aois_with_tokens, threshold, skip_probability):
 
     fixations = []
 
-    for i in range(len(aois_with_tokens)):
+    for index in range(len(aois_with_tokens)):
         if is_skipped(aois_with_tokens["token"][i], threshold, skip_probability)==False:
             x, y, width, height, token = aois_with_tokens['x'][i], aois_with_tokens['y'][i], aois_with_tokens['width'][i], aois_with_tokens['height'][i], aois_with_tokens['token'][i]
             fixation_x, fixation_y = left_of_center(x, y, width, height)
