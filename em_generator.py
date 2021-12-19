@@ -110,8 +110,8 @@ def generate_fixations_skip(aois_with_tokens, threshold, skip_probability):
     fixations = []
 
     for index in range(len(aois_with_tokens)):
-        if is_skipped(aois_with_tokens["token"][i], threshold, skip_probability)==False:
-            x, y, width, height, token = aois_with_tokens['x'][i], aois_with_tokens['y'][i], aois_with_tokens['width'][i], aois_with_tokens['height'][i], aois_with_tokens['token'][i]
+        if is_skipped(aois_with_tokens["token"][index], threshold, skip_probability)==False:
+            x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
             fixation_x, fixation_y = left_of_center(x, y, width, height)
             fixations.append([fixation_x, fixation_y, token])
     
@@ -137,7 +137,7 @@ def generate_fixations_regression(aois_with_tokens, regression_probability):
 
     while index < len(aois_with_tokens):
         x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
-        fixations.append([fixation_x, fixation_y, token])
+        fixations.append([x, y, token])
         
         if random.random() < regression_probability:
             index -= random.randint(1, 10)
@@ -146,7 +146,7 @@ def generate_fixations_regression(aois_with_tokens, regression_probability):
                 index = 0
 
             x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
-            fixations.append([fixation_x, fixation_y, token]) 
+            fixations.append([x, y, token]) 
 
         index += 1   
 
@@ -211,7 +211,7 @@ def generate_fixations_left_regression_skip(aois_with_tokens, regression_probabi
     index = 0
 
     while index < len(aois_with_tokens):
-        if is_skipped(aois_with_tokens["token"][i], threshold, skip_probability)==False:
+        if is_skipped(aois_with_tokens["token"][index], threshold, skip_probability)==False:
             x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
             fixation_x, fixation_y = left_of_center(x, y, width, height)
             fixations.append([fixation_x, fixation_y, token])
@@ -222,7 +222,7 @@ def generate_fixations_left_regression_skip(aois_with_tokens, regression_probabi
             if index < 0:
                 index = 0
 
-            if is_skipped(aois_with_tokens["token"][i], threshold, skip_probability)==False:
+            if is_skipped(aois_with_tokens["token"][index], threshold, skip_probability)==False:
                 x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
                 fixation_x, fixation_y = left_of_center(x, y, width, height)
                 fixations.append([fixation_x, fixation_y, token]) 
