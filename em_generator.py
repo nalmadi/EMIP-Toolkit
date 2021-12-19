@@ -27,6 +27,7 @@ def rectangle_center(x, y, width, height):
 
     return center_x, center_y
 
+
 def left_of_center(x, y, width, height):
     """ returns left-shifted coordinates
 
@@ -46,6 +47,7 @@ def left_of_center(x, y, width, height):
     y += height / 2 + random.randint(-10, 10)
 
     return round(x, 1), y
+
 
 def is_skipped(token, threshold, probability):
     """ checks if a token should be skipped
@@ -68,8 +70,56 @@ def is_skipped(token, threshold, probability):
     else:
         return False
 
+
+def generate_fixations_left(aois_with_tokens):
+    """ generate left-shifted fixations
+
+    Parameters
+    ----------
+    aois_with_tokens: pandas Dataframe
+    
+    Returns
+    -------
+    list, a list of fixations
+    """
+
+    fixations = []
+    
+    for i in range(len(aois_with_tokens)):
+        x, y, width, height, token = aois_with_tokens['x'][index], aois_with_tokens['y'][index], aois_with_tokens['width'][index], aois_with_tokens['height'][index], aois_with_tokens['token'][index]
+        fixation_x, fixation_y = left_of_center(x, y, width, height)
+        fixations.append([fixation_x, fixation_y, token])
+
+    return fixations
+
+
+def generate_fixations_skipped(aois_with_tokens, threshold=2, probability=0.7):
+    """ generate fixations with skipping
+
+    Parameters
+    ----------
+    aois_with_tokens: pandas Dataframe
+    threshold: int, the max length of a token below (including) which the token should be skipped
+    probability: float (0.0-1.0), the probability of a token (the length of which is <= threshold) being skipped
+
+    Returns
+    -------
+    list, a list of fixations
+    """
+
+    fixations = []
+
+    for i in range(len(aois_with_tokens)):
+        if is_skipped(aois_with_tokens["token"][i], threshold, probability)==False:
+            x, y, width, height, token = aois_with_tokens['x'][i], aois_with_tokens['y'][i], aois_with_tokens['width'][i], aois_with_tokens['height'][i], aois_with_tokens['token'][i]
+            x, y = gen.left_of_center(x, y, width, height)
+            fixations.append([x, y, token])
+    
+    return fixations
+
+
 def generate_fixations_left_regression(aois_with_tokens, regression_probability):
-    """ checks if a token should be skipped
+    """ generate fixations with left-shifts and regression
     (modified from Dr. Naser Al Madi's code)
 
     Parameters
