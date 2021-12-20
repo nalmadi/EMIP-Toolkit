@@ -63,10 +63,7 @@ def is_skipped(token, threshold, skip_probability):
     bool, whether a token should be skipped or not
     """
     if len(token) <= threshold:
-        if random.random() <= skip_probability:
-            return True
-        else: 
-            return False
+        return random.random() <= skip_probability:
     else:
         return False
 
