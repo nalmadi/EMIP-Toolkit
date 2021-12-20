@@ -50,3 +50,5 @@ matplotlib==3.1.3
 
 Pillow==8.1.2
 
+# Original project:
+https://github.com/nalmadi/EMIP-Toolkit.git
