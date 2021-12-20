@@ -10,7 +10,6 @@ Ricky Peng (siyuan.peng@colby.edu)
 
 import math
 import os
-from re import L
 import statistics
 
 import numpy as np
@@ -22,7 +21,8 @@ import requests, zipfile
 import tqdm
 
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
-data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
+data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425'],
+'AlMadi2018' : ['https://github.com/nalmadi/EMIP-Toolkit/raw/main/datasets/AlMadi2018.zip',False,'https://dl.acm.org/doi/10.1145/3448018.345742']}
 
 class Fixation:
     """ Basic container for storing Fixation data """
@@ -1715,7 +1715,7 @@ def download(dataset_name):
 
     return './datasets/' + dataset_name
 
-def download_progress_bar(dataset_name):
+def download (dataset_name):
     """Download any dataset via a link to the data with a progress bar 
     for both downloading and unzipping
 
@@ -1723,9 +1723,8 @@ def download_progress_bar(dataset_name):
     ----------
     dataset_name : str
         Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
-
     """
-    
+
     url, is_zipped, citation = data_dictionary[dataset_name]
     
     # Check if dataset has already been downloaded
