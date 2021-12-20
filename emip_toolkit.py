@@ -1113,7 +1113,6 @@ def find_background_color(img):
 
     return bg_color
 
-
 def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_height=4, margin_width=7):
     """Find Area of Interest in the given image and store the aoi attributes in a Pandas Dataframe
 
@@ -1256,7 +1255,6 @@ def find_aoi(image=None, image_path=None, img=None, level="sub-line", margin_hei
         dic = dict(zip(columns, value))
 
         aoi = aoi.append(dic, ignore_index=True)
-
     return aoi
 
 
@@ -1299,10 +1297,9 @@ def draw_aoi(aoi, image, image_path):
         draw.rectangle([(x_coordinate, y_coordinate),
                         (x_coordinate + width - 1, y_coordinate + height - 1)],
                        outline=outline[bg_color])
+    print(1)
 
     return rect_image
-
-
 def add_tokens_to_AOIs(file_path, aois_raw):
     """Adds tokens from code files to aois dataframe and returns it.
 
@@ -1319,66 +1316,58 @@ def add_tokens_to_AOIs(file_path, aois_raw):
     pandas.DataFrame
         a dataframe of AOIs with token information
     """
-
+    
     image_name = aois_raw["image"][1]
+    file = {
+        "rectangle_java.jpg":"Rectangle.java",
+        "rectangle_java2.jpg":"Rectangle.java",
+        "rectangle_python.jpg":"Rectangle.py",
+        "rectangle_scala.jpg":"Rectangle.scala",
+        "vehicle_java.jpg":"Vehicle.java",
+        "vehicle_java2.jpg":"Vehicle.java",
+        "vehicle_python.jpg":"vehicle.py",
+        "vehicle_scala.jpg":"Vehicle.scala"
+    }
 
-    # rectangle files
-    if image_name == "rectangle_java.jpg":
-        file_name = "Rectangle.java"
-
-    if image_name == "rectangle_java2.jpg":
-        file_name = "Rectangle.java"
-
-    if image_name == "rectangle_python.jpg":
-        file_name = "Rectangle.py"
-
-    if image_name == "rectangle_scala.jpg":
-        file_name = "Rectangle.scala"
-
-    # vehicle files
-    if image_name == "vehicle_java.jpg":
-        file_name = "Vehicle.java"
-
-    if image_name == "vehicle_java2.jpg":
-        file_name = "Vehicle.java"
-
-    if image_name == "vehicle_python.jpg":
-        file_name = "vehicle.py"
-
-    if image_name == "vehicle_scala.jpg":
-        file_name = "Vehicle.scala"
-
-    code_file = open(file_path + file_name)
+    code_file = open(file_path + file[image_name])
 
     code_text = code_file.read()
 
-    code_line = code_text.replace('\t', '').replace('        ', '').replace('    ', '').split('\n')
-
-    filtered_line = []
-
-    for line in code_line:
-        if len(line) != 0:
-            filtered_line.append(line.split(' '))
+    code_line = code_text.replace('\t', '').split('\n')
+    tokens = []
+    if(aois_raw.kind[0] == "sub-line"):
+        
+        filtered_line = []
+        for line in code_line:
+            if len(line) != 0:
+                correctedstring = " ".join(line.split())
+                filtered_line.append(correctedstring.split(' '))
 
     # after the code file has been tokenized and indexed
     # we can attach tokens to correct AOI
 
-    aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
+        for location in aois_raw["name"].iteritems():
+            line_part = location[1].split(' ')
+            line_num = int(line_part[1])
+            part_num = int(line_part[3])
 
-    tokens = []
-
-    for location in aois_raw["name"].iteritems():
-        line_part = location[1].split(' ')
-        line_num = int(line_part[1])
-        part_num = int(line_part[3])
-
-        # print(line_part, filtered_line[line_num - 1])
-        tokens.append(filtered_line[line_num - 1][part_num - 1])
+            # print(line_part, filtered_line[line_num - 1])
+            tokens.append(filtered_line[line_num - 1][part_num - 1])
+    elif(aois_raw.kind[0] == "line"):
+        print(1)
+        for line in code_line:
+            if len(line) != 0:
+                correctedstring = " ".join(line.split())
+                tokens.append(correctedstring)
+                #print(len(tokens))
+    else:
+        print("unknown message")
 
     aois_raw["token"] = tokens
 
     if aois_raw[aois_raw['token'] == '']['name'].count() != 0:
         print("Error in adding tokens, some tokens are missing!")
+
 
     return aois_raw
 
@@ -1402,6 +1391,10 @@ def add_srcml_to_AOIs(aois_raw, srcML_path):
     pandas.DataFrame
         AOI dataframe with srcML
     """
+
+    if aois_raw.kind[0] == "line":
+        msg = rf"cannot add a token when AOI kind is line"
+        raise TypeError(msg)
 
     image_name = aois_raw["image"][1]
 
@@ -1436,8 +1429,6 @@ def add_srcml_to_AOIs(aois_raw, srcML_path):
         return aois_raw
 
     srcML_table = pd.read_csv(srcML_path + file_name, sep='\t')
-
-    aois_raw = aois_raw[aois_raw.kind == "sub-line"].copy()
 
     # after the srcML file has been recognized
     # we can attach tokens to correct AOI
@@ -1527,9 +1518,9 @@ def hit_test(trial, aois_tokens, radius=25):
               "aoi_width",
               "aoi_height",
               "token",
-              "length",
-              "srcML"]
-
+              "length"]
+    if(aois_tokens.kind[0] == "sub-line"):
+        header.append("srcML")
     result = pd.DataFrame(columns=header)
     print("all fixations:", len(trial.get_fixations()))
 
@@ -1539,21 +1530,37 @@ def hit_test(trial, aois_tokens, radius=25):
             # kind	name	x	y	width	height	local_id	image	token
 
             if overlap(fix, row, radius):
-                df = pd.DataFrame([[fix.trial_id,
-                                    fix.participant_id,
-                                    row.image,
-                                    row.image,
-                                    fix.timestamp,
-                                    fix.duration,
-                                    fix.x_cord,
-                                    fix.y_cord,
-                                    row.x,
-                                    row.y,
-                                    row.width,
-                                    row.height,
-                                    row.token,
-                                    len(row.token),
-                                    row.srcML_tag], ], columns=header)
+                if(aois_tokens.kind[0] == "sub-line"):
+                    df = pd.DataFrame([[fix.trial_id,
+                                        fix.participant_id,
+                                        row.image,
+                                        row.image,
+                                        fix.timestamp,
+                                        fix.duration,
+                                        fix.x_cord,
+                                        fix.y_cord,
+                                        row.x,
+                                        row.y,
+                                        row.width,
+                                        row.height,
+                                        row.token,
+                                        len(row.token),
+                                        row.srcML_tag], ], columns=header)
+                else:
+                    df = pd.DataFrame([[fix.trial_id,
+                                        fix.participant_id,
+                                        row.image,
+                                        row.image,
+                                        fix.timestamp,
+                                        fix.duration,
+                                        fix.x_cord,
+                                        fix.y_cord,
+                                        row.x,
+                                        row.y,
+                                        row.width,
+                                        row.height,
+                                        row.token,
+                                        len(row.token)], ], columns=header)
 
                 result = result.append(df, ignore_index=True)
 
@@ -1720,4 +1727,3 @@ def download(dataset_name):
     print('Please cite this paper: ', citation)
 
     return './datasets/' + dataset_name
-
