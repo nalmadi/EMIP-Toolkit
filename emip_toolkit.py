@@ -1688,17 +1688,8 @@ def download(dataset_name):
     ----------
     dataset_name : str
         Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
-
-    url : str
-        link to the data
-    
-    is_zipped : bool
-        True if the url links to a zip file of the data, False if it simply links to the data
-    
-    citation : str
-        link to the paper where the dataset originates from
-
     """
+
     url, is_zipped, citation = data_dictionary[dataset_name]
 
     # Check if dataset has already been downloaded
@@ -1733,16 +1724,8 @@ def download_progress_bar(dataset_name):
     dataset_name : str
         Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
 
-    url : str
-        link to the data
-    
-    is_zipped : bool
-        True if the url links to a zip file of the data, False if it simply links to the data
-    
-    citation : str
-        link to the paper where the dataset originates from
-
     """
+    
     url, is_zipped, citation = data_dictionary[dataset_name]
     
     # Check if dataset has already been downloaded
@@ -1766,7 +1749,7 @@ def download_progress_bar(dataset_name):
             f.close()
 
     if not check_unzipped(dataset_name):
-        print("Unzipping")
+        # print("Unzipping")
     
         # extract all data with progress bar
         with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip, tqdm.tqdm(
