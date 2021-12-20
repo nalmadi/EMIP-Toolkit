@@ -13,7 +13,7 @@ The use of eye tracking in the study of program comprehension in software engine
 
 [Read More...](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset).
 
-https://user-images.githubusercontent.com/90881911/146845946-70f5c0cb-fb42-49a7-bbca-5b06562c9234.mp4
+https://user-images.githubusercontent.com/90881911/146846112-494b99b4-a90c-4d8f-a729-0149fb9fa4ac.mp4
 
 # Please Cite: 
 Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset. In ETRA ’21: 2021 Symposium on Eye Tracking Research and Applications (ETRA ’21 Short Papers), May25–27, 2021, Virtual Event, Germany. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3448018.3457425
