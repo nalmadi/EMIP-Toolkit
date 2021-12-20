@@ -1062,7 +1062,7 @@ def read_EyeLink1000(filename, filetype):
     # Read image location
     index = str(int(trial_id) + 1)
     experiment = participant_id.split('/')[-1]
-    location = 'runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
+    location = 'datasets/AlMadi2018/AlMadi2018/runtime/dataviewer/' + experiment + '/graphics/VC_' + index + '.vcl'
     with open(location, 'r') as file:
         image = file.readlines()[1].split()[-3].split('/')[-1]
 
