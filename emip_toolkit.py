@@ -10,6 +10,7 @@ Ricky Peng (siyuan.peng@colby.edu)
 
 import math
 import os
+from re import L
 import statistics
 
 import numpy as np
@@ -17,6 +18,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import requests, zipfile
+
+import tqdm
 
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
 data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
@@ -1721,3 +1724,62 @@ def download(dataset_name):
 
     return './datasets/' + dataset_name
 
+def download_progress_bar(dataset_name):
+    """Download any dataset via a link to the data with a progress bar 
+    for both downloading and unzipping
+
+    Parameters
+    ----------
+    dataset_name : str
+        Name of the dataset, path to raw data directory, e.g. '../../dataset_name/'
+
+    url : str
+        link to the data
+    
+    is_zipped : bool
+        True if the url links to a zip file of the data, False if it simply links to the data
+    
+    citation : str
+        link to the paper where the dataset originates from
+
+    """
+    url, is_zipped, citation = data_dictionary[dataset_name]
+    
+    # Check if dataset has already been downloaded
+    if not check_downloaded(dataset_name):
+        # print('Downloading...')
+
+        #creates a zip file of the data if unzipped
+        if is_zipped == False:          
+            # download with prog bar
+            with requests.get(url, stream=True) as r, open('./datasets/' + dataset_name + '.zip', 'wb') as f, tqdm.tqdm(
+                unit = "B",
+                unit_scale=True,  # let tqdm to determine the scale in kilo, mega..etc.
+                unit_divisor=1024,  # is used when unit_scale is true
+                total=int(r.headers['Content-Length']),  # the total iteration.
+                desc="Downloading " + dataset_name  # prefix to be displayed on progress bar.
+            ) as progress:
+                for chunk in r.iter_content(chunk_size=1024):
+                    datasize = f.write(chunk)
+                    progress.update(datasize)
+                progress.close()
+            f.close()
+
+    if not check_unzipped(dataset_name):
+        print("Unzipping")
+    
+        # extract all data with progress bar
+        with zipfile.ZipFile('./datasets/' + dataset_name + '.zip', 'r') as data_zip, tqdm.tqdm(
+            unit="B",
+            unit_scale=True,
+            unit_divisor=1024, 
+            total=len(data_zip.namelist()),
+            desc="Extracting"
+        ) as progress2:
+            for file in data_zip.namelist():
+                data_zip.extract(member=file, path='./datasets/' + dataset_name)
+                progress2.update()
+
+    print('Please cite this paper: ', citation)
+
+    return './datasets/' + dataset_name
