@@ -1588,3 +1588,74 @@ def download(dataset_name):
     print('Please cite this paper: ', citation)
 
     return './datasets/' + dataset_name
+
+def parse_fixations(filename):
+    '''
+    parse the .csv corrected EMIP dataset into the structure that can be read in by visualization functions
+    Parameters
+    Assuming the input file is in .csv and the samples are grouped first by participant id, then by trial id
+    ----------
+    filename : str
+        Name of the corrected dataset in .csv
+    '''
+    df = pd.read_csv(filename, header=0, index_col=0)
+    # TODO: probably should sort using participant, then trial #
+
+    trial_list = []
+    current_trial = -1
+    current_participant = ""
+    fixation_count = -1 # number of fixations in a trial
+
+    for index, sample in df.iterrows():
+        trial_id = sample["trial"]
+        participant_id = sample["participant"]
+        image = sample["code_file"]
+            
+        current_fixation = Fixation(
+            trial_id,
+            participant_id,
+            sample["timestamp"], 
+            sample["duration"],
+            sample["x_cord"],
+            sample["y_cord"],
+            sample["token"],
+            pupil=0
+            )
+
+        if  trial_id != current_trial or participant_id != current_participant: # create a new trial       
+            fixation_count = 0
+
+            # current_sacc = Saccade(
+            #     trial_id,
+            #     participant_id,
+            #     sample["timestamp"], 
+            #     sample["x_cord"],
+            #     sample["y_cord"],
+            #     x1_cord=0,
+            #     y1_cord=0,
+            #     amplitude=0,
+            #     peak_velocity=0
+            # )
+
+            # current_blink = Blink(trial_id, participant_id, sample["timestamp"], 
+            #     sample["duration"])
+
+            fixations = {}
+            fixations[fixation_count] = current_fixation
+            sacc = {}
+            blinks = {}
+            data_samples = []
+            eye_tracker = ""
+
+            new_trial = Trial(trial_id, participant_id, image, fixations, sacc, blinks, data_samples, eye_tracker)
+            trial_list.append(new_trial)
+
+            current_participant = participant_id
+            current_trial = trial_id
+            fixation_count += 1
+
+        else: # add to the dict of fixation to the same trial
+            trial_list[-1].fixations[fixation_count] = current_fixation
+            fixation_count += 1
+
+    return trial_list
