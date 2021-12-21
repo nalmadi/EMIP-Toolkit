@@ -14,7 +14,7 @@
 
 ## Wilming dataset:
   - dataset_name = Wilming
-  - url = 'https://datadryad.org/stash/downloads/file_stream/11821'
+  - url = 'https://datadryad.org/stash/downloads/file_stream/11821' '(https://datadryad.org/stash/dataset/doi:10.5061/dryad.9pf75 for stimuli and raw data)'
   - is_zipped = False
   - citation = 'https://doi.org/10.5061/dryad.9pf75'
 
