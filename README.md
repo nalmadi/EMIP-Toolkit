@@ -52,13 +52,53 @@ The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a 
 The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
 
 
-# Requirements:
-numpy
+# Usage:
+A standard set of Python libraries needs to be installed.
 
-pandas
+- Install pip:
 
-matplotlib
+```shell
+python -m pip install -U pip
+```
 
-Pillow
+- Install numpy:
 
-requests
+```shell
+pip install numpy
+```
+
+- Install pandas:
+
+```shell
+pip install pandas
+```
+
+- Install matplotlib:
+
+```shell
+pip install matplotlib
+```
+
+- Install Pillow:
+
+```shell
+pip install Pillow
+```
+
+- Install requests:
+
+```shell
+pip install requests
+```
+
+- Install Jupyter Notebook:
+
+```shell
+pip install notebook
+```
+To run the notebook, see [Running the Notebook](https://jupyter.readthedocs.io/en/latest/running.html#running) for more details.
+
+
+# Contributing to EMIP Toolkit:
+All contributions to EMIP Toolkit are submitted via a GitHub pull request.
+
