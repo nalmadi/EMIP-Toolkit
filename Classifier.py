@@ -3,9 +3,10 @@ from scipy.spatial import distance_matrix
 import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+import copy, math
 
 class IMST_classifier:
-	def minimum_spanning_tree(X, copy_X=True):
+	def minimum_spanning_tree(self, X, copy_X=True):
 		"""X are edge weights of fully connected graph"""
 		if copy_X:
 			X = X.copy()
@@ -36,7 +37,7 @@ class IMST_classifier:
 			num_visited += 1
 		return np.vstack(spanning_edges)
 
-	def imst_classifier(raw_fixations, sample_duration=4, minimum_duration=50,distance_threshold=10):
+	def imst_classifier(self, raw_fixations, sample_duration=4, minimum_duration=50,distance_threshold=10):
 		"""I-MST classifier based on page 10 of the following benchmarking paper:
 			https://digital.library.txstate.edu/bitstream/handle/10877/2577/fulltext.pdf?sequence=1&isAllowed=y
 			Notes:
@@ -71,8 +72,8 @@ class IMST_classifier:
 
 		# Go over each window:
 		timestamp = np.array(copy.copy(raw_fixations[1]))
-		x_cord = np.array(copy.copy(raw_fixations[2]))
-		y_cord = np.array(copy.copy(raw_fixations[3]))
+		x_coord = np.array(copy.copy(raw_fixations[2]))
+		y_coord = np.array(copy.copy(raw_fixations[3]))
 
 		# Filter (skip) coordinates outside of the screen 1920×1080 px
 		remove_coordinates = np.any((x_coord < 0,y_coord < 0,x_coord > 1920,y_coord > 1080))
@@ -93,7 +94,7 @@ class IMST_classifier:
 			coord_pairwise = distance_matrix(coord, coord)
 
 			# construct MST using the just calculated pairwise matrix and Prim's algorithm
-			edge_list = minimum_spanning_tree(coord_pairwise)
+			edge_list = self.minimum_spanning_tree(coord_pairwise)
 			edge_list = np.array(edge_list).T.tolist()
 			corresponding_dist = coord_pairwise[tuple(edge_list)]
 			# on the matrix, get the entries that is under the threshold:
@@ -102,48 +103,49 @@ class IMST_classifier:
 			filter_fixation.append([timestamp[fixation_which], 4*len(fixation_which), x_coord_now[fixation_which],y_coord_now[fixation_which]])
 		return filter_fixation
 
+
 class NSLR_HMM_classifier:
-        def nslr_hmm_classifier(raw_fixations,threshold,return_discrete=False):
-            coord = np.vstack([raw_fixations[1],raw_fixations[2]]).T
-            timestamp = raw_fixations[0]
-            
-            # classify using NSLR-HMM
-            sample_class, seg, seg_class = nslr_hmm.classify_gaze(time_array, gaze_array,
-                                                                **nslr_kwargs)
-            
-            # define discrete version of segments/classes
-            segments = [s.t[0] for s in seg.segments]
-            classes = seg_class
-            
-            # convert them if continuous series wanted
-            if return_discrete == False:
-                segments, classes = discrete_to_continuous(time_array, segments, classes)
-            
-            # add the prediction to our dataframe
-            classes = [CLASSES[i] for i in classes]
-            
-            if return_orig_output:
-                # create dictionary from it
-                segment_dict = {"sample_class": sample_class, "segmentation": seg, "seg_class":seg_class}
-                return segments, classes, segment_dict
-            else:
-                return segments, classes 
+	def nslr_hmm_classifier(self, raw_fixations, threshold, return_discrete=False):
+		coord = np.vstack([raw_fixations[1], raw_fixations[2]]).T
+		timestamp = raw_fixations[0]
+		
+		# classify using NSLR-HMM
+		sample_class, seg, seg_class = self.nslr_hmm.classify_gaze(time_array, gaze_array,
+															**nslr_kwargs)
+		
+		# define discrete version of segments/classes
+		segments = [s.t[0] for s in seg.segments]
+		classes = seg_class
+		
+		# convert them if continuous series wanted
+		if return_discrete == False:
+			segments, classes = discrete_to_continuous(time_array, segments, classes)
+		
+		# add the prediction to our dataframe
+		classes = [classes[i] for i in classes]
+		
+		if return_orig_output:
+			# create dictionary from it
+			segment_dict = {"sample_class": sample_class, "segmentation": seg, "seg_class":seg_class}
+			return segments, classes, segment_dict
+		else:
+			return segments, classes 
 
 
 class IVT_classifier:
-    def classify_velocity(raw_fixations,minimum_duration=50,sample_duration=4,velocity_threshold=0):
-        """I-VT velocity algorithm from Salvucci & Goldberg (2000).
-        
-    
-        For reference see:
-        
-        ---
-        Salvucci, D. D., & Goldberg, J. H. (2000). Identifying fixations 
-        and saccades in eye-tracking protocols. In Proceedings of the 
-        2000 symposium on Eye tracking research & applications
-        ---
-        
-        Parameters
+	def classify_velocity(self, raw_fixations,minimum_duration=50,sample_duration=4,velocity_threshold=0):
+		"""I-VT velocity algorithm from Salvucci & Goldberg (2000).
+		
+	
+		For reference see:
+		
+		---
+		Salvucci, D. D., & Goldberg, J. H. (2000). Identifying fixations 
+		and saccades in eye-tracking protocols. In Proceedings of the 
+		2000 symposium on Eye tracking research & applications
+		---
+		
+		Parameters
 		----------
 		raw_fixations : list
 			a list of fixations information containing timestamp, x_cord, and y_cord
@@ -164,41 +166,41 @@ class IVT_classifier:
 		list
 			a list where each element is a list of timestamp, duration, x_cord, and y_cord
 		"""
-        # process time argument and calculate sample threshold
-       
-        times=raw_fixations[0]
-        sfreq = 1 / np.mean(times[1:] - times[:-1]) 
+		# process time argument and calculate sample threshold
+	   
+		times=raw_fixations[0]
+		sfreq = 1 / np.mean(times[1:] - times[:-1]) 
 
-        sample_thresh = sfreq * velocity_threshold / 1000
-        
-        # calculate movement velocities
-        x_coord=raw_fixations[1]
-        y_coord=raw_fixations[2]
-        coord = np.stack([x_coord, y_coord])
-        vels = np.linalg.norm(gaze[:, 1:] - gaze[:, :-1], axis=0)
-        vels = np.concatenate([[0.], vels])
-        
-        # define classes by threshold
-        is_fixation = np.empty(len(x), dtype=object)
-        is_fixation[:] = True
-        is_fixation[vels > sample_thresh] = False
-        
-        # group consecutive classes to one segment
-        segments = np.zeros(len(x), dtype=int)
-        for idx in range(1, len(is_fixation)):
-            if is_fixation[idx] == is_fixation[idx - 1]:
-                segments[idx] = segments[idx - 1]
-            else:
-                segments[idx] = segments[idx - 1] + 1
-        
-        filter_fixation=[[time[segments[i]:segments[i+1]],(segments[i+1]-segments[i])*4,x_coord[segments[i]:segments[i+1]-1],y_coord[segments[i]:segments[i+1]-1]] for i in range(len(segments)-1)]
-        return filter_fixation
+		sample_thresh = sfreq * velocity_threshold / 1000
+		
+		# calculate movement velocities
+		x_coord=raw_fixations[1]
+		y_coord=raw_fixations[2]
+		gaze = np.stack([x_coord, y_coord])
+		vels = np.linalg.norm(gaze[:, 1:] - gaze[:, :-1], axis=0)
+		vels = np.concatenate([[0.], vels])
+		
+		# define classes by threshold
+		is_fixation = np.empty(len(x), dtype=object)
+		is_fixation[:] = True
+		is_fixation[vels > sample_thresh] = False
+		
+		# group consecutive classes to one segment
+		segments = np.zeros(len(x), dtype=int)
+		for idx in range(1, len(is_fixation)):
+			if is_fixation[idx] == is_fixation[idx - 1]:
+				segments[idx] = segments[idx - 1]
+			else:
+				segments[idx] = segments[idx - 1] + 1
+		
+		filter_fixation=[[times[segments[i]:segments[i+1]],(segments[i+1]-segments[i])*4,x_coord[segments[i]:segments[i+1]-1],y_coord[segments[i]:segments[i+1]-1]] for i in range(len(segments)-1)]
+		return filter_fixation
 
 
 class I2MC:
 	def getFixations(finalweights, timestamp, xpos, ypos, missing, params):
 		"""
-		Description
+		Algorithm: identification by 2 means clustering
 		
 		Parameters
 		----------
@@ -304,7 +306,7 @@ class I2MC:
 			i = fixend[p]
 			if i<len(xpos): # don't walk when fixation ending at end of data
 				while np.hypot(xpos[i]-xmedThis,ypos[i]-ymedThis)>thresh:
-					i = i-1;
+					i = i-1
 				fixend[p] = i
 
 		### get start time, end time,
@@ -423,127 +425,127 @@ class I2MC:
 
 
 def I2MC(gazeData, options = {}):
-    '''
-    RUNS I2MC 
-    
-    
-    Parameters
-    ----------
-    data : dict
-        Dictionary containing all the data
-    opt : dict
-        Dictionary containing all the options 
-    
-    Returns
-    -------
-    fix : dict
-        Dictionary containing all the fixation information
-    
-    Example
-    --------
-    >>> 
-    '''
-    # set defaults
-    data = copy.deepcopy(gazeData)
-    opt = options.copy()
-    par = {}
-    
-    # Check required parameters 
-    checkFun('xres', opt, 'horizontal screen resolution')
-    checkFun('yres', opt, 'vertical screen resolution')
-    checkFun('freq', opt, 'tracker sampling rate')
-    checkFun('missingx', opt, 'value indicating data loss for horizontal position')
-    checkFun('missingy', opt, 'value indicating data loss for vertical position')
-    
-    # required parameters:
-    par['xres'] = opt.pop('xres')
-    par['yres'] = opt.pop('yres')
-    par['freq'] = opt.pop('freq')
-    par['missingx'] = opt.pop('missingx')
-    par['missingy'] = opt.pop('missingy')
-    par['scrSz'] = opt.pop('scrSz', None ) # screen size (e.g. in cm). Optional, specify if want fixation statistics in deg
-    par['disttoscreen'] = opt.pop('disttoscreen', None) # screen distance (in same unit as size). Optional, specify if want fixation statistics in deg
-    
-    #parameters with defaults:
-    # CUBIC SPLINE INTERPOLATION
-    par['windowtimeInterp'] = opt.pop('windowtimeInterp', .1) # max duration (s) of missing values for interpolation to occur
-    par['edgeSampInterp'] = opt.pop('edgeSampInterp', 2) # amount of data (number of samples) at edges needed for interpolation
-    par['maxdisp'] = opt.pop('maxdisp', None) # maximum displacement during missing for interpolation to be possible. Default set below if needed
-    
-    # K-MEANS CLUSTERING
-    par['windowtime'] = opt.pop('windowtime', .2) # time window (s) over which to calculate 2-means clustering (choose value so that max. 1 saccade can occur)
-    par['steptime'] = opt.pop('steptime', .02) # time window shift (s) for each iteration. Use zero for sample by sample processing
-    par['downsamples'] = opt.pop('downsamples', [2, 5, 10]) # downsample levels (can be empty)
-    par['downsampFilter'] = opt.pop('downsampFilter', True) # use chebychev filter when downsampling? True: yes, False: no. requires signal processing toolbox. is what matlab's downsampling functions do, but could cause trouble (ringing) with the hard edges in eye-movement data
-    par['chebyOrder'] = opt.pop('chebyOrder', 8.) # order of cheby1 Chebyshev downsampling filter, default is normally ok, as long as there are 25 or more samples in the window (you may have less if your data is of low sampling rate or your window is small
-    par['maxerrors'] = opt.pop('maxerrors', 100.) # maximum number of errors allowed in k-means clustering procedure before proceeding to next file
-    # FIXATION DETERMINATION
-    par['cutoffstd'] = opt.pop('cutoffstd', 2.) # number of standard deviations above mean k-means weights will be used as fixation cutoff
-    par['onoffsetThresh']  = opt.pop('onoffsetThresh', 3.) # number of MAD away from median fixation duration. Will be used to walk forward at fixation starts and backward at fixation ends to refine their placement and stop algorithm from eating into saccades
-    par['maxMergeDist'] = opt.pop('maxMergeDist', 30.) # maximum Euclidean distance in pixels between fixations for merging
-    par['maxMergeTime'] = opt.pop('maxMergeTime', 30.) # maximum time in ms between fixations for merging
-    par['minFixDur'] = opt.pop('minFixDur', 40.) # minimum fixation duration (ms) after merging, fixations with shorter duration are removed from output
-      
-    # Development parameters (plotting intermediate steps), Change these to False when not developing
-    par['dev_interpolation'] = opt.pop('dev_interpolation', False)
-    par['dev_cluster'] = opt.pop('dev_cluster', False)
-    par['skip_inputhandeling'] = opt.pop('skip_inputhandeling', False)
+	'''
+	RUNS I2MC 
+	
+	
+	Parameters
+	----------
+	data : dict
+		Dictionary containing all the data
+	opt : dict
+		Dictionary containing all the options 
+	
+	Returns
+	-------
+	fix : dict
+		Dictionary containing all the fixation information
+	
+	Example
+	--------
+	>>> 
+	'''
+	# set defaults
+	data = copy.deepcopy(gazeData)
+	opt = options.copy()
+	par = {}
+	
+	# Check required parameters 
+	checkFun('xres', opt, 'horizontal screen resolution')
+	checkFun('yres', opt, 'vertical screen resolution')
+	checkFun('freq', opt, 'tracker sampling rate')
+	checkFun('missingx', opt, 'value indicating data loss for horizontal position')
+	checkFun('missingy', opt, 'value indicating data loss for vertical position')
+	
+	# required parameters:
+	par['xres'] = opt.pop('xres')
+	par['yres'] = opt.pop('yres')
+	par['freq'] = opt.pop('freq')
+	par['missingx'] = opt.pop('missingx')
+	par['missingy'] = opt.pop('missingy')
+	par['scrSz'] = opt.pop('scrSz', None ) # screen size (e.g. in cm). Optional, specify if want fixation statistics in deg
+	par['disttoscreen'] = opt.pop('disttoscreen', None) # screen distance (in same unit as size). Optional, specify if want fixation statistics in deg
+	
+	#parameters with defaults:
+	# CUBIC SPLINE INTERPOLATION
+	par['windowtimeInterp'] = opt.pop('windowtimeInterp', .1) # max duration (s) of missing values for interpolation to occur
+	par['edgeSampInterp'] = opt.pop('edgeSampInterp', 2) # amount of data (number of samples) at edges needed for interpolation
+	par['maxdisp'] = opt.pop('maxdisp', None) # maximum displacement during missing for interpolation to be possible. Default set below if needed
+	
+	# K-MEANS CLUSTERING
+	par['windowtime'] = opt.pop('windowtime', .2) # time window (s) over which to calculate 2-means clustering (choose value so that max. 1 saccade can occur)
+	par['steptime'] = opt.pop('steptime', .02) # time window shift (s) for each iteration. Use zero for sample by sample processing
+	par['downsamples'] = opt.pop('downsamples', [2, 5, 10]) # downsample levels (can be empty)
+	par['downsampFilter'] = opt.pop('downsampFilter', True) # use chebychev filter when downsampling? True: yes, False: no. requires signal processing toolbox. is what matlab's downsampling functions do, but could cause trouble (ringing) with the hard edges in eye-movement data
+	par['chebyOrder'] = opt.pop('chebyOrder', 8.) # order of cheby1 Chebyshev downsampling filter, default is normally ok, as long as there are 25 or more samples in the window (you may have less if your data is of low sampling rate or your window is small
+	par['maxerrors'] = opt.pop('maxerrors', 100.) # maximum number of errors allowed in k-means clustering procedure before proceeding to next file
+	# FIXATION DETERMINATION
+	par['cutoffstd'] = opt.pop('cutoffstd', 2.) # number of standard deviations above mean k-means weights will be used as fixation cutoff
+	par['onoffsetThresh']  = opt.pop('onoffsetThresh', 3.) # number of MAD away from median fixation duration. Will be used to walk forward at fixation starts and backward at fixation ends to refine their placement and stop algorithm from eating into saccades
+	par['maxMergeDist'] = opt.pop('maxMergeDist', 30.) # maximum Euclidean distance in pixels between fixations for merging
+	par['maxMergeTime'] = opt.pop('maxMergeTime', 30.) # maximum time in ms between fixations for merging
+	par['minFixDur'] = opt.pop('minFixDur', 40.) # minimum fixation duration (ms) after merging, fixations with shorter duration are removed from output
+	  
+	# Development parameters (plotting intermediate steps), Change these to False when not developing
+	par['dev_interpolation'] = opt.pop('dev_interpolation', False)
+	par['dev_cluster'] = opt.pop('dev_cluster', False)
+	par['skip_inputhandeling'] = opt.pop('skip_inputhandeling', False)
 
-    for key in opt:
-        assert False, 'Key "{}" not recognized'.format(key)
-    
-    # =============================================================================
-    # # Input handeling and checking
-    # =============================================================================
-    ## loop over input
-    if not par['skip_inputhandeling']:
-        for key, value in par.items():
-            if key in ['xres','yres','freq','missingx','missingy','windowtimeInterp','maxdisp','windowtime','steptime','cutoffstd','onoffsetThresh','maxMergeDist','maxMergeTime','minFixDur']:
-                checkNumeric(key,value)
-                checkScalar(key,value)
-            elif key == 'disttoscreen':
-                if value is not None:   # may be none (its an optional parameter)
-                    checkNumeric(key,value)
-                    checkScalar(key,value)
-            elif key in ['downsampFilter','chebyOrder','maxerrors','edgeSampInterp']:
-                checkInt(key,value)
-                checkScalar(key,value)
-            elif key == 'scrSz':
-                if value is not None:   # may be none (its an optional parameter)
-                    checkNumeric(key,value)
-                    checkNumel2(key,value)
-            elif key == 'downsamples':
-                checkInt(key,value)
-            else:
-                if type(key) != str:
-                    assert False, 'Key "{}" not recognized'.format(key)
-    
-    # set defaults
-    if par['maxdisp'] is None:
-        par['maxdisp'] = par['xres']*0.2*np.sqrt(2)
+	for key in opt:
+		assert False, 'Key "{}" not recognized'.format(key)
+	
+	# =============================================================================
+	# # Input handeling and checking
+	# =============================================================================
+	## loop over input
+	if not par['skip_inputhandeling']:
+		for key, value in par.items():
+			if key in ['xres','yres','freq','missingx','missingy','windowtimeInterp','maxdisp','windowtime','steptime','cutoffstd','onoffsetThresh','maxMergeDist','maxMergeTime','minFixDur']:
+				checkNumeric(key,value)
+				checkScalar(key,value)
+			elif key == 'disttoscreen':
+				if value is not None:   # may be none (its an optional parameter)
+					checkNumeric(key,value)
+					checkScalar(key,value)
+			elif key in ['downsampFilter','chebyOrder','maxerrors','edgeSampInterp']:
+				checkInt(key,value)
+				checkScalar(key,value)
+			elif key == 'scrSz':
+				if value is not None:   # may be none (its an optional parameter)
+					checkNumeric(key,value)
+					checkNumel2(key,value)
+			elif key == 'downsamples':
+				checkInt(key,value)
+			else:
+				if type(key) != str:
+					assert False, 'Key "{}" not recognized'.format(key)
+	
+	# set defaults
+	if par['maxdisp'] is None:
+		par['maxdisp'] = par['xres']*0.2*np.sqrt(2)
 
-    # check filter
-    if par['downsampFilter']:
-        nSampRequired = np.max([1,3*par['chebyOrder']])+1  # nSampRequired = max(1,3*(nfilt-1))+1, where nfilt = chebyOrder+1
-        nSampInWin = round(par['windowtime']/(1./par['freq']))
-        assert nSampInWin>=nSampRequired,'I2MCfunc: Filter parameters requested with the setting ''chebyOrder'' will not work for the sampling frequency of your data. Please lower ''chebyOrder'', or set the setting ''downsampFilter'' to 0'
+	# check filter
+	if par['downsampFilter']:
+		nSampRequired = np.max([1,3*par['chebyOrder']])+1  # nSampRequired = max(1,3*(nfilt-1))+1, where nfilt = chebyOrder+1
+		nSampInWin = round(par['windowtime']/(1./par['freq']))
+		assert nSampInWin>=nSampRequired,'I2MCfunc: Filter parameters requested with the setting ''chebyOrder'' will not work for the sampling frequency of your data. Please lower ''chebyOrder'', or set the setting ''downsampFilter'' to 0'
    
-    assert np.sum(par['freq']%np.array(par['downsamples'])) ==0,'I2MCfunc: Some of your downsample levels are not divisors of your sampling frequency. Change the option "downsamples"'
-    
+	assert np.sum(par['freq']%np.array(par['downsamples'])) ==0,'I2MCfunc: Some of your downsample levels are not divisors of your sampling frequency. Change the option "downsamples"'
+	
    
 
    
-    data['finalweights'], stopped = twoClusterWeighting(xpos, ypos, missingn, par['downsamples'], par['downsampFilter'], par['chebyOrder'],par['windowtime'], par['steptime'],par['freq'],par['maxerrors'],par['dev_cluster'])
-        
-        # check whether clustering succeeded
-    if stopped:
-        print('\tClustering stopped after exceeding max errors, continuing to next file \n')
-        return False
-        
-    # =============================================================================
-    #  DETERMINE FIXATIONS BASED ON FINALWEIGHTS_AVG
-    # =============================================================================
-    print('\tDetermining fixations based on clustering weight mean for averaged signal and separate eyes + {:.2f}*std'.format(par['cutoffstd']))
-    fix = getFixations(data['finalweights'],data['time'],xpos,ypos,missing,par)
+	data['finalweights'], stopped = twoClusterWeighting(xpos, ypos, missingn, par['downsamples'], par['downsampFilter'], par['chebyOrder'],par['windowtime'], par['steptime'],par['freq'],par['maxerrors'],par['dev_cluster'])
+		
+		# check whether clustering succeeded
+	if stopped:
+		print('\tClustering stopped after exceeding max errors, continuing to next file \n')
+		return False
+		
+	# =============================================================================
+	#  DETERMINE FIXATIONS BASED ON FINALWEIGHTS_AVG
+	# =============================================================================
+	print('\tDetermining fixations based on clustering weight mean for averaged signal and separate eyes + {:.2f}*std'.format(par['cutoffstd']))
+	fix = getFixations(data['finalweights'],data['time'],xpos,ypos,missing,par)
   
-    return fix
+	return fix
