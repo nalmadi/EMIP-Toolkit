@@ -245,15 +245,17 @@ class IVT_classifier:
 			else:
 				segments[idx] = segments[idx - 1] + 1
 		
-
+		duration=(segments[1:]-segments[:-1])*4
+		duration_legit=np.where(duration>50)
 		
-		corresponding_dist=np.array(corresponding_dist,dtype=np.float64)
-		fixation_which = np.where(corresponding_dist < threshold)
-		fixation_which = np.sort(np.unique(edge_list[fixation_which].flatten()))
-		filter_fixation.append([timestamp_now[-1],4*len(fixation_which),np.mean(x_cord_now[fixation_which]),np.mean(y_cord_now[fixation_which])])
 		
-
-		return filter_fixation
+		filter_fixation_x=x_cord[np.mean(x_cord[segments[i]:segments[i+1]]) for i in range(len(segments))]
+		filter_fixation_y=x_cord[np.mean(y_cord[segments[i]:segments[i+1]]) for i in range(len(segments))]
+		
+		filter_fixation_timestamp=times[segments]
+		
+		filter_fixation=np.array([filter_fixation_timestamp[duration_legit],duration[duration_legit],filter_fixation_x[duration_legit],filter_fixation_y[duration_legit]])
+		return filter_fixation.T
 
 
 
