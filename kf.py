@@ -3,7 +3,7 @@ import scipy.stats.chisquare as chisquare
 class KF:
 	def __init__(self, F = None, B = None, H = None, Q = None, R = None, P = None, x0 = None):
 		if(F is None or H is None):
-			raise ValueError("Set proper system dynamics.")
+			raise ValueError("|--INVALID PARAMETERS--|")
 
 		self.n = F.shape[1]
 		self.m = H.shape[1]
