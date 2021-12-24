@@ -6,7 +6,6 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import copy, math
 
 import math
-import os
 import statistics
 
 		
@@ -446,11 +445,10 @@ class I2MC:
 				eind = eind-d
 				i = i-d
 				
-
 		# create final weights
 		finalweights = totalweights/nrtests
-		
 		return finalweights, stopped
+
 	def getFixations(finalweights, timestamp, xpos, ypos, missing, params):
 		"""
 		Algorithm: identification by 2 means clustering
@@ -681,7 +679,133 @@ class I2MC:
 		fix_arr = np.array(fix_list)
 
 		return fix_arr.T
+	
+	def kmeans2(data):
+		# n points in p dimensional space
+		n = data.shape[0]
+		maxit = 100
 
+		## initialize using kmeans++ method.
+		# code taken and slightly edited from scipy.cluster.vq
+		dims = data.shape[1] if len(data.shape) > 1 else 1
+		C = np.ndarray((2, dims))
+		
+		# first cluster
+		C[0, :] = data[np.random.randint(data.shape[0])]
+
+		# second cluster
+		D = cdist(C[:1,:], data, metric='sqeuclidean').min(axis=0)
+		probs = D/D.sum()
+		cumprobs = probs.cumsum()
+		r = np.random.rand()
+		C[1, :] = data[np.searchsorted(cumprobs, r)]
+
+		# Compute the distance from every point to each cluster centroid and the
+		# initial assignment of points to clusters
+		D = cdist(C, data, metric='sqeuclidean')
+		# Compute the nearest neighbor for each obs using the current code book
+		label = vq(data, C)[0]
+		# Update the code book by computing centroids
+		C = _vq.update_cluster_means(data, label, 2)[0]
+		m = np.bincount(label)
+
+		## Begin phase one:  batch reassignments
+		#-----------------------------------------------------
+		# Every point moved, every cluster will need an update
+		prevtotsumD = math.inf
+		iter = 0
+		while True:
+			iter += 1
+			# Calculate the new cluster centroids and counts, and update the
+			# distance from every point to those new cluster centroids
+			Clast = C
+			mlast = m
+			D = cdist(C, data, metric='sqeuclidean')
+
+			# Deal with clusters that have just lost all their members
+			if np.any(m==0):
+				i = np.argwhere(m==0)
+				d = D[[label],[range(n)]]   # use newly updated distances
+			
+				# Find the point furthest away from its current cluster.
+				# Take that point out of its cluster and use it to create
+				# a new singleton cluster to replace the empty one.
+				lonely = np.argmax(d)
+				cFrom = label[lonely]    # taking from this cluster
+				if m[cFrom] < 2:
+					# In the very unusual event that the cluster had only
+					# one member, pick any other non-singleton point.
+					cFrom = np.argwhere(m>1)[0]
+					lonely = np.argwhere(label==cFrom)[0]
+				label[lonely] = i
+			
+				# Update clusters from which points are taken
+				C = _vq.update_cluster_means(data, label, 2)[0]
+				m = np.bincount(label)
+				D = cdist(C, data, metric='sqeuclidean')
+		
+			# Compute the total sum of distances for the current configuration.
+			totsumD = np.sum(D[[label],[range(n)]])
+			# Test for a cycle: if objective is not decreased, back out
+			# the last step and move on to the single update phase
+			if prevtotsumD <= totsumD:
+				label = prevlabel
+				C = Clast
+				m = mlast
+				iter -= 1
+				break
+			if iter >= maxit:
+				break
+		
+			# Determine closest cluster for each point and reassign points to clusters
+			prevlabel = label
+			prevtotsumD = totsumD
+			newlabel = vq(data, C)[0]
+		
+			# Determine which points moved
+			moved = newlabel != prevlabel
+			if np.any(moved):
+				# Resolve ties in favor of not moving
+				moved[np.bitwise_and(moved, D[0,:]==D[1,:])] = False
+			if not np.any(moved):
+				break
+			label = newlabel
+			# update centers
+			C = _vq.update_cluster_means(data, label, 2)[0]
+			m = np.bincount(label)
+
+	def bool2bounds(b):
+		"""
+		Finds all contiguous sections of true in a boolean
+
+		Parameters
+		----------
+		data : np.array
+			A 1d np.array containing True, False values.
+		
+		Returns
+		-------
+		on : np.array
+			The array contains the indexes of the first value = True
+		off : np.array
+			The array contains the indexes of the last value = True in a sequence
+		
+		Example
+		--------
+		>>> import numpy as np
+		>>> b = np.array([1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0])
+		>>> on, off = bool2bounds(b)
+		>>> print(on)
+		[0 4 8]
+		>>> print(off)
+		[0 6 9]
+		"""
+		b = np.array(np.array(b, dtype = np.bool), dtype=int)
+		b = np.pad(b, (1, 1), 'constant', constant_values=(0, 0))
+		D = np.diff(b)
+		on  = np.array(np.where(D == 1)[0], dtype=int)
+		off = np.array(np.where(D == -1)[0] -1, dtype=int)
+		return on, off
 
 	def classify(raw_fixations,par):
 		assert ['downsamples','downsampFilter','chebyOrder','windowtime','steptime','freq','maxerrors','dev_cluster','maxerrors','dev_cluster'] in params.keys()
@@ -697,7 +821,6 @@ class I2MC:
 			return filter_fixation
 		
 class HMM:
-
 	def forward(V, a, b, initial_distribution):
 		'''
 		carries out the long computations in HMM models
