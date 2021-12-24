@@ -36,13 +36,12 @@ class KF:
 			(I - np.dot(K, self.H)).T) + np.dot(np.dot(K, self.R), K.T)
 
 	@staticmethod
-	def classify(raw_fixations, sample_duration=4, minimum_duration=50,threshold=1):
-		filter_fixation=[]
-		raw_fixations_np=np.array(raw_fixations)
-		times=raw_fixations_np[:,0]
-		dt=sample_duration
+	def classify(raw_fixations, sample_duration=4, minimum_duration=50, threshold=1):
+		filter_fixation = []
+		raw_fixations_np = np.array(raw_fixations)
+		times = raw_fixations_np[:,0]
+		dt = sample_duration
 		sfreq = 1 / np.mean(times[1:] - times[:-1])
-
 		sample_thresh = sfreq * threshold / 1000
 		
 		# calculate movement velocities
