@@ -287,3 +287,36 @@ class twoClusterWeighting:
             # update centers
             C = _vq.update_cluster_means(data, label, 2)[0]
             m = np.bincount(label)
+
+    def bool2bounds(b):
+        """
+        Finds all contiguous sections of true in a boolean
+
+        Parameters
+        ----------
+        data : np.array
+            A 1d np.array containing True, False values.
+        
+        Returns
+        -------
+        on : np.array
+            The array contains the indexes of the first value = True
+        off : np.array
+            The array contains the indexes of the last value = True in a sequence
+        
+        Example
+        --------
+        >>> import numpy as np
+        >>> b = np.array([1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0])
+        >>> on, off = bool2bounds(b)
+        >>> print(on)
+        [0 4 8]
+        >>> print(off)
+        [0 6 9]
+        """
+        b = np.array(np.array(b, dtype = np.bool), dtype=int)
+        b = np.pad(b, (1, 1), 'constant', constant_values=(0, 0))
+        D = np.diff(b)
+        on  = np.array(np.where(D == 1)[0], dtype=int)
+        off = np.array(np.where(D == -1)[0] -1, dtype=int)
+        return on, off
