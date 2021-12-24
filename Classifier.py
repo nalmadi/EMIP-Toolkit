@@ -10,7 +10,7 @@ import os
 import statistics
 
 		
-class IDT_classifier: 
+class IDT:
 
 		def classify(self,raw_fixations, minimum_duration, sample_duration, threshold):
 			"""I-DT classifier based on page 296 of eye tracker manual:
@@ -85,7 +85,7 @@ class IDT_classifier:
 			return filter_fixation
 
 
-class IMST_classifier:
+class IMST:
 	
 	def minimum_spanning_tree(self,X, copy_X=True):
 		"""X are edge weights of fully connected graph"""
@@ -189,7 +189,7 @@ class IMST_classifier:
 		return filter_fixation
 
 
-class IVT_classifier:
+class IVT:
 
 	def classify(raw_fixations,minimum_duration=50,sample_duration=4,threshold=0.6):
 		"""I-VT velocity algorithm from Salvucci & Goldberg (2000). 
@@ -491,7 +491,7 @@ class I2MC:
 		return [time_out,xpos_out,ypos_out]
 
 
-class HMM_classifier:
+class HMM:
 
 	def forward(V, a, b, initial_distribution):
 		'''
