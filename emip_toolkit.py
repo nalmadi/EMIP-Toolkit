@@ -18,7 +18,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import requests, zipfile
-
+import Classifier as Clf
 # Dictionary for datasets Key = dataset_name, Value = [url, is_zipped, citation]
 data_dictionary = {'EMIP' : ['https://osf.io/j6vt3/download', False, 'https://dl.acm.org/doi/abs/10.1145/3448018.3457425']}
 
@@ -719,6 +719,10 @@ class Experiment:
             name of the eye tracker
         """
         return self.eye_tracker
+
+
+
+        
 class Classifier:
     class IMST_classifier:
         def minimum_spanning_tree(X, copy_X=True):
@@ -752,7 +756,7 @@ class Classifier:
                 num_visited += 1
             return np.vstack(spanning_edges)
 
-        def imst_classifier(raw_fixations,sample_duration=4,minimum_duration=50,distance_threshold=10):
+        def classifier(raw_fixations,sample_duration=4,minimum_duration=50,threshold=.6):
             """I-MST classifier based on page 10 of the following benchmarking paper:
                 https://digital.library.txstate.edu/bitstream/handle/10877/2577/fulltext.pdf?sequence=1&isAllowed=y
                 Notes:
@@ -805,7 +809,6 @@ class Classifier:
                 coord=np.hstack((x_coord,y_coord))
                 #Pairwise matrix using Euclidean distance 
                 coord_pairwise=distance_matrix(coord,coord)
-
                 #construct MST using the just calculated pairwise matrix and Prim's algorithm
                 edge_list=minimum_spanning_tree(coord_pairwise)
                 edge_list=np.array(edge_list).T.tolist()
@@ -816,109 +819,15 @@ class Classifier:
                 filter_fixation.append([timestamp[fixation_which],4*len(fixation_which),x_coord_now[fixation_which],y_coord_now[fixation_which]])
             return filter_fixation
     
-    class IDT_classifier: 
+  
+def get_classifier(method="IVT"):
+    methods_dict={"IDT":Clf.IDT(),"IVT":Clf.IVT(),"IMST":Clf.IMST(),"I2MC":Clf.I2MC,"HMM":Clf.HMM,"KF":Clf.KF }
+    assert method in methods_dict.keys()
+    return methods_dict[method]
 
-        
 
-        def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximum_dispersion=25):
-            """I-DT classifier based on page 296 of eye tracker manual:
-                https://psychologie.unibas.ch/fileadmin/user_upload/psychologie/Forschung/N-Lab/SMI_iView_X_Manual.pdf
-
-                Notes:
-                    remember that some data is MSG for mouse clicks.
-                    some records are invalid with value -1.
-                    read right eye data only.
-
-            Parameters
-            ----------
-            raw_fixations : list
-                a list of fixations information containing timestamp, x_cord, and y_cord
-
-            minimum_duration : int, optional
-                minimum duration for a fixation in milliseconds, less than minimum is considered noise.
-                set to 50 milliseconds by default
-
-            sample_duration : int, optional
-                Sample duration in milliseconds, this is 4 milliseconds based on this eye tracker
-
-            maximum_dispersion : int, optional
-                maximum distance from a group of samples to be considered a single fixation.
-                Set to 25 pixels by default
-
-            Returns
-            -------
-            list
-                a list where each element is a list of timestamp, duration, x_cord, and y_cord
-            """
-
-            # Create moving window based on minimum_duration
-            window_size = int(math.ceil(minimum_duration / sample_duration))
-
-            window_x = []
-            window_y = []
-
-            filter_fixation = []
-
-            # Go over all SMPs in trial data
-            for timestamp, x_cord, y_cord in raw_fixations:
-
-                # Filter (skip) coordinates outside of the screen 1920×1080 px
-                if x_cord < 0 or y_cord < 0 or x_cord > 1920 or y_cord > 1080:
-                    continue
-
-                # Add sample if it appears to be valid
-                window_x.append(x_cord)
-                window_y.append(y_cord)
-
-                # Calculate dispersion = [max(x) - min(x)] + [max(y) - min(y)]
-                dispersion = (max(window_x) - min(window_x)) + (max(window_y) - min(window_y))
-
-                # If dispersion is above maximum_dispersion
-                if dispersion > maximum_dispersion:
-
-                    # Then the window does not represent a fixation
-                    # Pop last item in window
-                    window_x.pop()
-                    window_y.pop()
-
-                    # Add fixation to fixations if window is not empty (size >= window_size)
-                    if len(window_x) == len(window_y) and len(window_x) > window_size:
-                        # The fixation is registered at the centroid of the window points
-                        filter_fixation.append(
-                            [timestamp, len(window_x) * 4, statistics.mean(window_x), statistics.mean(window_y)])
-
-                    window_x = []
-                    window_y = []
-
-            return filter_fixation
-    class NSLR_HMM_classifier:
-        def nslr_hmm_classifier(raw_fixations,threshold,return_discrete=False):
-            coord = np.vstack([raw_fixations[1],raw_fixations[2]]).T
-            timestamp = raw_fixations[0]
-            
-            # classify using NSLR-HMM
-            sample_class, seg, seg_class = nslr_hmm.classify_gaze(time_array, gaze_array,
-                                                                **nslr_kwargs)
-            
-            # define discrete version of segments/classes
-            segments = [s.t[0] for s in seg.segments]
-            classes = seg_class
-            
-            # convert them if continuous series wanted
-            if return_discrete == False:
-                segments, classes = discrete_to_continuous(time_array, segments, classes)
-            
-            # add the prediction to our dataframe
-            classes = [CLASSES[i] for i in classes]
-            
-            if return_orig_output:
-                # create dictionary from it
-                segment_dict = {"sample_class": sample_class, "segmentation": seg, "seg_class":seg_class}
-                return segments, classes, segment_dict
-            else:
-                return segments, classes
-
-def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, maximum_dispersion=25):
+    
+def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, threshold=.6,filter_fixation='IVT',*args):
     """Read tsv file from SMI Red 250 eye tracker
 
     Parameters
@@ -983,12 +892,11 @@ def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, m
                 raw_fixations.append([int(token[0]), float(token[23]), float(token[24])])
 
         if token[1] == "MSG" and token[3].find(".jpg") != -1:
-
             if active:
-                filter_fixations = idt_classifier(raw_fixations=raw_fixations,
+                filter_fixations = get_classifier().classify(raw_fixations=raw_fixations,
                                                   minimum_duration=minimum_duration,
                                                   sample_duration=sample_duration,
-                                                  maximum_dispersion=maximum_dispersion)
+                                                  threshold=threshold,*args)
                 # TODO saccades
 
                 fixations = {}
@@ -1024,10 +932,10 @@ def read_SMIRed250(filename, filetype, minimum_duration=50, sample_duration=4, m
             active = True
 
     # Adds the last trial
-    filter_fixations = idt_classifier(raw_fixations=raw_fixations,
+    filter_fixations =get_classifier().classify(raw_fixations=raw_fixations,
                                       minimum_duration=minimum_duration,
                                       sample_duration=sample_duration,
-                                      maximum_dispersion=maximum_dispersion)
+                                      threshold=threshold,*args)
 
     fixations = {}
     count = 0
@@ -1685,7 +1593,7 @@ def hit_test(trial, aois_tokens, radius=25):
     return result
 
 
-def EMIP_dataset(path, sample_size=216):
+def EMIP_dataset(path, sample_size=216,*args):
     """Import the EMIP dataset
 
     Parameters
@@ -1713,7 +1621,7 @@ def EMIP_dataset(path, sample_size=216):
                 participant_id = file.split('/')[-1].split('_')[0]
 
                 if subject.get(participant_id, -1) == -1:
-                    subject[participant_id] = read_SMIRed250(os.path.join(r, file), filetype="tsv")
+                    subject[participant_id] = read_SMIRed250(os.path.join(r, file),filetype="tsv",*args)
                 else:
                     print("Error, experiment already in dictionary")
 

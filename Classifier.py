@@ -11,7 +11,6 @@ import statistics
 
 		
 class IDT:
-
 		def classify(self,raw_fixations, minimum_duration, sample_duration, threshold):
 			"""I-DT classifier based on page 296 of eye tracker manual:
 				https://psychologie.unibas.ch/fileadmin/user_upload/psychologie/Forschung/N-Lab/SMI_iView_X_Manual.pdf
@@ -118,8 +117,6 @@ class IMST:
 			num_visited += 1
 		return np.vstack(spanning_edges)
 
-	def velocity(self,raw_fixations,sample_duration=4,minimum_duration=50):
-		pass
 
 	def classify(self,raw_fixations, sample_duration=4, minimum_duration=50,threshold=.6):
 		"""I-MST classifier based on page 10 of the following benchmarking paper:
@@ -159,7 +156,6 @@ class IMST:
 		timestamp = np.array(raw_fixations_np[:,0])
 		x_cord = np.array(raw_fixations_np[:,1])
 		y_cord = np.array(raw_fixations_np[:,2])
-		print(len(x_cord))
 		# now loop through each time window:
 		for time_frame in range(0,math.ceil(len(x_cord)/window_size)):
 			timestamp_now = timestamp[time_frame*window_size:(time_frame+1)*window_size-1]
@@ -170,7 +166,7 @@ class IMST:
 			x_cord_now = x_cord_now[np.logical_not(remove_coordinates)]
 			y_cord_now = y_cord_now[np.logical_not(remove_coordinates)]
 			coord = np.vstack((x_cord_now, y_cord_now))
-			# Pairwise matrix using Euclidean distance
+			# Pairwise matrix using Euclidean distance, if smaller than 5 points are used, we skip this window
 			if coord.shape[1]<5:
 				continue
 			coord_pairwise = distance_matrix(coord.T, coord.T)
@@ -190,8 +186,7 @@ class IMST:
 
 
 class IVT:
-
-	def classify(raw_fixations,minimum_duration=50,sample_duration=4,threshold=0.6):
+	def classify(self,raw_fixations,minimum_duration=50,sample_duration=4,threshold=0.6):
 		"""I-VT velocity algorithm from Salvucci & Goldberg (2000). 
 		
 	
@@ -250,21 +245,212 @@ class IVT:
 				segments[i] = segments[i - 1]
 			else:
 				segments[i] = segments[i - 1] + 1
+		filter_fixation=[]
+		for i in range (1,np.max(segments)+1):
+			segment_where=np.where(segments==i)
+			if len(segment_where)<50:
+				continue
+			time_now=times[segment_where[-1]]
+			duration_now=len(segment_where)*4
+			x_cord_now=np.mean(x_cord[segment_where])
+			y_cord_now=np.mean(y_cord[segment_where])
+			filter_fixation.append([time_now,duration_now,x_cord_now,y_cord_now])
+
+
 		
-		duration=(segments[1:]-segments[:-1])*4
-		duration_legit=np.where(duration>50)
+	
 		
 		
-		filter_fixation_x=x_cord[np.mean(x_cord[segments[i]:segments[i+1]]) for i in range(len(segments))]
-		filter_fixation_y=x_cord[np.mean(y_cord[segments[i]:segments[i+1]]) for i in range(len(segments))]
+		filter_fixation=np.array(filter_fixation)		
 		
-		filter_fixation_timestamp=times[segments]
-		
-		filter_fixation=np.array([filter_fixation_timestamp[duration_legit],duration[duration_legit],filter_fixation_x[duration_legit],filter_fixation_y[duration_legit]])
-		return filter_fixation.T
+		return filter_fixation.T.tolist()
 
 
 class I2MC:
+	def twoClusterWeighting(xpos, ypos, missing, downsamples, downsampFilter, chebyOrder, windowtime, steptime, freq, maxerrors, dev=False):
+		"""
+		Description
+		
+		Parameters
+		----------
+		xpos : type
+			Description
+		ypos : type
+			Description
+		missing : type
+			Description
+		downsamples : type
+			Description
+		downsampFilter : type
+			Description
+		chebyOrder : type
+			Description
+		windowtime : type
+			Description
+		steptime : type
+			Description
+		freq : type
+			Description
+		maxerrors : type
+			Description
+		Returns
+		-------
+		finalweights : np.array
+			Vector of 2-means clustering weights (one weight for each sample), the higher, the more likely a saccade happened        
+			
+		Examples
+		--------
+		>>> 
+		"""   
+		# calculate number of samples of the moving window
+		nrsamples = int(windowtime/(1./freq))
+		stepsize  = np.max([1,int(steptime/(1./freq))])
+		
+		# create empty weights vector
+		totalweights = np.zeros(len(xpos))
+		totalweights[missing] = np.nan
+		nrtests = np.zeros(len(xpos))
+		
+		# stopped is always zero, unless maxiterations is exceeded. this
+		# indicates that file could not be analysed after trying for x iterations
+		stopped = False
+		counterrors = 0
+		
+		# Number of downsamples
+		nd = len(downsamples)
+		
+		# Downsample 
+		if downsampFilter:
+			# filter signal. Follow the lead of decimate(), which first runs a
+			# Chebychev filter as specified below
+			rp = .05 # passband ripple in dB
+			b = [[] for i in range(nd)]
+			a = [[] for i in range(nd)]
+			for p in range(nd):
+				b[p],a[p] = scipy.signal.cheby1(chebyOrder, rp, .8/downsamples[p]) 
+		
+		
+		# idx for downsamples
+		idxs = []
+		for i in range(nd):
+			idxs.append(np.arange(nrsamples,0,-downsamples[i],dtype=int)[::-1] - 1)
+			
+		# see where are missing in this data, for better running over the data
+		# below.
+		on,off = bool2bounds(missing)
+		if on.size > 0:
+			#  merge intervals smaller than nrsamples long 
+			merge = np.argwhere((on[1:] - off[:-1])-1 < nrsamples).flatten()
+			for p in merge[::-1]:
+				off[p] = off[p+1]
+				off = np.delete(off, p+1)
+				on = np.delete(on, p+1)
+
+			# check if intervals at data start and end are large enough
+			if on[0]<nrsamples+1:
+				# not enough data point before first missing, so exclude them all
+				on[0]=0
+
+			if off[-1]>(len(xpos)-1-nrsamples):
+				# not enough data points after last missing, so exclude them all
+				off[-1]=len(xpos)-1
+
+			# start at first non-missing sample if trial starts with missing (or
+			# excluded because too short) data
+			if on[0]==0:
+				i=off[0]+1 # start at first non-missing
+			else:
+				i=0
+		else:
+			i=0
+
+		eind = i+nrsamples
+		while eind<=(len(xpos)-1):
+			# check if max errors is crossed
+			if counterrors > maxerrors:
+				print('Too many empty clusters encountered, aborting file. \n')
+				stopped = True
+				finalweights = np.nan
+				return finalweights, stopped
+			
+			# select data portion of nrsamples
+			idx = range(i,eind)
+			ll_d = [[] for p in range(nd+1)]
+			IDL_d = [[] for p in range(nd+1)]
+			ll_d[0] = np.vstack([xpos[idx], ypos[idx]])
+					
+			# Filter the bit of data we're about to downsample. Then we simply need
+			# to select each nth sample where n is the integer factor by which
+			# number of samples is reduced. select samples such that they are till
+			# end of window
+			for p in range(nd):
+				if downsampFilter:
+					ll_d[p+1] = scipy.signal.filtfilt(b[p],a[p],ll_d[0])
+					ll_d[p+1] = ll_d[p+1][:,idxs[p]]
+				else:
+					ll_d[p+1] = ll_d[0][:,idxs[p]]
+			
+			# do 2-means clustering
+			try:
+				for p in range(nd+1):
+					IDL_d[p] = kmeans2(ll_d[p].T)[0]
+			except Exception as e:
+				print('Unknown error encountered at sample {}.\n'.format(i))
+				raise e
+			
+			# detect switches and weight of switch (= 1/number of switches in
+			# portion)
+			switches = [[] for p in range(nd+1)]
+			switchesw = [[] for p in range(nd+1)]
+			for p in range(nd+1):
+				switches[p] = np.abs(np.diff(IDL_d[p]))
+				switchesw[p]  = 1./np.sum(switches[p])
+			
+			# get nearest samples of switch and add weight
+			weighted = np.hstack([switches[0]*switchesw[0],0])
+			for p in range(nd):
+				j = np.array((np.argwhere(switches[p+1]).flatten()+1)*downsamples[p],dtype=int)-1
+				for o in range(int(downsamples[p])):
+					weighted[j+o] = weighted[j+o] + switchesw[p+1]
+			
+			# add to totalweights
+			totalweights[idx] = totalweights[idx] + weighted
+			# record how many times each sample was tested
+			nrtests[idx] = nrtests[idx] + 1
+			
+			# update i
+			i += stepsize
+			eind += stepsize
+			missingOn = np.logical_and(on>=i, on<=eind)
+			missingOff = np.logical_and(off>=i, off<=eind)
+			qWhichMiss = np.logical_or(missingOn, missingOff) 
+			if np.sum(qWhichMiss) > 0:
+				# we have some missing in this window. we don't process windows
+				# with missing. Move back if we just skipped some samples, or else
+				# skip whole missing and place start of window and first next
+				# non-missing.
+				if on[qWhichMiss][0] == (eind-stepsize):
+					# continue at first non-missing
+					i = off[qWhichMiss][0]+1
+				else:
+					# we skipped some points, move window back so that we analyze
+					# up to first next missing point
+					i = on[qWhichMiss][0]-nrsamples
+				eind = i+nrsamples
+				
+			if eind>len(xpos)-1 and eind-stepsize<len(xpos)-1:
+				# we just exceeded data bound, but previous eind was before end of
+				# data: we have some unprocessed samples. retreat just enough so we
+				# process those end samples once
+				d = eind-len(xpos)+1
+				eind = eind-d
+				i = i-d
+				
+
+		# create final weights
+		finalweights = totalweights/nrtests
+		
+		return finalweights, stopped
 	def getFixations(finalweights, timestamp, xpos, ypos, missing, params):
 		"""
 		Algorithm: identification by 2 means clustering
@@ -330,11 +516,12 @@ class I2MC:
 			'ypos': array([486.216, 404.838, 416.664, 373.005, 383.562, 311.904])}
 		"""    
 		### Extract the required parameters 
-		cutoffstd = params['cutoffstd']
-		onoffsetThresh = params['onoffsetThresh']
-		maxMergeDist = params['maxMergeDist']
-		maxMergeTime = params['maxMergeTime']
-		minFixDur = params['minFixDur']
+		assert ['cutoffstd','onoffsetThresh','maxMergeDist','maxMergeTime','minFixDur'] in par.keys()
+		cutoffstd = par['cutoffstd']
+		onoffsetThresh = par['onoffsetThresh']
+		maxMergeDist = par['maxMergeDist']
+		maxMergeTime = par['maxMergeTime']
+		minFixDur = par['minFixDur']
 			
 		### first determine cutoff for finalweights
 		cutoff = np.nanmean(finalweights) + cutoffstd*np.nanstd(finalweights,ddof=1)
@@ -484,13 +671,31 @@ class I2MC:
 			fracinterped[a]  = np.sum(np.invert(np.isnan(xposf[qMiss])))/(fixend[a]-fixstart[a]+1)
 
 		# store all the results in an appropriate form 
-		xpos_out=[xpos[fixstart[i]:fixend[i]] for i in range(len(fixstart))]
-		ypos_out=[ypos[fixstart[i]:fixend[i]] for i in range(len(fixstart))]
-		time_out=[ypos[fixstart[i]:fixend[i]] for i in range(len(fixstart))]
+		fix = {}
+		fix['endT'] = endtime
+		fix['dur'] = fixdur
+		fix['xpos'] = xmedian
+		fix['ypos'] = ymedian
 
-		return [time_out,xpos_out,ypos_out]
+		fix_list = list(fix.items())
+		fix_arr = np.array(fix_list)
+
+		return fix_arr.T
 
 
+	def classify(raw_fixations,par):
+		assert ['downsamples','downsampFilter','chebyOrder','windowtime','steptime','freq','maxerrors','dev_cluster','maxerrors','dev_cluster'] in params.keys()
+		raw_fixations_np=np.array(raw_fixations)
+		xpos=raw_fixations[:,1]
+		ypos=raw_fixations[:,2]
+		time=raw_fixations[:,0]
+
+		# we assume that no data are missing: 
+		data['finalweights'], stopped = twoClusterWeighting(xpos, ypos, np.ones((xpos.shape[0],1),dtype=bool), par['downsamples'], par['downsampFilter'], par['chebyOrder'],par['windowtime'], par['steptime'],par['freq'],par['maxerrors'],par['dev_cluster'])
+		if not stopped:
+			filter_fixation = getFixations(data['finalweights'],data['time'],xpos,ypos,np.ones((xpos.shape[0],1),dtype=bool),par)
+			return filter_fixation
+		
 class HMM:
 
 	def forward(V, a, b, initial_distribution):
@@ -643,3 +848,89 @@ class HMM:
 		# Use Baum­welch algorithm to re­estimate initial, transition,	and observation probabilities for the defined sampler
 		# Merge Function(array of pre classified fixation and saccades)
 		# Return saccades and fixations
+
+
+
+
+import scipy.stats as scpst
+class KF:
+	def __init__(self, F = None, B = None, H = None, Q = None, R = None, P = None, x0 = None):
+		if(F is None or H is None):
+			raise ValueError("|--INVALID PARAMETERS--|")
+
+		self.n = F.shape[1]
+		self.m = H.shape[1]
+
+		# Next State Function
+		self.F = F
+		# Measurement Function
+		self.H = H
+		# External Motion (dotted with mu in prediction step)
+		self.B = 0 if B is None else B
+		# Identity Matrix
+		self.Q = np.eye(self.n) if Q is None else Q
+		self.R = np.eye(self.n) if R is None else R
+		self.P = np.eye(self.n) if P is None else P
+		# Initial State Matrix (Position & Velocity)
+		self.x = np.zeros((self.n, 1)) if x0 is None else x0
+
+	def predict(self, u = 0):
+		self.x = np.dot(self.F, self.x) + np.dot(self.B, u)
+		self.P = np.dot(np.dot(self.F, self.P), self.F.T) + self.Q
+		return self.x
+
+	def update(self, z):
+		y = z - np.dot(self.H, self.x)
+		S = self.R + np.dot(self.H, np.dot(self.P, self.H.T))
+		K = np.dot(np.dot(self.P, self.H.T), np.linalg.inv(S))
+		self.x = self.x + np.dot(K, y)
+		I = np.eye(self.n)
+		self.P = np.dot(np.dot(I - np.dot(K, self.H), self.P), 
+			(I - np.dot(K, self.H)).T) + np.dot(np.dot(K, self.R), K.T)
+
+	@staticmethod
+	def classify(raw_fixations, sample_duration=4, minimum_duration=50, threshold=1):
+		filter_fixation = []
+		raw_fixations_np = np.array(raw_fixations)
+		times = raw_fixations_np[:,0]
+		dt = sample_duration
+		sfreq = 1 / np.mean(times[1:] - times[:-1])
+		sample_thresh = sfreq * threshold / 1000
+		
+		# calculate movement velocities
+		x_coord = raw_fixations_np[:,1]
+		y_coord = raw_fixations_np[:,2]
+		coord = np.stack([x_coord, y_coord])
+		
+		F = np.array([[1, dt, 0], [0, 1, dt], [0, 0, 1]])
+		H = np.array([1, 0, 0]).reshape(1, 3)
+		Q = np.array([[0.05, 0.05, 0.0], [0.05, 0.05, 0.0], [0.0, 0.0, 0.0]])
+		R = np.array([0.5]).reshape(1, 1)
+
+		for time_frame in range(0,math.ceil(len(x_coord)/window_size)):
+			timestamp_now = timestamp[time_frame*window_size:(time_frame+1)*window_size-1]
+			x_coord_now = x_coord[(time_frame*window_size):((time_frame+1)*window_size-1)]
+			y_coord_now = y_coord[time_frame*window_size:(time_frame+1)*window_size-1]
+			remove_coordinates = np.any(np.vstack((x_coord_now <= 0, y_coord_now <= 0, x_coord_now >= 1920, y_coord_now >= 1080)), axis=0)
+			timestamp_now = timestamp_now[np.logical_not(remove_coordinates)]
+			x_coord_now = x_coord_now[np.logical_not(remove_coordinates)]
+			y_coord_now = y_coord_now[np.logical_not(remove_coordinates)]
+			coord_now = np.vstack((x_coord_now, y_coord_now))
+			if coord_now.shape[1] < 5:
+				continue
+
+			sfreq = 1 / np.mean(timestamp_now[1:] - timestamp_now[:-1])
+			vels_now = np.linalg.norm(coord_now[:, 1:] - coord_now[:, :-1], axis=0)
+			vels_now = np.concatenate([[0.], vels_now])
+			vels_now_pred = []
+			kf = KF(F = F, H = H, Q = Q, R = R)
+
+			for z in vels_now:
+				vels_now_pred.append(np.dot(H, kf.predict())[0])
+				kf.update(z)
+				
+			chi_square_now,_ = scpst.chisquare(vels_now, vels_now_pred)
+			if chi_square_now < threshold:
+				# a fixation:
+				filter_fixation.append[timestamp_now[-1], len(x_coord_now)*4, np.mean(x_coord_now), np.mean(y_coord_now)]
+		return filter_fixation
