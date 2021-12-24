@@ -1,3 +1,9 @@
+'''
+Sidney Liu
+Helper Functions Refactored for I2MC Class
+CS321
+'''
+
 import numpy as np
 
 class getFixations:
