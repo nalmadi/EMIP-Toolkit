@@ -5,7 +5,7 @@ CS321
 December 22, 2021
 '''
 
-import kf
+from Classifier import KF
 import numpy as np
 
 class test_kf:
@@ -35,7 +35,7 @@ if __name__=="__main__":
     measurements = - (x**2 + 2*x - 2) + np.random.normal(0, 2, 100)
 
     tkf = test_kf()
-    obj = kf.KF(F = F, H = H, Q = Q, R = R)
+    obj = KF(F = F, H = H, Q = Q, R = R)
 
     print(tkf.test_predict(obj, 0))
     print(tkf.test_update(obj, 0))

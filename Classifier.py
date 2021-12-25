@@ -4,8 +4,11 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 import copy, math
+import scipy.stats as scpst
+from scipy.signal import filtfilt, cheby1
 
 import math
+import os
 import statistics
 
 		
@@ -185,6 +188,7 @@ class IMST:
 
 
 class IVT:
+	
 	def classify(self,raw_fixations,minimum_duration=50,sample_duration=4,threshold=0.6):
 		"""I-VT velocity algorithm from Salvucci & Goldberg (2000). 
 		
@@ -326,7 +330,7 @@ class I2MC:
 			b = [[] for i in range(nd)]
 			a = [[] for i in range(nd)]
 			for p in range(nd):
-				b[p],a[p] = scipy.signal.cheby1(chebyOrder, rp, .8/downsamples[p]) 
+				b[p],a[p] = cheby1(chebyOrder, rp, .8/downsamples[p]) 
 		
 		
 		# idx for downsamples
@@ -336,7 +340,7 @@ class I2MC:
 			
 		# see where are missing in this data, for better running over the data
 		# below.
-		on,off = bool2bounds(missing)
+		on, off = bool2bounds(missing)
 		if on.size > 0:
 			#  merge intervals smaller than nrsamples long 
 			merge = np.argwhere((on[1:] - off[:-1])-1 < nrsamples).flatten()
@@ -384,7 +388,7 @@ class I2MC:
 			# end of window
 			for p in range(nd):
 				if downsampFilter:
-					ll_d[p+1] = scipy.signal.filtfilt(b[p],a[p],ll_d[0])
+					ll_d[p+1] = filtfilt(b[p],a[p],ll_d[0])
 					ll_d[p+1] = ll_d[p+1][:,idxs[p]]
 				else:
 					ll_d[p+1] = ll_d[0][:,idxs[p]]
@@ -445,10 +449,11 @@ class I2MC:
 				eind = eind-d
 				i = i-d
 				
+
 		# create final weights
 		finalweights = totalweights/nrtests
+		
 		return finalweights, stopped
-
 	def getFixations(finalweights, timestamp, xpos, ypos, missing, params):
 		"""
 		Algorithm: identification by 2 means clustering
@@ -499,7 +504,7 @@ class I2MC:
 		
 		Examples
 		--------
-		>>> fix = getFixations(finalweights,data['time'],xpos,ypos,missing,par)
+		>>> fix = getFixations(finalweights,data['time'],xpos,ypos,missing,params)
 		>>> fix
 			{'cutoff': 0.1355980099309374,
 			'dur': array([366.599, 773.2  , 239.964, 236.608, 299.877, 126.637]),
@@ -514,12 +519,12 @@ class I2MC:
 			'ypos': array([486.216, 404.838, 416.664, 373.005, 383.562, 311.904])}
 		"""    
 		### Extract the required parameters 
-		assert ['cutoffstd','onoffsetThresh','maxMergeDist','maxMergeTime','minFixDur'] in par.keys()
-		cutoffstd = par['cutoffstd']
-		onoffsetThresh = par['onoffsetThresh']
-		maxMergeDist = par['maxMergeDist']
-		maxMergeTime = par['maxMergeTime']
-		minFixDur = par['minFixDur']
+		assert ['cutoffstd','onoffsetThresh','maxMergeDist','maxMergeTime','minFixDur'] in params.keys()
+		cutoffstd = params['cutoffstd']
+		onoffsetThresh = params['onoffsetThresh']
+		maxMergeDist = params['maxMergeDist']
+		maxMergeTime = params['maxMergeTime']
+		minFixDur = params['minFixDur']
 			
 		### first determine cutoff for finalweights
 		cutoff = np.nanmean(finalweights) + cutoffstd*np.nanstd(finalweights,ddof=1)
@@ -570,8 +575,8 @@ class I2MC:
 			# get median coordinates of fixation
 			xmedThis = np.median(xpos[fixstart[p]:fixend[p]+1])
 			ymedThis = np.median(ypos[fixstart[p]:fixend[p]+1])
-			xmedPrev = np.median(xpos[fixstart[p-1]:fixend[p-1]+1]);
-			ymedPrev = np.median(ypos[fixstart[p-1]:fixend[p-1]+1]);
+			xmedPrev = np.median(xpos[fixstart[p-1]:fixend[p-1]+1])
+			ymedPrev = np.median(ypos[fixstart[p-1]:fixend[p-1]+1])
 			
 			# check if fixations close enough in time and space and thus qualify
 			# for merging
@@ -582,8 +587,8 @@ class I2MC:
 			if starttime[p]-endtime[p-1] < maxMergeTime and \
 				np.hypot(xmedThis-xmedPrev,ymedThis-ymedPrev) < maxMergeDist:
 				# merge
-				fixend[p-1] = fixend[p];
-				endtime[p-1]= endtime[p];
+				fixend[p-1] = fixend[p]
+				endtime[p-1]= endtime[p]
 				# delete merged fixation
 				fixstart = np.delete(fixstart, p)
 				fixend = np.delete(fixend, p)
@@ -679,148 +684,24 @@ class I2MC:
 		fix_arr = np.array(fix_list)
 
 		return fix_arr.T
-	
-	def kmeans2(data):
-		# n points in p dimensional space
-		n = data.shape[0]
-		maxit = 100
 
-		## initialize using kmeans++ method.
-		# code taken and slightly edited from scipy.cluster.vq
-		dims = data.shape[1] if len(data.shape) > 1 else 1
-		C = np.ndarray((2, dims))
-		
-		# first cluster
-		C[0, :] = data[np.random.randint(data.shape[0])]
-
-		# second cluster
-		D = cdist(C[:1,:], data, metric='sqeuclidean').min(axis=0)
-		probs = D/D.sum()
-		cumprobs = probs.cumsum()
-		r = np.random.rand()
-		C[1, :] = data[np.searchsorted(cumprobs, r)]
-
-		# Compute the distance from every point to each cluster centroid and the
-		# initial assignment of points to clusters
-		D = cdist(C, data, metric='sqeuclidean')
-		# Compute the nearest neighbor for each obs using the current code book
-		label = vq(data, C)[0]
-		# Update the code book by computing centroids
-		C = _vq.update_cluster_means(data, label, 2)[0]
-		m = np.bincount(label)
-
-		## Begin phase one:  batch reassignments
-		#-----------------------------------------------------
-		# Every point moved, every cluster will need an update
-		prevtotsumD = math.inf
-		iter = 0
-		while True:
-			iter += 1
-			# Calculate the new cluster centroids and counts, and update the
-			# distance from every point to those new cluster centroids
-			Clast = C
-			mlast = m
-			D = cdist(C, data, metric='sqeuclidean')
-
-			# Deal with clusters that have just lost all their members
-			if np.any(m==0):
-				i = np.argwhere(m==0)
-				d = D[[label],[range(n)]]   # use newly updated distances
-			
-				# Find the point furthest away from its current cluster.
-				# Take that point out of its cluster and use it to create
-				# a new singleton cluster to replace the empty one.
-				lonely = np.argmax(d)
-				cFrom = label[lonely]    # taking from this cluster
-				if m[cFrom] < 2:
-					# In the very unusual event that the cluster had only
-					# one member, pick any other non-singleton point.
-					cFrom = np.argwhere(m>1)[0]
-					lonely = np.argwhere(label==cFrom)[0]
-				label[lonely] = i
-			
-				# Update clusters from which points are taken
-				C = _vq.update_cluster_means(data, label, 2)[0]
-				m = np.bincount(label)
-				D = cdist(C, data, metric='sqeuclidean')
-		
-			# Compute the total sum of distances for the current configuration.
-			totsumD = np.sum(D[[label],[range(n)]])
-			# Test for a cycle: if objective is not decreased, back out
-			# the last step and move on to the single update phase
-			if prevtotsumD <= totsumD:
-				label = prevlabel
-				C = Clast
-				m = mlast
-				iter -= 1
-				break
-			if iter >= maxit:
-				break
-		
-			# Determine closest cluster for each point and reassign points to clusters
-			prevlabel = label
-			prevtotsumD = totsumD
-			newlabel = vq(data, C)[0]
-		
-			# Determine which points moved
-			moved = newlabel != prevlabel
-			if np.any(moved):
-				# Resolve ties in favor of not moving
-				moved[np.bitwise_and(moved, D[0,:]==D[1,:])] = False
-			if not np.any(moved):
-				break
-			label = newlabel
-			# update centers
-			C = _vq.update_cluster_means(data, label, 2)[0]
-			m = np.bincount(label)
-
-	def bool2bounds(b):
-		"""
-		Finds all contiguous sections of true in a boolean
-
-		Parameters
-		----------
-		data : np.array
-			A 1d np.array containing True, False values.
-		
-		Returns
-		-------
-		on : np.array
-			The array contains the indexes of the first value = True
-		off : np.array
-			The array contains the indexes of the last value = True in a sequence
-		
-		Example
-		--------
-		>>> import numpy as np
-		>>> b = np.array([1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0])
-		>>> on, off = bool2bounds(b)
-		>>> print(on)
-		[0 4 8]
-		>>> print(off)
-		[0 6 9]
-		"""
-		b = np.array(np.array(b, dtype = np.bool), dtype=int)
-		b = np.pad(b, (1, 1), 'constant', constant_values=(0, 0))
-		D = np.diff(b)
-		on  = np.array(np.where(D == 1)[0], dtype=int)
-		off = np.array(np.where(D == -1)[0] -1, dtype=int)
-		return on, off
 
 	def classify(raw_fixations,par):
-		assert ['downsamples','downsampFilter','chebyOrder','windowtime','steptime','freq','maxerrors','dev_cluster','maxerrors','dev_cluster'] in params.keys()
+		assert ['downsamples','downsampFilter','chebyOrder','windowtime','steptime','freq','maxerrors','dev_cluster','maxerrors','dev_cluster'] in par.keys()
 		raw_fixations_np=np.array(raw_fixations)
 		xpos=raw_fixations[:,1]
 		ypos=raw_fixations[:,2]
 		time=raw_fixations[:,0]
 
 		# we assume that no data are missing: 
-		data['finalweights'], stopped = twoClusterWeighting(xpos, ypos, np.ones((xpos.shape[0],1),dtype=bool), par['downsamples'], par['downsampFilter'], par['chebyOrder'],par['windowtime'], par['steptime'],par['freq'],par['maxerrors'],par['dev_cluster'])
+		data['finalweights'], stopped = I2MC.twoClusterWeighting(xpos, ypos, np.ones((xpos.shape[0],1),dtype=bool), par['downsamples'], par['downsampFilter'], par['chebyOrder'],par['windowtime'], par['steptime'],par['freq'],par['maxerrors'],par['dev_cluster'])
 		if not stopped:
-			filter_fixation = getFixations(data['finalweights'],data['time'],xpos,ypos,np.ones((xpos.shape[0],1),dtype=bool),par)
+			filter_fixation = I2MC.getFixations(data['finalweights'], data['time'],xpos,ypos,np.ones((xpos.shape[0],1),dtype=bool),par)
 			return filter_fixation
-		
+
+
 class HMM:
+
 	def forward(V, a, b, initial_distribution):
 		'''
 		carries out the long computations in HMM models
@@ -862,8 +743,8 @@ class HMM:
 		T = len(V)
 
 		for n in range(n_iter):
-			alpha = HMM_classifier.forward(V, a, b, initial_distribution)
-			beta = HMM_classifier.backward(V, a, b)
+			alpha = HMM.forward(V, a, b, initial_distribution)
+			beta = HMM.backward(V, a, b)
 
 			xi = np.zeros((M, M, T - 1))
 			for t in range(T - 1):
@@ -973,9 +854,6 @@ class HMM:
 		# Return saccades and fixations
 
 
-
-
-import scipy.stats as scpst
 class KF:
 	def __init__(self, F = None, B = None, H = None, Q = None, R = None, P = None, x0 = None):
 		if(F is None or H is None):
@@ -1015,15 +893,16 @@ class KF:
 	def classify(raw_fixations, sample_duration=4, minimum_duration=50, threshold=1):
 		filter_fixation = []
 		raw_fixations_np = np.array(raw_fixations)
-		times = raw_fixations_np[:,0]
+		timestamp = raw_fixations_np[:,0]
 		dt = sample_duration
-		sfreq = 1 / np.mean(times[1:] - times[:-1])
+		sfreq = 1 / np.mean(timestamp[1:] - timestamp[:-1])
 		sample_thresh = sfreq * threshold / 1000
 		
 		# calculate movement velocities
 		x_coord = raw_fixations_np[:,1]
 		y_coord = raw_fixations_np[:,2]
 		coord = np.stack([x_coord, y_coord])
+		window_size = int(math.ceil(minimum_duration / sample_duration))		
 		
 		F = np.array([[1, dt, 0], [0, 1, dt], [0, 0, 1]])
 		H = np.array([1, 0, 0]).reshape(1, 3)
