@@ -1565,7 +1565,7 @@ def AlMadi_dataset(path, sample_size=216):
                 participant_id = file.split('.')[0]
 
                 if subject.get(participant_id, -1) == -1:
-                    subject[participant_id] = read_EyeLink1000(r+"/"+file, filetype="asc")
+                    subject[participant_id] = read_EyeLink1000(r+file, filetype="asc")
                 else:
                     print("Error, experiment already in dictionary")
 
