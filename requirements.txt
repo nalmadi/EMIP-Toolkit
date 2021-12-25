@@ -2,3 +2,5 @@ numpy
 pandas
 matplotlib
 Pillow
+requests
+tqdm
