@@ -7,7 +7,7 @@
 
 # EMIP-Toolkit
 
-EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
+## EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
 
 The use of eye tracking in the study of program comprehension in software engineering allows researchers to gain a better understanding of the strategies and processes applied by programmers. Despite the large number of eye tracking studies in software engineering, very few datasets are publicly available. The existence of the large Eye Movements in Programming Dataset (EMIP) opens the door for new studies and makes reproducibility of existing research easier. The toolkit is specifically designed to make using the EMIP dataset easier and more accessible. It implements features for fixation detection and correction, trial visualization, source code lexical data enrichment, and mapping fixation data over areas of interest. 
 
@@ -52,13 +52,17 @@ The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a 
 The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
 
 
-# Requirements:
-numpy
+# Requirements: 
+Packages Required for Usage:
 
-pandas
+[numpy](https://numpy.org/)
 
-matplotlib
+[pandas](https://pandas.pydata.org/)
 
-Pillow
+[matplotlib](https://matplotlib.org/downloads.html)
 
-requests
+[Pillow](https://pypi.org/project/Pillow/)
+
+[requests](https://pypi.org/project/requests/)
+
+[jupyter notebook](https://jupyter.org/)
