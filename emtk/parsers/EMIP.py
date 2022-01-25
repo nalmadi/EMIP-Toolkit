@@ -4,7 +4,6 @@ import pandas as pd
 
 from .eye_events import eye_event_list, get_eye_event_columns
 from .samples import get_samples_columns, samples_list
-from .download import download
 
 from emtk.fixation_classification import idt_classifier
 
@@ -46,11 +45,6 @@ def EMIP(sample_size: int = 216):
     eye_events = []
     samples = []
     parsed_experiments = []
-
-    # Uncomment the next 2 lines when issue #70 is resolved: 
-    # https://github.com/nalmadi/EMIP-Toolkit/issues/70
-    # if not os.path.isfile(RAWDATA_MODULE):
-    #     download("EMIP")
     
     # go over .tsv files in the rawdata directory add files and count them
     # r = root, d = directories, f = files

@@ -25,10 +25,7 @@ def AlMadi(sample_size=216):
     """
     eye_events = []
     parsed_experiments = []
-
-    if not os.path.isfile(RAWDATA_MODULE):
-        download("AlMadi2018")
-
+    
     # go over .tsv files in the rawdata directory add files and count them
     # r = root, d = directories, f = files
     for r, _, f in os.walk(RAWDATA_MODULE):
