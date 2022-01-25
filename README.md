@@ -7,7 +7,7 @@
 
 # EMIP-Toolkit
 
-## EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
+**EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset**
 
 The use of eye tracking in the study of program comprehension in software engineering allows researchers to gain a better understanding of the strategies and processes applied by programmers. Despite the large number of eye tracking studies in software engineering, very few datasets are publicly available. The existence of the large Eye Movements in Programming Dataset (EMIP) opens the door for new studies and makes reproducibility of existing research easier. The toolkit is specifically designed to make using the EMIP dataset easier and more accessible. It implements features for fixation detection and correction, trial visualization, source code lexical data enrichment, and mapping fixation data over areas of interest. 
 
@@ -51,18 +51,24 @@ The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a 
 # Corrected Dataset:
 The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
 
+# Support
+Before opening a new issue, make sure to check to see if someone has opened a similar or the same issue. This will stop issues from being repeated. If there is no corresponding issue, open a new thread and members from the community will comment. 
 
-# Requirements: 
-Packages Required for Usage:
+# Road Map
+Road Map for the Future of the Project To Be Determined.
 
-[numpy](https://numpy.org/)
 
-[pandas](https://pandas.pydata.org/)
+# Requirements and Installation: 
+**The Following Packages are Required:**
 
-[matplotlib](https://matplotlib.org/downloads.html)
+**[numpy](https://numpy.org/)**
 
-[Pillow](https://pypi.org/project/Pillow/)
+**[pandas](https://pandas.pydata.org/)**
 
-[requests](https://pypi.org/project/requests/)
+**[matplotlib](https://matplotlib.org/downloads.html)**
 
-[jupyter notebook](https://jupyter.org/)
+**[Pillow](https://pypi.org/project/Pillow/)**
+
+**[requests](https://pypi.org/project/requests/)**
+
+**[jupyter notebook](https://jupyter.org/)**
