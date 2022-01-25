@@ -49,7 +49,7 @@ The toolkit is specifically designed to make using the EMIP dataset easier and m
 The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a tutorial on using the EMIP Toolkit. The file describes the required file structure and raw EMIP files and metadata from http://emipws.org/.
 
 # Suggested Workflow
-Below is the suggested workflow for contribuiting to this project: 
+Below is the suggested workflow for contributing to this project: 
 
 1. Fork the repository to your account.
 2. Make changes to the main branch in your forked repo.
