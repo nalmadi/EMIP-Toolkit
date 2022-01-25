@@ -5,6 +5,7 @@
 [![Stars](https://img.shields.io/github/stars/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
 
 
+
 # EMIP-Toolkit
 
 **EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset**
@@ -47,6 +48,16 @@ The toolkit is specifically designed to make using the EMIP dataset easier and m
 # Examples and tutorial:
 The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a tutorial on using the EMIP Toolkit. The file describes the required file structure and raw EMIP files and metadata from http://emipws.org/.
 
+# Suggested Workflow
+Below is the suggested workflow for contribuiting to this project: 
+
+1. Fork the repository to your account.
+2. Make changes to the main branch in your forked repo.
+3. Test that everything still works.
+4. Create a pull request to merge the updated code/changes to the main EMIP repository.
+5. Respond to questions with project maintainers to get pull-requests accepted.
+
+
 
 # Corrected Dataset:
 The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
@@ -61,6 +72,7 @@ Road Map for the Future of the Project To Be Determined.
 # Requirements and Installation: 
 **The Following Packages are Required:**
 
+
 **[numpy](https://numpy.org/)**
 
 **[pandas](https://pandas.pydata.org/)**
@@ -71,4 +83,9 @@ Road Map for the Future of the Project To Be Determined.
 
 **[requests](https://pypi.org/project/requests/)**
 
-**[jupyter notebook](https://jupyter.org/)**
+**[tqdm](https://pypi.org/project/tqdm/)**
+
+# License
+To be decided. 
+
+
