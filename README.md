@@ -89,10 +89,10 @@ Road Map for the Future of the Project To Be Determined.
 For in-depth instructions on installation and building the documentation, see the **[EMIP Toolkit Documentation Style Guide](https://github.com/bigbret/EMIP-Toolkit/wiki/EMIP-Toolkit-Documentation-Style-Guide)**.
 
 # Contributing 
-We welcome contributions from anyone, even if you are new to open source. Please read our **[Contributing](https://github.com/bigbret/EMIP-Toolkit/wiki/Contributing)** page and the **[EMIP Toolkit Documentation Style Guide](https://github.com/bigbret/EMIP-Toolkit/wiki/EMIP-Toolkit-Documentation-Style-Guide)**. If you are new and looking for some way to contribute, a good place to start is to look at some of the current issues. 
+We welcome contributions from anyone, even if you are new to open source. Please read our **[Contributing](https://github.com/bigbret/EMIP-Toolkit/wiki/Contributing)** page and the **[EMIP Toolkit Documentation Style Guide](https://github.com/bigbret/EMIP-Toolkit/wiki/EMIP-Toolkit-Documentation-Style-Guide)** before getting started. If you are new and looking for some way to contribute, a good place to start is to look at some of the current issues. 
 
 # Adding Dataset
-Please take a look at our **[Adding a Dataset](https://github.com/bigbret/EMIP-Toolkit/wiki/Adding-a-Dataset)** page for instructions on how to add new datasets to the repository 
+Please take a look at our **[Adding a Dataset](https://github.com/bigbret/EMIP-Toolkit/wiki/Adding-a-Dataset)** page for instructions on how to add new datasets to the repository. 
 
 # License
 To be decided. 
