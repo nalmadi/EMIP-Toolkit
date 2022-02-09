@@ -3,33 +3,42 @@ import pandas as pd
 
 from emtk.util import _find_background_color, _get_meta_data, _get_stimuli
 
-def find_aoi(eye_events: pd.DataFrame = pd.DataFrame(), 
-            eye_tracker_col: str = "eye_tracker",
-            stimuli_module_col: str = "stimuli_module",
-            stimuli_name_col: str = "stimuli_name", image: Image = None, 
-            level: str = "sub-line", margin_height: int = 4, margin_width: int = 7):
 
-    """Find Area of Interest in the given image and store the aoi attributes in a Pandas Dataframe
+def find_aoi(eye_events: pd.DataFrame = pd.DataFrame(),
+             eye_tracker_col: str = "eye_tracker",
+             stimuli_module_col: str = "stimuli_module",
+             stimuli_name_col: str = "stimuli_name", image: Image = None,
+             level: str = "sub-line", margin_height: int = 4, margin_width: int = 7) -> pd.DataFrame:
+    """Find areas of interest in the stimuli image.
 
     Parameters
     ----------
-    image : str
-        filename for the image, e.g. "vehicle_java.jpg"
+    eye_events : pandas.DataFrame, optional (default pandas.DataFrame())
+        A pandas dataframe of eye events. It must contains columns that specify the name 
+        of the eye tracker, stimuli module, and name of stimuli. If this dataframe is empty,
+        image must be specified.
 
-    image_path : str
-        path for all images, e.g. "emip_dataset/stimuli/"
+    eye_tracker_col : str, optional (default "eye_tracker")
+        Name of the column in eye_events dataframe that contains the name of the eye tracker.
 
-    image : PIL.Image, optional
-        PIL.Image object if user chooses to input an PIL image object
+    stimuli_module_col : str, optional (default "stimuli_module")
+        Name of the column in eye_events dataframe that contains the path to the stimuli module.
 
-    level : str, optional
-        level of detection in AOIs, "line" for each line as an AOI or "sub-line" for each token as an AOI
+    stimuli_name_col : str, optional (default "stimuli_name")
+        Name of the column in eye_events dataframe that contains the name of the stimuli.
 
-    margin_height : int, optional
-        marginal height when finding AOIs, use smaller number for tight text layout
+    image : PIL.Image, optional (default None)
+        Stimuli image. If this is empty, eye_events must be specified.
 
-    margin_width : int, optional
-        marginal width when finding AOIs, use smaller number for tight text layout
+    level : str, optional (default "sub-line")
+        Level of detection in AOIs. 
+        "Line" for each line as an AOI or "sub-line" for each token as an AOI.
+
+    margin_height : int, optional (default 4)
+        Marginal height when finding AOIs, use smaller number for tight text layout.
+
+    margin_width : int, optional (default 7)
+        Marginal width when finding AOIs, use smaller number for tight text layout.
 
     Returns
     -------
@@ -44,29 +53,31 @@ def find_aoi(eye_events: pd.DataFrame = pd.DataFrame(),
             return
 
         eye_tracker, stimuli_module, stimuli_name = \
-            _get_meta_data(eye_events, eye_tracker_col, stimuli_module_col, stimuli_name_col)
-        
-        image = _get_stimuli(stimuli_module, stimuli_name, eye_tracker).convert('1')
-        
+            _get_meta_data(eye_events, eye_tracker_col,
+                           stimuli_module_col, stimuli_name_col)
+
+        image = _get_stimuli(stimuli_module, stimuli_name,
+                             eye_tracker).convert('1')
+
     else:
         image = image.convert('1')
         stimuli_name = ''
-    
+
     width, height = image.size
 
     # Detect the background color
-    bg_color = _find_background_color(image = image)
+    bg_color = _find_background_color(image=image)
 
     left, right = 0, width
 
     vertical_result, upper_bounds, lower_bounds = [], [], []
-    
+
     # Move the detecting rectangle from the top to the bottom of the image
     for upper in range(height - margin_height):
-        
+
         lower = upper + margin_height
 
-        box = (left, upper, right, lower)   
+        box = (left, upper, right, lower)
         minimum, maximum = image.crop(box).getextrema()
 
         if upper > 1:

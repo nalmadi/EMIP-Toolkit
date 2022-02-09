@@ -1,21 +1,27 @@
 from PIL import Image
 
-def _find_background_color(stimuli_module: str = None, stimuli_name: str = None, 
-                        image: Image = None) -> str:
-    
-    """Private function that identifies the background color of the image
+
+def _find_background_color(stimuli_module: str = None, stimuli_name: str = None,
+                           image: Image = None) -> str:
+    """Return background color of the stimuli image
 
     Parameters
     ----------
-    image : PIL.Image
-        a PIL (pillow fork) Image object
+    stimuli_module : str, optional (default to None)
+        Path to directory that contains stimuli images. If not specified, image must be specified.
+
+    stimuli_name : str, optional (default to None)
+        Name of the stimuli image. If not specified, image must be specified.
+
+    image : PIL.Image (default to None)
+        Stimuli image. If not specified, stimuli_module and stimuli_name must be specified.
 
     Returns
     -------
     str
-        the color of the background of the image
+        Color of the background of the image. "Black" or "white".
     """
-    
+
     if image is None:
         if stimuli_module is None or stimuli_name is None:
             return

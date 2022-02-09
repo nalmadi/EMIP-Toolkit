@@ -1,10 +1,10 @@
 import pandas as pd
 
-def add_srcml_to_AOIs(aois_raw, srcML_path):
-    """Adds srcML tags to AOIs dataframe and returns it.
-        Check https://www.srcml.org/ for more information about srcML
 
-        The files: rectangle.tsv and vehicle.tsv should be in the same directory as the code.
+def add_srcml_to_AOIs(aois_raw: pd.DataFrame, srcML_path: str) -> pd.DataFrame:
+    """Add srcML tags to AOIs dataframe and returns it.
+    Check https://www.srcml.org/ for more information about srcML
+    The files: rectangle.tsv and vehicle.tsv should be in the same directory as the code.
 
     Parameters
     ----------

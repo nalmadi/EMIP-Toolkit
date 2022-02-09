@@ -10,18 +10,19 @@ FILE_eye_event_type = ".tsv"
 RAWDATA_MODULE = "emtk/datasets/AlMadi2018/ASCII/"
 STIMULI_MODULE = "emtk/datasets/AlMadi2018/runtime/images/"
 
-def AlMadi(sample_size=216):
-    """Import the EMIP dataset
+
+def AlMadi(sample_size: int = 216):
+    """Import the AlMadi2018 dataset.
 
     Parameters
     ----------
-    sample_size : int, optional
-        the number of subjects to be processed, the default is 216.
+    sample_size : int, optional (default 216)
+        Number of subjects to be processed.
 
     Returns
     -------
     pandas.DataFrame
-        dataFrame of eye events from every experiment in the dataset.
+        Pandas dataframe of eye events from every experiment in the dataset.
     """
     eye_events = []
     parsed_experiments = []
@@ -37,48 +38,49 @@ def AlMadi(sample_size=216):
 
                 experiment_id = file.split('.')[0].split('/')[-1]
 
-                if  experiment_id not in parsed_experiments:
+                if experiment_id not in parsed_experiments:
 
                     parsed_experiments.append(experiment_id)
 
                     new_eye_events = read_EyeLink1000(
-                        root_dir = r,
-                        filename =  file,
-                        experiment_id = experiment_id
+                        root_dir=r,
+                        filename=file,
+                        experiment_id=experiment_id
                     )
-                
+
                     eye_events.extend(new_eye_events)
 
                 else:
                     print("Error, experiment already in dictionary")
-
 
             sample_size -= 1
             # breaks after sample_size
             if sample_size == 0:
                 break
 
-    eye_events_df = pd.DataFrame(eye_events, columns = get_eye_event_columns())
-    
+    eye_events_df = pd.DataFrame(eye_events, columns=get_eye_event_columns())
+
     return eye_events_df, pd.DataFrame()
 
 
-
-def read_EyeLink1000(root_dir, filename, experiment_id):
-    """Read asc file from Eye Link 1000 eye tracker
+def read_EyeLink1000(root_dir: str, filename: str, experiment_id: str) -> list:
+    """Read asc file from Eye Link 1000 eye tracker.
 
     Parameters
     ----------
+    root_dir : str
+        Path to directory that contains the asc file.
+
     filename : str
-        name of the asc file
-        
-    fileeye_event_type : str
-        fileeye_event_type of the file, e.g. "tsv"
-        
+        Name of asc file.
+
+    experiment_id : str
+        Id of the experiment contained in the file.
+
     Returns
     -------
-    Experiment
-        an Experiment object of EyeLink1000 data
+    list
+        List of eye events. Each eye event is represented as a list of eye event features.
     """
 
     asc_file = open(os.path.join(root_dir, filename))
@@ -104,8 +106,8 @@ def read_EyeLink1000(root_dir, filename, experiment_id):
             # Read stimuli location
             index = str(int(trial_id) + 1)
             location = 'emtk/datasets/AlMadi2018/runtime/dataviewer/' + experiment_id + \
-                        '/graphics/VC_' + index + '.vcl'
-                      
+                '/graphics/VC_' + index + '.vcl'
+
             with open(location, 'r') as file:
                 stimuli_name = file.readlines()[1].split()[-3].split('/')[-1]
 
@@ -141,24 +143,24 @@ def read_EyeLink1000(root_dir, filename, experiment_id):
             duration = int(token[4])
             eye_event_type = "blink"
 
-        new_eye_event = eye_event_list(eye_tracker=EYE_TRACKER, 
-                                    experiment_id=experiment_id,
-                                    participant_id=experiment_id, 
-                                    filename=filename,
-                                    trial_id=str(trial_id), 
-                                    stimuli_module=STIMULI_MODULE,
-                                    stimuli_name=stimuli_name, 
-                                    duration=duration, 
-                                    timestamp=timestamp,
-                                    x0=x_cord, 
-                                    y0=y_cord,
-                                    x1=x1_cord, 
-                                    y1=y1_cord, 
-                                    token=token, 
-                                    pupil=pupil,
-                                    amplitude=amplitude, 
-                                    peak_velocity=peak_velocity, 
-                                    eye_event_type=eye_event_type)
+        new_eye_event = eye_event_list(eye_tracker=EYE_TRACKER,
+                                       experiment_id=experiment_id,
+                                       participant_id=experiment_id,
+                                       filename=filename,
+                                       trial_id=str(trial_id),
+                                       stimuli_module=STIMULI_MODULE,
+                                       stimuli_name=stimuli_name,
+                                       duration=duration,
+                                       timestamp=timestamp,
+                                       x0=x_cord,
+                                       y0=y_cord,
+                                       x1=x1_cord,
+                                       y1=y1_cord,
+                                       token=token,
+                                       pupil=pupil,
+                                       amplitude=amplitude,
+                                       peak_velocity=peak_velocity,
+                                       eye_event_type=eye_event_type)
 
         eye_events.append(new_eye_event)
 
