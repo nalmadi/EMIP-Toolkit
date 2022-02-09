@@ -7,8 +7,8 @@ from .download import download
 
 EYE_TRACKER = "EyeLink1000"
 FILE_eye_event_type = ".tsv"
-RAWDATA_MODULE = "emtk/datasets/AlMadi2018/ASCII/"
-STIMULI_MODULE = "emtk/datasets/AlMadi2018/runtime/images/"
+RAWDATA_MODULE = "emtk/datasets/AlMadi2018/AlMadi2018/ASCII/"
+STIMULI_MODULE = "emtk/datasets/AlMadi2018/AlMadi2018/runtime/images/"
 
 
 def AlMadi(sample_size: int = 216):
@@ -105,7 +105,7 @@ def read_EyeLink1000(root_dir: str, filename: str, experiment_id: str) -> list:
 
             # Read stimuli location
             index = str(int(trial_id) + 1)
-            location = 'emtk/datasets/AlMadi2018/runtime/dataviewer/' + experiment_id + \
+            location = 'emtk/datasets/AlMadi2018/AlMadi2018/runtime/dataviewer/' + experiment_id + \
                 '/graphics/VC_' + index + '.vcl'
 
             with open(location, 'r') as file:

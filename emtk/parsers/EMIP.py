@@ -1,23 +1,16 @@
 import os
-from random import sample
 import pandas as pd
 
 from .eye_events import eye_event_list, get_eye_event_columns
 from .samples import get_samples_columns, samples_list
 
 from emtk.fixation_classification import idt_classifier
+from .download import download
 
 EYE_TRACKER = "SMIRed250"
 FILE_TYPE = ".tsv"
-# Uncomment the next 2 lines with the 2-line comment below
-# when issue #70 is resolved:
-# https://github.com/nalmadi/EMIP-Toolkit/issues/70
-
-RAWDATA_MODULE = "emtk/datasets/emip_dataset/rawdata"
-STIMULI_MODULE = "emtk/datasets/emip_dataset/stimuli"
-
-# RAWDATA_MODULE = "emtk/datasets/EMIP/rawdata"
-# STIMULI_MODULE = "emtk/datasets/EMIP/stimuli"
+RAWDATA_MODULE = "emtk/datasets/EMIP/EMIP-Toolkit- replication package/emip_dataset/rawdata"
+STIMULI_MODULE = "emtk/datasets/EMIP/EMIP-Toolkit- replication package/emip_dataset/stimuli"
 
 SAMPLE_BASE_COLUMNS = ['Time', 'Type', 'Trial', 'L Raw X [px]', 'L Raw Y [px]', 'R Raw X [px]',
                        'R Raw Y [px]', 'L Dia X [px]', 'L Dia Y [px]', 'L Mapped Diameter [mm]',
@@ -46,6 +39,9 @@ def EMIP(sample_size: int = 216):
     eye_events = []
     samples = []
     parsed_experiments = []
+
+    if not os.path.isfile(RAWDATA_MODULE):
+        download("EMIP")
 
     # go over .tsv files in the rawdata directory add files and count them
     # r = root, d = directories, f = files

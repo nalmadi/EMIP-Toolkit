@@ -51,18 +51,15 @@ def download(dataset_name):
     citation : str
         link to the paper where the dataset originates from
     """
-    url, is_zipped, citation = DATA_CATALOG[dataset_name].values()
+    url, citation = DATA_CATALOG[dataset_name].values()
 
     # Check if dataset has already been downloaded
     if not check_downloaded(dataset_name):
         print('Downloading...')
 
-        # creates a zip file of the data if unzipped
-        if is_zipped == False:
-
-            r = requests.get(url)
-            with open(os.path.join(DATASET_MODULE, dataset_name + '.zip'), 'wb') as f:
-                f.write(r.content)
+        r = requests.get(url)
+        with open(os.path.join(DATASET_MODULE, dataset_name + '.zip'), 'wb') as f:
+            f.write(r.content)
 
     if not check_unzipped(dataset_name):
         print('unzipping...')
@@ -71,6 +68,8 @@ def download(dataset_name):
         with zipfile.ZipFile(os.path.join(DATASET_MODULE, dataset_name + '.zip'), 'r') as data_zip:
 
             data_zip.extractall(os.path.join(DATASET_MODULE, dataset_name))
+
+    os.remove(os.path.join(DATASET_MODULE, dataset_name + '.zip'))
 
     print('Please cite this paper: ', citation)
 
