@@ -46,6 +46,7 @@ def EMIP(sample_size: int = 216):
     # go over .tsv files in the rawdata directory add files and count them
     # r = root, d = directories, f = files
     for r, _, f in os.walk(RAWDATA_MODULE):
+        f.sort()
         for file in f:
             if '.tsv' in file:
                 experiment_id = file.split('/')[-1].split('_')[0]
