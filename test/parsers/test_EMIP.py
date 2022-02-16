@@ -67,6 +67,6 @@ def test_EMIP():
 
     trial_samples = samples.loc[(samples["experiment_id"] == experiment_id) & \
                         (samples["trial_id"] == trial_id)]
-    assert trial_samples.shape[0] == 6
+    assert trial_samples.shape[0] == 18964
 
     # TODO: Check dtype of each column                        
