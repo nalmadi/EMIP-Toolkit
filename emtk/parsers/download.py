@@ -69,8 +69,6 @@ def download(dataset_name):
 
             data_zip.extractall(os.path.join(DATASET_MODULE, dataset_name))
 
-    os.remove(os.path.join(DATASET_MODULE, dataset_name + '.zip'))
-
     print('Please cite this paper: ', citation)
 
     return DATASET_MODULE + dataset_name
