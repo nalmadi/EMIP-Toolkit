@@ -67,7 +67,7 @@ def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximu
             if len(window_x) == len(window_y) and len(window_x) > window_size:
                 # The fixation is registered at the centroid of the window points
                 filter_fixation.append(
-                    [timestamp, len(window_x) * 4, statistics.mean(window_x), statistics.mean(window_y)])
+                    [timestamp, len(window_x) * sample_duration, statistics.mean(window_x), statistics.mean(window_y)])
 
             window_x = []
             window_y = []
