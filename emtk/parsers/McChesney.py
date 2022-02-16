@@ -37,6 +37,7 @@ def McChesney(sample_size: int = 216):
     samples = pd.DataFrame()
 
     for r, _, f in os.walk(RAWDATA_MODULE):
+        f.sort()
         for file in f:
 
             raw_data = pd.read_csv(
