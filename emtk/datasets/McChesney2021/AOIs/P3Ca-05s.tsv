@@ -1,0 +1,631 @@
+Participant	Dys	Timeline	TOI	Interval	Media	AOI	Total_duration_of_fixations	Average_duration_of_fixations	Minimum_duration_of_fixations	Maximum_duration_of_fixations	Number_of_fixations	Time_to_first_fixation	Duration_of_first_fixation	Total_duration_of_whole_fixations	Average_duration_of_whole_fixations	Minimum_duration_of_whole_fixations	Maximum_duration_of_whole_fixations	Number_of_whole_fixations	Time_to_first_whole_fixation	Duration_of_first_whole_fixation	Total_duration_of_Visit	Average_duration_of_Visit	Minimum_duration_of_Visit	Maximum_duration_of_Visit	Number_of_Visits	Time_to_first_Visit	Duration_of_first_Visit	Total_duration_of_Glances	Average_duration_of_Glances	Minimum_duration_of_Glances	Maximum_duration_of_Glances	Number_of_Glances	Time_to_first_Glance	Duration_of_first_Glance	Number_of_saccades_in_AOI	Time_to_entry_saccade	Time_to_exit_saccade	Peak_velocity_of_entry_saccade	Peak_velocity_of_exit_saccade
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	83	83	83	83	1	92	83	83	83	83	83	1	92	83	83	83	83	83	1	410492	83	100	100	100	100	1	410476	100	0		176		155.69
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L01-F	650	130	75	183	5	426	150	575	144	108	183	4	426	150	2033	678	150	1475	3	410826	150	2091	697	167	1500	3	410809	167	0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L02-F	92	92	92	92	1	1517	92	92	92	92	92	1	1517	92	92	92	92	92	1	411917	92	125	125	125	125	1	411884	125	0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L03-F	83	83	83	83	1	92	83	83	83	83	83	1	92	83	83	83	83	83	1	410492	83	100	100	100	100	1	410476	100	0		176		155.69
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	283	142	133	150	2	426	150	283	142	133	150	2	426	150	283	142	133	150	2	410826	150	325	162	158	167	2	410809	167	0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	1183	108	67	183	11	92	83	1108	111	67	183	10	92	83	4908	4908	4908	4908	1	410492	4908	4924	4924	4924	4924	1	410476	4924	2				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant561	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L01-F	1208	201	100	383	6	43	100	1208	201	100	383	6	43	100	1592	796	633	958	2	304688	958	1633	817	667	967	2	304679	967	1		1001		38.97
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L02-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	775	194	100	383	4	43	100	775	194	100	383	4	43	100	858	286	100	633	3	304688	100	917	306	108	667	3	304679	108	0		776		125.28
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	1666	185	58	383	9	43	100	1608	201	100	383	8	43	100	2141	714	549	958	3	304688	958	2249	750	616	967	3	304679	967	2	4384	1001	269.92	38.97
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant536	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L01-F	1000	200	100	342	5	318	342	1000	200	100	342	5	318	342	1083	542	533	550	2	639761	533	1125	562	558	567	2	639736	558	3	293	851	212.92	33.56
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L02-F	966	138	58	275	7	59	108	908	151	83	275	6	59	108	1050	210	108	275	5	639503	233	1150	230	125	292	5	639461	275	1		293		212.92
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L01	542	271	200	342	2	318	342	542	271	200	342	2	318	342	542	271	200	342	2	639761	342	600	300	233	367	2	639736	367	0	293	659	212.92	58.99
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	P3-Whole-F	3557	169	58	342	21	59	108	2841	178	83	342	16	59	108	4408	2204	1533	2874	2	639503	1533	4508	2254	1575	2933	2	639461	1575	9	2067	1592	302.16	63.08
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant100	Y	Timeline3	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Ai<x;	275	275	275	275	1	0	275	0	0			0			275	275	275	275	1	304772	275	275	275	275	275	1	304772	275	0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Aint i = 0;	133	133	133	133	1	1567	133	133	133	133	133	1	1567	133	133	133	133	133	1	306339	133	167	167	167	167	1	306306	167	0	1534		161.06	
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L01-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L02-F	183	183	183	183	1	625	183	183	183	183	183	1	625	183	183	183	183	183	1	305398	183	200	200	200	200	1	305381	200	0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L03-F	600	200	133	275	3	0	275	325	163	133	192	2	1342	192	634	317	275	358	2	304772	275	692	346	275	417	2	304772	275	1				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L04-F	1325	166	100	242	8	342	133	1175	168	100	242	7	342	133	1533	511	133	1000	3	305115	133	1583	528	142	1025	3	305106	142	5				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L01	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L04	150	150	150	150	1	2217	150	150	150	150	150	1	2217	150	150	150	150	150	1	306989	150	192	192	192	192	1	306948	192	0	2175	2367	143.09	201.16
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	P3-Whole-F	3342	186	100	442	18	0	275	2817	188	100	442	15	342	133	5000	5000	5000	5000	1	304772	5000	5000	5000	5000	5000	1	304772	5000	10				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant611	Y	Timeline4	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L01-F	717	143	83	217	5	1484	117	467	156	117	217	3	1484	117	883	294	117	425	3	479267	117	975	325	158	450	3	479225	158	1	1443	1601	122.74	38.37
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L02-F	1099	157	75	383	7	3643	208	767	153	75	383	5	3893	92	1357	1357	1357	1357	1	481425	1357	1357	1357	1357	1357	1	481425	1357	4				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L01	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	P3-Whole-F	3534	161	67	383	22	0	126	2683	168	67	383	16	843	308	4475	2238	318	4157	2	477782	318	4542	2271	318	4224	2	477782	318	14	776		489.08	
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant214	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L01-F	1508	251	150	433	6	611	325	1508	251	150	433	6	611	325	1608	536	150	1208	3	423806	1208	1716	572	192	1242	3	423772	1242	3	2252	1819	135.65	81.65
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L02-F	956	239	106	533	4	3969	183	850	283	133	533	3	3969	183	1031	1031	1031	1031	1	427164	1031	1065	1065	1065	1065	1	427130	1065	3	3935		95.83	
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L09-F	125	125	125	125	1	236	125	125	125	125	125	1	236	125	125	125	125	125	1	423431	125	242	242	242	242	1	423314	242	0	119	361	422.96	459.87
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L01	500	250	175	325	2	611	325	500	250	175	325	2	611	325	500	250	175	325	2	423806	325	575	287	217	358	2	423772	358	0	1602	936	206.89	190.36
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09b	125	125	125	125	1	236	125	125	125	125	125	1	236	125	125	125	125	125	1	423431	125	242	242	242	242	1	423314	242	0	119	361	422.96	459.87
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	P3-Whole-F	3539	208	106	533	17	236	125	3433	215	117	533	16	236	125	4064	2032	1764	2300	2	423431	2300	4222	2111	1806	2416	2	423314	2416	14	119	2536	422.96	153.34
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant900	N	Timeline4	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	392	98	67	167	4	772	75	392	98	67	167	4	772	75	400	133	75	242	3	319325	75	486	122	11	275	4	319292	108	1	4347		351.83	
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	350	87	67	133	4	1364	83	350	87	67	133	4	1364	83	358	119	67	158	3	319917	158	475	158	83	200	3	319884	192	1	3322		285.63	
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L01-F	375	125	108	133	3	1681	133	375	125	108	133	3	1681	133	592	296	133	458	2	320234	133	683	342	167	517	2	320200	167	0		1814		60.77
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L02-F	383	192	167	217	2	439	217	383	192	167	217	2	439	217	383	192	167	217	2	318992	217	425	212	183	242	2	318967	242	0		4347		351.83
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L03-F	742	93	67	167	8	772	75	742	93	67	167	8	772	75	1586	397	83	750	4	319325	750	1728	432	92	783	4	319292	783	2	3322		285.63	
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	133	133	133	133	1	1681	133	133	133	133	133	1	1681	133	133	133	133	133	1	320234	133	167	167	167	167	1	320200	167	0		1814		60.77
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	83	83	83	83	1	4030	83	83	83	83	83	1	4030	83	83	83	83	83	1	322583	83	92	92	92	92	1	322575	92	0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	2056	114	67	217	18	0	81	1975	116	67	217	17	439	217	5000	5000	5000	5000	1	318553	5000	5000	5000	5000	5000	1	318553	5000	5				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant469	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L01-F	267	133	75	192	2	1434	75	267	133	75	192	2	1434	75	267	133	75	192	2	320017	75	325	162	92	233	2	320000	92	0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L02-F	592	118	75	192	5	3275	75	592	118	75	192	5	3275	75	908	454	200	708	2	321858	708	958	479	242	717	2	321850	717	2	4442		205.38	
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L04-F	108	108	108	108	1	4883	108	108	108	108	108	1	4883	108	108	108	108	108	1	323466	108	158	158	158	158	1	323416	158	0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L01	75	75	75	75	1	1434	75	75	75	75	75	1	1434	75	75	75	75	75	1	320017	75	92	92	92	92	1	320000	92	0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	P3-Whole-F	1142	127	75	192	9	1434	75	1142	127	75	192	9	1434	75	2408	1204	75	2333	2	320017	75	2466	1233	92	2375	2	320000	92	3				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant323	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L01-F	154	154	154	154	1	0	154	0	0			0			154	154	154	154	1	282949	154	154	154	154	154	1	282949	154	0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L02-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L01	154	154	154	154	1	0	154	0	0			0			154	154	154	154	1	282949	154	154	154	154	154	1	282949	154	0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	P3-Whole-F	3483	166	100	367	21	0	154	3133	165	100	367	19	988	133	4167	2083	154	4012	2	282949	154	4225	2113	154	4071	2	282949	154	17				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant708	N	Timeline4	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	67	67	67	67	1	814	67	0	0			0			67	67	67	67	1	388906	67	125	125	125	125	1	388847	125	0	756		268.61	
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	67	67	67	67	1	689	67	67	67	67	67	1	689	67	67	67	67	67	1	388781	67	83	83	83	83	1	388764	83	0	672	756	67.97	268.61
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L01-F	475	95	75	158	5	114	92	317	79	75	92	4	114	92	1625	542	75	1458	3	388206	92	1708	569	83	1475	3	388147	150	0	56	2864	208.27	153.05
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L02-F	356	89	56	142	4	0	56	75	75	75	75	1	3672	75	1339	669	56	1283	2	388092	56	1356	678	56	1300	2	388092	56	0		56		208.27
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L03-F	258	86	67	125	3	689	67	67	67	67	67	1	689	67	378	189	187	192	2	388781	192	436	218	208	228	2	388764	208	1	672		67.97	
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L04-F	67	67	67	67	1	606	67	67	67	67	67	1	606	67	67	67	67	67	1	388697	67	117	117	117	117	1	388647	117	0		672		67.97
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	67	67	67	67	1	814	67	0	0			0			67	67	67	67	1	388906	67	125	125	125	125	1	388847	125	0	756		268.61	
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	1231	88	56	158	14	0	56	600	75	67	92	8	114	92	5000	5000	5000	5000	1	388092	5000	5000	5000	5000	5000	1	388092	5000	5				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant653	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Ai<x;	133	133	133	133	1	3444	133	133	133	133	133	1	3444	133	133	133	133	133	1	246922	133	167	167	167	167	1	246889	167	0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Aint i = 0;	83	83	83	83	1	4377	83	83	83	83	83	1	4377	83	623	623	623	623	1	247855	623	681	681	681	681	1	247797	681	0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L01-F	267	133	100	167	2	2260	167	267	133	100	167	2	2260	167	283	283	283	283	1	245739	283	325	325	325	325	1	245697	325	1	2219		107.46	
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L02-F	608	101	67	133	6	261	92	542	108	75	133	5	261	92	1017	339	92	600	3	243739	92	1167	389	142	633	3	243689	142	0		352		94.01
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L03-F	492	98	83	133	5	3444	133	492	98	83	133	5	3444	133	1556	1556	1556	1556	1	246922	1556	1590	1590	1590	1590	1	246889	1590	2				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L01	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	P3-Whole-F	2058	103	67	167	20	61	67	1667	104	67	167	16	61	67	4939	4939	4939	4939	1	243539	4939	4948	4948	4948	4948	1	243531	4948	6				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant114	Y	Timeline3	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	1442	160	75	358	9	1848	117	1117	186	100	358	6	1848	117	1833	917	858	975	2	274072	975	1900	950	900	1000	2	274047	1000	5	3439		156.47	
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	667	133	75	292	5	514	75	558	140	75	292	4	514	75	733	244	75	550	3	272739	75	925	308	83	583	3	272731	83	2	1514	3439	141.09	156.47
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L01-F	475	119	83	133	4	739	133	475	119	83	133	4	739	133	703	351	133	569	2	272964	133	719	360	142	578	2	272956	142	1		873		158.51
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L02-F	492	123	83	200	4	931	200	492	123	83	200	4	931	200	583	583	583	583	1	273156	583	642	642	642	642	1	273097	642	2	873	1514	158.51	141.09
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L03-F	2108	151	75	358	14	514	75	1675	167	75	358	10	514	75	2750	1375	75	2675	2	272739	75	2908	1454	83	2825	2	272731	83	8	1514		141.09	
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L04-F	373	186	158	214	2	0	214	158	158	158	158	1	256	158	414	414	414	414	1	272225	414	414	414	414	414	1	272225	414	0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	133	133	133	133	1	4756	133	133	133	133	133	1	4756	133	133	133	133	133	1	276980	133	175	175	175	175	1	276939	175	0	4714		90.78	
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	608	152	100	233	4	1848	117	608	152	100	233	4	1848	117	608	152	100	233	4	274072	117	750	187	142	275	4	274047	142	0	3631	1964	152.42	87.7
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	3448	144	75	358	24	0	214	2800	147	75	358	19	256	158	5000	5000	5000	5000	1	272225	5000	5000	5000	5000	5000	1	272225	5000	13				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant642	N	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L01-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L02-F	275	138	110	165	2	0	165	0	0			0			275	138	110	165	2	287529	165	317	159	152	165	2	287529	165	0	4848		121.51	
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L03-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L01	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	P3-Whole-F	1642	182	75	325	9	0	165	1367	195	75	325	7	3107	183	2059	1029	165	1893	2	287529	165	2134	1067	165	1968	2	287529	165	4				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant370	N	Timeline3	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Ai<x;	92	92	92	92	1	245	92	92	92	92	92	1	245	92	92	92	92	92	1	366191	92	158	158	158	158	1	366124	158	0		337		308.15
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Aint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L01-F	1758	195	67	508	9	520	158	1642	205	67	508	8	520	158	2141	1071	517	1625	2	366466	517	2175	1087	525	1650	2	366458	525	4	512	1037	34.23	33.78
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L02-F	1100	183	83	225	6	3278	200	1100	183	83	225	6	3278	200	1300	1300	1300	1300	1	369224	1300	1330	665	22	1308	2	369216	1308	4		4578		165.71
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L03-F	92	92	92	92	1	245	92	92	92	92	92	1	245	92	92	92	92	92	1	366191	92	158	158	158	158	1	366124	158	0		337		308.15
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L01	200	200	200	200	1	712	200	200	200	200	200	1	712	200	200	200	200	200	1	366658	200	233	233	233	233	1	366624	233	0	679	912	132.27	188.96
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	P3-Whole-F	3300	174	67	508	19	245	92	3183	177	67	508	18	245	92	4588	2294	792	3796	2	366191	792	4680	2340	858	3821	2	366124	858	12		1037		33.78
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant157	Y	Timeline4	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai++	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Ai<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Aint i = 0;	283	142	117	167	2	260	117	283	142	117	167	2	260	117	283	142	117	167	2	511405	117	342	171	142	200	2	511380	142	0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi++	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Bi<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Bint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci++	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Ci<x;	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	Cint i = 0;	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L07	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	j-L11	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L01-F	108	108	108	108	1	3393	108	108	108	108	108	1	3393	108	108	108	108	108	1	514538	108	150	150	150	150	1	514497	150	0		3501		58.46
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L02-F	333	83	67	108	4	1726	67	333	83	67	108	4	1726	67	583	292	83	500	2	512872	500	625	312	108	517	2	512855	517	0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L03-F	283	142	117	167	2	260	117	283	142	117	167	2	260	117	283	142	117	167	2	511405	117	342	171	142	200	2	511380	142	0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L04-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L05-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L06-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L07-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L08-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L09-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L10-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L11-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L12-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L13-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L14-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L15-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L16-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	L17-F	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L01	108	108	108	108	1	3393	108	108	108	108	108	1	3393	108	108	108	108	108	1	514538	108	150	150	150	150	1	514497	150	0		3501		58.46
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L03	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L04	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L06	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09a	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L09b	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L10	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L15	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	numbers-L16	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	P3-Whole-F	941	105	67	167	9	260	117	941	105	67	167	9	260	117	3241	3241	3241	3241	1	511405	3241	3266	3266	3266	3266	1	511380	3266	0		3501		58.46
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L08	0	0			0			0	0			0			0	0			0							0			0				
+Participant459	Y	Timeline2	P3Ca+05s	1	P3Ca	temp-L10	0	0			0			0	0			0			0	0			0							0			0				

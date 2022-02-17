@@ -45,6 +45,10 @@ def test_EMIP():
     ]
 
     assert len( eye_events["experiment_id"].unique() ) == 8
+    assert list(eye_events["filename"].unique()) == ["100_rawdata.tsv", "101_rawdata.tsv", 
+                                                "102_rawdata.tsv", "103_rawdata.tsv", 
+                                                "104_rawdata.tsv", "105_rawdata.tsv", 
+                                                "106_rawdata.tsv", "107_rawdata.tsv"]
 
     experiment_id = '100'
     experiment_100 = eye_events.loc[eye_events["experiment_id"] == experiment_id]

@@ -1,6 +1,7 @@
 import math
 import statistics
 
+
 def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximum_dispersion=25):
     """I-DT classifier based on page 296 of eye tracker manual:
         https://psychologie.unibas.ch/fileadmin/user_upload/psychologie/Forschung/N-Lab/SMI_iView_X_Manual.pdf
@@ -52,11 +53,11 @@ def idt_classifier(raw_fixations, minimum_duration=50, sample_duration=4, maximu
         window_y.append(y_cord)
 
         # Calculate dispersion = [max(x) - min(x)] + [max(y) - min(y)]
-        dispersion = (max(window_x) - min(window_x)) + (max(window_y) - min(window_y))
+        dispersion = (max(window_x) - min(window_x)) + \
+            (max(window_y) - min(window_y))
 
         # If dispersion is above maximum_dispersion
         if dispersion > maximum_dispersion:
-
             # Then the window does not represent a fixation
             # Pop last item in window
             window_x.pop()

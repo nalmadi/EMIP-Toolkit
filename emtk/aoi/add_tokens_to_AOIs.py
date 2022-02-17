@@ -1,4 +1,7 @@
-def add_tokens_to_AOIs(file_path, aois_raw):
+import pandas as pd
+
+
+def add_tokens_to_AOIs(file_path: str, aois_raw: pd.DataFrame) -> pd.DataFrame:
     """Adds tokens from code files to aois dataframe and returns it.
 
     Parameters
@@ -47,7 +50,8 @@ def add_tokens_to_AOIs(file_path, aois_raw):
 
     code_text = code_file.read()
 
-    code_line = code_text.replace('\t', '').replace('        ', '').replace('    ', '').split('\n')
+    code_line = code_text.replace('\t', '').replace(
+        '        ', '').replace('    ', '').split('\n')
 
     filtered_line = []
 
