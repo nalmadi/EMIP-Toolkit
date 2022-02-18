@@ -5,8 +5,8 @@
 [![Stars](https://img.shields.io/github/stars/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
 
 
-# EMIP-Toolkit
-EMIP Toolkit (EMTK): A Python Library for Processing Eye Movement in Programming Data
+# EMIP-Toolkit (EMTK)
+EMIP-Toolkit (EMTK): A Python Library for Processing Eye Movement in Programming Data
 
 
 The use of eye tracking in the study of program comprehension in software engineering allows researchers to gain a better understanding of the strategies and processes applied by programmers. Despite the large number of eye tracking studies in software engineering, very few datasets are publicly available. This tool evolved to include the following datasets:
