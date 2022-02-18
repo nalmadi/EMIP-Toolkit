@@ -6,10 +6,16 @@
 
 
 # EMIP-Toolkit
+EMIP Toolkit (EMTK): A Python Library for Processing Eye Movement in Programming Data
 
-EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset
 
-The use of eye tracking in the study of program comprehension in software engineering allows researchers to gain a better understanding of the strategies and processes applied by programmers. Despite the large number of eye tracking studies in software engineering, very few datasets are publicly available. The existence of the large Eye Movements in Programming Dataset (EMIP) opens the door for new studies and makes reproducibility of existing research easier. The toolkit is specifically designed to make using the EMIP dataset easier and more accessible. It implements features for fixation detection and correction, trial visualization, source code lexical data enrichment, and mapping fixation data over areas of interest. 
+The use of eye tracking in the study of program comprehension in software engineering allows researchers to gain a better understanding of the strategies and processes applied by programmers. Despite the large number of eye tracking studies in software engineering, very few datasets are publicly available. This tool evolved to include the following datasets:
+1. EMIP2020: Bednarik, Roman, et al. "EMIP: The eye movements in programming dataset." Science of Computer Programming 198 (2020): 102520.
+2. AlMadi2018: Al Madi, Naser, and Javed Khan. "Constructing semantic networks of comprehension from eye-movement during reading." 2018 IEEE 12th International Conference on Semantic Computing (ICSC). IEEE, 2018.
+3. McChesney2021: McChesney, Ian, and Raymond Bond. "Eye Tracking Analysis of Code Layout, Crowding and Dyslexia-An Open Data Set." ACM Symposium on Eye Tracking Research and Applications. 2021.
+4. AlMadi2021: Al Madi, Naser, et al. "EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset." ACM Symposium on Eye Tracking Research and Applications. 2021.
+
+We would be happy to include more eye movement datasets if you have any suggestions.
 
 [Read More...](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset).
 
@@ -20,16 +26,15 @@ Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EM
 
 
 # Features:
-The toolkit is specifically designed to make using the EMIP dataset easier and more accessible by providing the following functions:
+The toolkit is designed to make using and processing eye movement in programming datasets easier and more accessible by providing the following functions:
  
- 
- - Parsing raw data files from the EMIP dataset into Experiment, Trial, and Fixation containers.
+ - Parsing raw data files from existing datasets into pandas dataframes.
     
- - Customizable dispersion-based fixation detection algorithm implementation according to the manual of the SMI eye tracker used in the data collection.
+ - Customizable fixation detection algorithms.
    
  - Raw data and filtered data visualizations for each trial.
     
- - Performing hit testing between fixations and AOIs to determine the fixations over each AOI.
+ - Hit testing between fixations and AOIs to determine the fixations over each AOI.
         
  - Customizable offset-based fixation correction implementation for each trial.
     
@@ -41,24 +46,7 @@ The toolkit is specifically designed to make using the EMIP dataset easier and m
     
  - Adding source code lexical category tags to eye movement data using [srcML](https://www.srcml.org/). srcML is a static analysis tool and data format that provides very accurate syntactic categories (method signatures, parameters, function names, method calls, declarations and so on) for source code. We use it to enhance the eye movements dataset to enable better querying capabilities. 
 
- - Downloading specific datasets from the [EMIP-Toolkit replication package](https://osf.io/j6vt3/) and other data sources.
-
 
 # Examples and tutorial:
-The Jupyter Notebook file "EMIP Toolkit Examples.ipynb" contains examples and a tutorial on using the EMIP Toolkit. The file describes the required file structure and raw EMIP files and metadata from http://emipws.org/.
+The Jupyter Notebook files contain examples and a tutorial on using the EMTK with each dataset. 
 
-
-# Corrected Dataset:
-The directory “Corrected EMIP Dataset” includes our second contribution of a filtered, corrected, and processed version of the EMIP dataset.
-
-
-# Requirements:
-numpy
-
-pandas
-
-matplotlib
-
-Pillow
-
-requests
