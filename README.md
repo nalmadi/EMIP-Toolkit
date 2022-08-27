@@ -24,9 +24,6 @@ We would be happy to include more eye movement datasets if you have any suggesti
 [![Watch the video](https://imgur.com/IcowLr3.png)](https://www.youtube.com/watch?v=wFdGyM6qUlE)
 [Read our paper](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset).
 
-# 📝 Please Cite: 
-[Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset. In ETRA ’21: 2021 Symposium on Eye Tracking Research and Applications (ETRA ’21 Short Papers), May25–27, 2021, Virtual Event, Germany. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3448018.3457425](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset)
-
 
 # ⚙️ Features:
 The toolkit is designed to make using and processing eye movement in programming datasets easier and more accessible by providing the following functions:
@@ -51,5 +48,9 @@ The toolkit is designed to make using and processing eye movement in programming
 
 
 # ✍️ Examples and tutorial:
-The Jupyter Notebook files contain examples and a tutorial on using the EMTK with each dataset. 
+The Jupyter Notebook files contain examples and a tutorial on using the EMTK with each dataset.
+
+
+# 📝 Please Cite: 
+[Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset. In ETRA ’21: 2021 Symposium on Eye Tracking Research and Applications (ETRA ’21 Short Papers), May25–27, 2021, Virtual Event, Germany. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3448018.3457425](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset)
 
