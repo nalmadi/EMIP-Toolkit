@@ -13,10 +13,10 @@ The use of eye tracking in the study of program comprehension in software engine
 
 # 💾 Datasets:
 This tool evolved to include the following datasets:
-1. EMIP2020: Bednarik, Roman, et al. "EMIP: The eye movements in programming dataset." Science of Computer Programming 198 (2020): 102520.
-2. AlMadi2018: Al Madi, Naser, and Javed Khan. "Constructing semantic networks of comprehension from eye-movement during reading." 2018 IEEE 12th International Conference on Semantic Computing (ICSC). IEEE, 2018.
-3. McChesney2021: McChesney, Ian, and Raymond Bond. "Eye Tracking Analysis of Code Layout, Crowding and Dyslexia-An Open Data Set." ACM Symposium on Eye Tracking Research and Applications. 2021.
-4. AlMadi2021: Al Madi, Naser, et al. "EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset." ACM Symposium on Eye Tracking Research and Applications. 2021.
+1. **EMIP2020**: Bednarik, Roman, et al. "EMIP: The eye movements in programming dataset." Science of Computer Programming 198 (2020): 102520.
+2. **AlMadi2018**: Al Madi, Naser, and Javed Khan. "Constructing semantic networks of comprehension from eye-movement during reading." 2018 IEEE 12th International Conference on Semantic Computing (ICSC). IEEE, 2018.
+3. **McChesney2021**: McChesney, Ian, and Raymond Bond. "Eye Tracking Analysis of Code Layout, Crowding and Dyslexia-An Open Data Set." ACM Symposium on Eye Tracking Research and Applications. 2021.
+4. **AlMadi2021**: Al Madi, Naser, et al. "EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset." ACM Symposium on Eye Tracking Research and Applications. 2021.
 
 We would be happy to include more eye movement datasets if you have any suggestions.
 
