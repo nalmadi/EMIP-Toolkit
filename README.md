@@ -1,4 +1,3 @@
-![GitHub top language](https://img.shields.io/github/languages/top/nalmadi/EMIP-Toolkit?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/nalmadi/EMIP-Toolkit?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/nalmadi/EMIP-Toolkit?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/nalmadi/EMIP-Toolkit?style=for-the-badge)
