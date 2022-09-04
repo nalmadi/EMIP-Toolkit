@@ -1,10 +1,8 @@
 ![GitHub issues](https://img.shields.io/github/issues-raw/nalmadi/EMIP-Toolkit?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/nalmadi/EMIP-Toolkit?style=for-the-badge)
+[![Watchers](https://img.shields.io/github/watchers/nalmadi/EMIP-Toolkit?style=for-the-badge)](https://github.com/nalmadi/EMIP-Toolkit)
+[![Forks](https://img.shields.io/github/forks/nalmadi/EMIP-Toolkit?style=for-the-badge)](https://github.com/nalmadi/EMIP-Toolkit)
+[![Stars](https://img.shields.io/github/stars/nalmadi/EMIP-Toolkit?style=for-the-badge)](https://github.com/nalmadi/EMIP-Toolkit)
 ![GitHub last commit](https://img.shields.io/github/last-commit/nalmadi/EMIP-Toolkit?style=for-the-badge)
-[![Watchers](https://img.shields.io/github/watchers/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
-[![Forks](https://img.shields.io/github/forks/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
-[![Stars](https://img.shields.io/github/stars/nalmadi/EMIP-Toolkit?color=magenta)](https://github.com/nalmadi/EMIP-Toolkit)
-
 
 # 👀 Eye Movement In Programming Toolkit (EMTK)
 EMIP-Toolkit (EMTK): A Python Library for Processing Eye Movement in Programming Data
