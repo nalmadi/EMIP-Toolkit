@@ -17,7 +17,7 @@ This tool evolved to include the following datasets:
 3. **McChesney2021**: McChesney, Ian, and Raymond Bond. "Eye Tracking Analysis of Code Layout, Crowding and Dyslexia-An Open Data Set." ACM Symposium on Eye Tracking Research and Applications. 2021.
 4. **AlMadi2021**: Al Madi, Naser, et al. "EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset." ACM Symposium on Eye Tracking Research and Applications. 2021.
 
-We would be happy to include more eye movement datasets if you have any suggestions.
+We would be happy to include more eye movement datasets if you have any suggestions, please contact us.
 
 # 🎥 Presentation:
 [![Watch the video](https://imgur.com/IcowLr3.png)](https://www.youtube.com/watch?v=wFdGyM6qUlE)
