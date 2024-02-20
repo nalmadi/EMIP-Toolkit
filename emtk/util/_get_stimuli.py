@@ -27,7 +27,7 @@ def _get_stimuli(stimuli_module: str, stimuli_name: str, eye_tracker: str) -> Im
     # Preprocessing
     if ( eye_tracker == "EyeLink1000" ):
         background = Image.new('RGB', (1024, 768), color='black')
-        background.paste(stimuli, (100, 375), stimuli.convert('RGBA'))
+        background.paste(stimuli, (0, 375), stimuli.convert('RGBA'))
         return background.copy()
 
     return stimuli
