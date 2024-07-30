@@ -53,3 +53,13 @@ The Jupyter Notebook files contain examples and a tutorial on using the EMTK wit
 # 📝 Please Cite This Paper: 
 [Naser Al Madi, Drew T. Guarnera, Bonita Sharif, and Jonathan I. Maletic.2021. EMIP Toolkit: A Python Library for Customized Post-processing of the Eye Movements in Programming Dataset. In ETRA ’21: 2021 Symposium on Eye Tracking Research and Applications (ETRA ’21 Short Papers), May25–27, 2021, Virtual Event, Germany. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3448018.3457425](https://www.researchgate.net/publication/350485560_EMIP_Toolkit_A_Python_Library_for_Customized_Post-processing_of_the_Eye_Movements_in_Programming_Dataset)
 
+```bash
+@inproceedings{al2021emip,
+  title={Emip toolkit: A python library for customized post-processing of the eye movements in programming dataset},
+  author={Al Madi, Naser and Guarnera, Drew and Sharif, Bonita and Maletic, Jonathan},
+  booktitle={Acm symposium on eye tracking research and applications},
+  pages={1--6},
+  year={2021}
+}
+```
+
